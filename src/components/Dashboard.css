@@ -1,7 +1,7 @@
 .mainPage
 {
     /* background-color: aqua; */
-    background-image: url('./images/background3.png');
+    background-image: url('./images/background2.png');
     background-position: center;
     background-size: cover;
     height: 100vh;
@@ -11,34 +11,36 @@
     display: flex;
 }
 
+
 .innerPage
 {
-    background-color: blueviolet;
+    background-color: none;
     height: 100vh;
-    width: 95%;
-    justify-content: center;
+    width: 85%;
+    /* justify-content: center;
+    align-items: center; */
+    display: flex;
+    flex-direction: column;
+}
+
+
+.headerBox
+{
+    background-color: whitesmoke;
+    height: 14vh;
+    width: 100%;
+    margin-bottom: 1%;
+    justify-content: space-around;
     align-items: center;
     display: flex;
     flex-direction: row;
-}
-
-.searching
-{
-    background-color: white;
-    height: 100vh;
-    width: 40%;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-
 }
 
 .inputBox
 {
      /*background-color: green;*/
      height: 5.3vh;
-     width: 80%; 
+     width: 30%; 
      border-bottom: 0.4vh solid #0D3AA9;
      display: flex;
      align-items: center;
@@ -59,30 +61,111 @@
 .searchBar
 {
     /* background-color: black; */
-    margin-top: 10%;
+    /* margin-top: 10%; */
     /* margin-bottom: 2%; */
     height: 5vh;
-    width: 80%;
-    position: relative;
+    width: 35%;
+    position: sticky;
 }
 
-.create
+.addButton
 {
     background-color: #0D3AA9;
     color: white;
-    height: 6vh;
-    width: 55%;
-    border-radius: 15vh;
-    margin-top: 20%;
+    height: 5.3vh;
+    width: 10%;
+    border: #0D3AA9;
+    border-radius: 10vh;
+    cursor: pointer;
+    outline: 0;
     justify-content: center;
     align-items: center;
     display: flex;
     font-size: 2.5vh;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 20px;
 }
 
-.listing
+
+.footerBox
 {
-    background-color: blanchedalmond;
-    height: 100vh;
-    width: 60%;
+    /* background-color: red; */
+    height: 85vh;
+    width: 100%;
+    /* /* justify-content: center;
+    align-items: center; */
+    display: flex;
 }
+
+
+
+.listBox
+{
+    background-color: darksalmon;
+    height: 85vh;
+    width: 40%;
+    /* justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column; */
+
+}
+
+.deleteButton
+{
+    background-color: #889dd1;
+    color: white;
+    height: 5vh;
+    width: 20%;
+    border: #889dd1;
+    border-radius: 5vh;
+    cursor: pointer;
+    outline: 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 1.5vh;
+    margin-left: 75%;
+}
+
+.mapBox
+{
+    /* background-color: blanchedalmond; */
+    height: 85vh;
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: relative;;
+    
+}
+
+
+.location-search-input{
+    font-family: 'Lato', sans-serif;
+    width: 30%;
+    height: 5vh;
+    background: none;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: black;
+    font-weight: bold;
+    /* margin-top: 300px; */
+    margin-left: 5rem;
+  
+  }
+  
+  .input-suggestion{
+    font-family: 'Lato', sans-serif;
+    width: 30%;
+    height: 5vh;
+    background-color: white;
+    border-bottom: 1px black dotted;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bold;
+    color: black;
+    /* margin-left: 5rem; */
+  }

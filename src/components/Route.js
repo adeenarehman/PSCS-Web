@@ -20,12 +20,12 @@ export default function App() {
                         <Map />
                     </Route>
 
-                    <Route path="/dashboard">
+                    {/* <Route path="/dashboard">
                         <Dashboard />
-                    </Route>
+                    </Route> */}
                     
                     <Route path="/">
-                        <Signin />
+                        <Dashboard />
                     </Route>
                    
                     

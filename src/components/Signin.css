@@ -105,14 +105,17 @@
 
 .button
 {
-    background-color: lightblue;
+    background-color: #0D3AA9;
     color: white;
     height: 6vh;
     width: 55%;
     border-radius: 20vh;
-    margin-top: 8%;
-    justify-content: center;
+    margin-top: 3%;
+    cursor: pointer;
+    outline: 0;
+    border: #0D3AA9;
     align-items: center;
+    justify-content: center;
     display: flex;
     font-size: 2vh;
 }
