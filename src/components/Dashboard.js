@@ -27,9 +27,9 @@ class Dashboard extends Component {
             },
             zoom: 13,
             place: {},
-            latitute: '24.860770',
-            longitude: '67.063822',
-            radius: '100'
+            latitude: 24.860770,
+            longitude: 67.063822,
+            radius: 100
         };
     }
 
@@ -49,7 +49,7 @@ class Dashboard extends Component {
         const db = firebase.firestore();
         const docRef = db.collection('Cordinates').doc();
         await docRef.set({
-            latitute: this.state.latitute,
+            latitude: this.state.latitude,
             longitude: this.state.longitude,
             radius: this.state.radius
         });
