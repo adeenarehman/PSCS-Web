@@ -5,10 +5,11 @@
     background-position: center;
     background-size: cover;
     height: 100vh;
-    width: 100%;
+    width: 1533px;
     justify-content: center;
     align-items: center;
     display: flex;
+    flex: 1;
 }
 
 
@@ -21,21 +22,24 @@
     align-items: center; */
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 
 .headerBox
 {
-    background-color: lightgrey;
-    height: 14vh;
-    width: 100%;
+    background-color: #50A6C2;
+    height: 15vh;
+    width: 99.5%;
     margin-bottom: 1%;
+    margin-top: 0.5%;
     justify-content: center;
     align-items: center;
     display: flex;
     flex-direction: row;
-    border-color: blue;
-    border-width: 1vh;
+    border: 0.4vh solid #026e7a;
+
 }
 
 .inputBox
@@ -49,11 +53,11 @@
      justify-content: center;
 }
 
-.input
+.input1
 {
-    background-color: white;
+    background-color: none;
     width: 80%;
-    height: 4.5vh;
+    height: 4.8vh;
     font-size: 2vh;
     border: 0;
     outline: none;
@@ -67,18 +71,19 @@
     /* background-color: pink; */
     /* margin-top: 10%; */
     /* margin-bottom: 2%; */
-    height: 5vh;
+    height: 5.1vh;
     width: 53%;
     position: sticky;
+    border-bottom: 0.4vh solid #0D3AA9;
 }
 
 .addButton
 {
     
     
-    background-color: white;
+    background-color: none;
     color: black;
-    height: 5.3vh;
+    height: 5.6vh;
     width: 10%;
     /* border: #0D3AA9; */
     /* border-radius: 10vh; */
@@ -93,14 +98,11 @@
 
 .addButton1
 {
-    
-    
-    
     border-color: #0D3AA9;
     border-width: 3px;
     background-color: white;
     color: black;
-    height: 5.3vh;
+    height: 5.5vh;
     width: 100%;
     /* border: #0D3AA9; */
     /* border-radius: 10vh; */
@@ -116,10 +118,11 @@
 
 .footerBox
 {
-    /* background-color: red; */
+    /* background-color: #50A6C2; */
+    /* border: 0.4vh solid #026e7a; */
     height: 85vh;
-    width: 100%;
-margin-bottom: 1%;
+    width: 1450px;
+    margin-bottom: 1%;
     /* /* justify-content: center;
     align-items: center; */
     display: flex;
@@ -129,13 +132,16 @@ margin-bottom: 1%;
 
 .listBox
 {
-    background-color: lightgray;
+    border: 0.4vh solid #026e7a;
+
+    background-color: #50A6C2;
     height: 85vh;
-    width: 60%;
+    width: 850px;
     /* overflow-y: scroll */
     justify-content: center;
     align-items: center;
     display: flex;
+    margin-right: 1%;
     /*flex-direction: column; */
     /* position: relative; */
 }
@@ -144,9 +150,10 @@ margin-bottom: 1%;
 
 .mapBox
 {
-    /* background-color: blanchedalmond; */
+    border: 0.4vh solid #026e7a;
+
     height: 85vh;
-    width: 40%;
+    width: 1000px;
     justify-content: center;
     align-items: center;
     display: flex;

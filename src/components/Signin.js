@@ -7,7 +7,6 @@ import withFirebaseAuth from 'react-with-firebase-auth'
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { firebaseConfig } from './FirebaseConfig';
-
 import {
     BrowserRouter as Router,
     Link
@@ -32,8 +31,8 @@ class Signin extends Component {
         console.log(this.state.email, this.state.password);
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
         .then(function (result) {
-            console.log(result.user.email);
-            // <Link to="/dashboard"/>
+            // console.log(result.user.email);
+            
             alert('Signin successfull')
         })
 
@@ -93,7 +92,9 @@ class Signin extends Component {
                         </div>
 
                         <Ripples color="#DCDCDC" during={1200} className={'button'}>
-                            <button onClick={this.signInWithEmailPassword} className={'button'}>SIGN IN</button>
+                            <button onClick={this.signInWithEmailPassword} className={'button'}>
+                                SIGN IN
+                            </button>
                         </Ripples>
                             {/* <button>SIGN IN</button>
                             <Link to="/dashboard">Signin</Link> */}

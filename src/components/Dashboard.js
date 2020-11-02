@@ -33,21 +33,28 @@ export class Dashboard extends Component {
 
     }
 
-    // createCircle(lat, long, radius) {
-    //     console.log("check lat = " + lat)
-    //     console.log("check long = " + long)
-    //     return (
-    //         <Circle
-    //             radius={radius}
-    //             center={{ lat, long }}
-    //             strokeColor='transparent'
-    //             strokeOpacity={0}
-    //             strokeWeight={5}
-    //             fillColor='#FF0000'
-    //             fillOpacity={0.2}
-    //         />
-    //     );
-    // }
+    createCircle(lat, long, rad) {
+        console.log("check lat = " + lat)
+        console.log("check long = " + long)
+        console.log("check radius = " + rad)
+
+        {this.state.Zones.map(value => (
+            // console.log("check value lat = "+value.latitude),
+            // console.log("check value long = "+value.longitude)            
+            // this.createCircle(value.latitude, value.longitude, value.radius)
+           
+            <Circle
+                radius={rad}
+                center={{ lat: value.latitude, long: value.longitude }}
+                strokeColor='transparent'
+                strokeOpacity={0}
+                strokeWeight={5}
+                fillColor='#FF0000'
+                fillOpacity={0.2}
+            />
+        ))}
+        
+    }
 
     componentDidMount() {
         this.getCordinates();
@@ -113,7 +120,7 @@ export class Dashboard extends Component {
 
 
                         <div className={'inputBox'}>
-                            <input className={'input'}
+                            <input className={'input1'}
                                 type={'text'}
                                 placeholder={'Radius'}
                             />
@@ -131,58 +138,54 @@ export class Dashboard extends Component {
                     <div className={'footerBox'}>
 
                         <div className={'listBox'}>
-                            <div style={{ height: '99%', width: '99%', overflowY: 'scroll', }}>
+
+                            <div style={{ height: '99%', width: '850px', overflowY: 'scroll', overflowX: 'hidden'}}>
 
                                 {this.state.Zones.map(value => (
 
-                                    <div style={{
-                                        height: '8%', width: '99%', backgroundColor: "white", marginBottom: '0.5%',
-                                        alignItems: 'center', display: 'flex', justifyContent: 'space-around'
-                                    }}>
-                                        <div style={{ height: '100%', width: '80%', alignItems: 'center', display: 'flex', marginLeft: '1%'}}>
+                                    <div style={{height: '8%', width: '825px', backgroundColor: "white", marginBottom: '0.5%',marginLeft: '0.4%',
+                                                 alignItems: 'center', display: 'flex', justifyContent: 'space-around'}}>
+
+                                        <div style={{ height: '100%', width: '700px', alignItems: 'center',
+                                                      display: 'flex', marginLeft: '0.5%'}}>
+
                                             {value.place}
+                                            
                                         </div>
 
-                                        <div style={{ height: '87%', width: '20%', marginRight: '0.5%', borderColor: '#0D3AA9', borderWidth: '1%' }}>
+                                        <div style={{ height: '85%', width: '150px', marginRight: '0.5%', borderColor: '#0D3AA9',
+                                                      borderWidth: '1%' }}>
+
                                             <Ripples color="#DCDCDC" during={1200} className={'deleteButton'} >
                                                 <button className={'deleteButton'}>DELETE</button>
                                             </Ripples>
+
                                         </div>
+
                                     </div>
                                 ))}
-                            </div>
 
+                            </div>
 
                         </div>
 
                         <div className={'mapBox'}>
-
-                            {/* <GoogleMapReact
-                                bootstrapURLKeys={{ key: 'AIzaSyA_d3pS7JqjFnGWc9hHkvT2MUQvAKo5Bio' }}
-                                defaultCenter={this.state.center}
-                                defaultZoom={this.state.zoom}
-                            /> */}
 
                             <Map
                                 initialCenter={this.state.center}
                                 google={this.props.google}
                                 // style={{ width: 500, height: 500, position: 'relative' }}
                                 zoom={this.state.zoom}
+                                onReady={this.createCircle()} 
                             >
-                                {/* ?{this.state.zones.map(value => (
-                                    console.log("check value lat = "+value.latitude),
-                                    console.log("check value long = "+value.longitude)
-                                    
-                                    // this.createCircle(value.latitude, value.longitude, value.radius)
-                                    
-                                ))} :{console.log("Hate u")} */}
-
                             </Map>
+
                         </div>
 
                     </div>
 
                 </div>
+
             </div>
         );
     }

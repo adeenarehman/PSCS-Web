@@ -5,7 +5,6 @@ import {
     Route,
 } from "react-router-dom";
 import Signin from './Signin'
-import Map from "./Map"
 import Dashboard from "./Dashboard"
 
 export default function App() {
@@ -16,19 +15,18 @@ export default function App() {
                 {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
                 <Switch>
-                    <Route path="/map">
-                        <Map />
+                    <Route path="/dashboard">
+                        <Dashboard />
+                    </Route>
+
+                    <Route path="/">
+                        <Signin />
                     </Route>
 
                     {/* <Route path="/dashboard">
                         <Dashboard />
                     </Route> */}
-                    
-                    <Route path="/">
-                        <Dashboard />
-                    </Route>
-                   
-                    
+
                 </Switch>
             </div>
         </Router>
