@@ -20,11 +20,11 @@ export class Dashboard extends Component {
         super(props)
         this.state = {
             center: {
-                lat: 24.8607,
-                lng: 67.0011
+                lat: 24.916624,
+                lng: 67.074067
             },
             Zones: [],
-            zoom: 13,
+            zoom: 11,
             place: {},
             lat: 24.854640,
             lng: 67.043271,
@@ -38,23 +38,25 @@ export class Dashboard extends Component {
         console.log("check long = " + long)
         console.log("check radius = " + rad)
 
-        {this.state.Zones.map(value => (
-            // console.log("check value lat = "+value.latitude),
-            // console.log("check value long = "+value.longitude)            
-            // this.createCircle(value.latitude, value.longitude, value.radius)
-           
-            <Circle
-                radius={rad}
-                center={{ lat: value.latitude, long: value.longitude }}
-                strokeColor='transparent'
-                strokeOpacity={0}
-                strokeWeight={5}
-                fillColor='#FF0000'
-                fillOpacity={0.2}
-            />
-        ))}
-        
-    }
+        // {this.state.Zones.map(value => (
+        //     // console.log("check value lat = "+value.latitude),
+        //     // console.log("check value long = "+value.longitude)            
+        //     // this.createCircle(value.latitude, value.longitude, value.radius)
+        return(
+         <Circle
+        radius={rad}
+        center={{ lat: lat, lng: long }}
+        onMouseover={() => console.log('mouseover')}
+        onClick={() => console.log('click')}
+        onMouseout={() => console.log('mouseout')}
+        strokeColor='transparent'
+        strokeOpacity={0}
+        strokeWeight={5}
+        fillColor='#FF0000'
+        fillOpacity={0.5}
+      />
+    );
+}
 
     componentDidMount() {
         this.getCordinates();
@@ -139,21 +141,23 @@ export class Dashboard extends Component {
 
                         <div className={'listBox'}>
 
-                            <div style={{ height: '99%', width: '850px', overflowY: 'scroll', overflowX: 'hidden'}}>
+                            <div style={{ height: '99%', width: '100%', overflowY: 'scroll', overflowX: 'hidden'}}>
 
                                 {this.state.Zones.map(value => (
 
-                                    <div style={{height: '8%', width: '825px', backgroundColor: "white", marginBottom: '0.5%',marginLeft: '0.4%',
+                                    <div style={{height: '8%', width: '99%', backgroundColor: "white", marginBottom: '0.5%',marginLeft: '0.4%',
                                                  alignItems: 'center', display: 'flex', justifyContent: 'space-around'}}>
 
-                                        <div style={{ height: '100%', width: '700px', alignItems: 'center',
+                                        <div style={{ height: '100%', width: '80%', alignItems: 'center',
                                                       display: 'flex', marginLeft: '0.5%'}}>
 
-                                            {value.place}
+                                            <p style={{fontSize: '2vh', height:'70%',width:'100%'}}>
+                                                {value.place}
+                                            </p>
                                             
                                         </div>
 
-                                        <div style={{ height: '85%', width: '150px', marginRight: '0.5%', borderColor: '#0D3AA9',
+                                        <div style={{ height: '85%', width: '20%', marginRight: '0.5%', borderColor: '#0D3AA9',
                                                       borderWidth: '1%' }}>
 
                                             <Ripples color="#DCDCDC" during={1200} className={'deleteButton'} >
@@ -176,8 +180,13 @@ export class Dashboard extends Component {
                                 google={this.props.google}
                                 // style={{ width: 500, height: 500, position: 'relative' }}
                                 zoom={this.state.zoom}
-                                onReady={this.createCircle()} 
+                                //onReady={this.createCircle()} 
                             >
+                                {this.state.Zones.map(value => (
+                                    // console.log("check value lat = "+value.latitude),
+                                    // console.log("check value long = "+value.longitude),            
+                                    this.createCircle(value.latitude, value.longitude, value.radius)
+                                ))}
                             </Map>
 
                         </div>

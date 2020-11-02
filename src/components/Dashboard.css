@@ -5,7 +5,7 @@
     background-position: center;
     background-size: cover;
     height: 100vh;
-    width: 1533px;
+    width: 100%;
     justify-content: center;
     align-items: center;
     display: flex;
@@ -17,7 +17,7 @@
 {
     background-color: none;
     height: 100vh;
-    width: 1450px;
+    width: 1250px;
     /* justify-content: center;
     align-items: center; */
     display: flex;
@@ -121,7 +121,7 @@
     /* background-color: #50A6C2; */
     /* border: 0.4vh solid #026e7a; */
     height: 85vh;
-    width: 1450px;
+    width: 100%;
     margin-bottom: 1%;
     /* /* justify-content: center;
     align-items: center; */
@@ -136,7 +136,7 @@
 
     background-color: #50A6C2;
     height: 85vh;
-    width: 850px;
+    width: 60%;
     /* overflow-y: scroll */
     justify-content: center;
     align-items: center;
@@ -153,7 +153,7 @@
     border: 0.4vh solid #026e7a;
 
     height: 85vh;
-    width: 1000px;
+    width: 40%;
     justify-content: center;
     align-items: center;
     display: flex;
