@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import './Dashboard.css'
 import { GoogleComponent } from 'react-google-location'
-import GoogleMapReact from 'google-map-react';
 import Ripples from 'react-ripples'
-
+import { Map, Circle, GoogleApiWrapper } from 'google-maps-react';
 import * as firebase from 'firebase/app';
 import firestore from 'firebase/firestore'
 import { firebaseConfig } from './FirebaseConfig';
-// import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-// import PlacesAutocomplete from 'react-places-autocomplete';
 
 
 
-const API_KEY = "AIzaSyAGKFNn0Gk9EFj35JTLG5G77RQ3XHD8hH8"
+// const names = ['James', 'Paul', 'John', 'George', 'Ringo', 'James', 'Paul', 'John', 'George', 'Ringo', 'James', 'Paul', 'John', 'George', 'Ringo',];
+const API_KEY = "AIzaSyDKMc4fu4GunH8TbX-ZEkJsrdEPkZEu31k"
 // const firebaseApp = firebase.initializeApp(firebaseConfig);
-const names = ['James', 'Paul', 'John', 'George', 'Ringo'];
+// const names = ['James', 'Paul', 'John', 'George', 'Ringo'];
 
-class Dashboard extends Component {
+export class Dashboard extends Component {
 
     constructor(props) {
         super(props)
@@ -25,25 +23,49 @@ class Dashboard extends Component {
                 lat: 24.8607,
                 lng: 67.0011
             },
+            Zones: [],
             zoom: 13,
             place: {},
-            latitude: 24.860770,
-            longitude: 67.063822,
-            radius: 100
+            lat: 24.854640,
+            lng: 67.043271,
+            radius: 350
         };
+
     }
+
+    // createCircle(lat, long, radius) {
+    //     console.log("check lat = " + lat)
+    //     console.log("check long = " + long)
+    //     return (
+    //         <Circle
+    //             radius={radius}
+    //             center={{ lat, long }}
+    //             strokeColor='transparent'
+    //             strokeOpacity={0}
+    //             strokeWeight={5}
+    //             fillColor='#FF0000'
+    //             fillOpacity={0.2}
+    //         />
+    //     );
+    // }
 
     componentDidMount() {
         this.getCordinates();
     }
 
     getCordinates = async () => {
+        let tempdata = []
         const db = firebase.firestore();
-        const snapshot = await db.collection('Users').get();
+        const snapshot = await db.collection('zones').get();
         snapshot.forEach((doc) => {
-            console.log(doc.id, '=>', doc.data());
+            // console.log(doc.id, '=>', doc.data());
+            tempdata.push(doc.data())
+
         });
+        this.setState({ Zones: tempdata })
     }
+
+    
 
     addCordinates = async () => {
         const db = firebase.firestore();
@@ -54,10 +76,11 @@ class Dashboard extends Component {
             radius: this.state.radius
         });
     }
-     
+
 
 
     render() {
+        // console.log("Zones = ", this.state.Zones);
         return (
             <div className={'mainPage'}>
 
@@ -81,7 +104,7 @@ class Dashboard extends Component {
                                 language={'en'}
                                 country={'country:pk'}
                                 coordinates={true}
-                                color= {'black'}
+                                color={'black'}
                                 // locationBoxStyle={'custom-style'}
                                 // locationListStyle= {'custom-style-list'}
                                 onChange={(e) => { this.setState({ place: e }) }}
@@ -97,7 +120,10 @@ class Dashboard extends Component {
                         </div>
 
                         <Ripples color="#DCDCDC" during={1200} className={'addButton'}>
-                            <button onClick={this.addCordinates} className={'addButton'}>Add</button>
+                            <button 
+                            // onClick={this.addCordinates}
+                             className={'addButton1'}
+                             >Add</button>
                         </Ripples>
 
                     </div>
@@ -105,37 +131,53 @@ class Dashboard extends Component {
                     <div className={'footerBox'}>
 
                         <div className={'listBox'}>
+                            <div style={{ height: '99%', width: '99%', overflowY: 'scroll', }}>
 
-                            {names.map(name => (
-                                <li>
-                                    {this.getCordinates}
-                                    {name}
-                                    <button className={'deleteButton'} >DELETE</button>
-                                </li>
-                            ))}
+                                {this.state.Zones.map(value => (
 
+                                    <div style={{
+                                        height: '8%', width: '99%', backgroundColor: "white", marginBottom: '0.5%',
+                                        alignItems: 'center', display: 'flex', justifyContent: 'space-around'
+                                    }}>
+                                        <div style={{ height: '100%', width: '80%', alignItems: 'center', display: 'flex', marginLeft: '1%'}}>
+                                            {value.place}
+                                        </div>
 
-                            {/* <button onClick={this.addCordinates}>Add</button>
+                                        <div style={{ height: '87%', width: '20%', marginRight: '0.5%', borderColor: '#0D3AA9', borderWidth: '1%' }}>
+                                            <Ripples color="#DCDCDC" during={1200} className={'deleteButton'} >
+                                                <button className={'deleteButton'}>DELETE</button>
+                                            </Ripples>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
 
-                            <div className={'create'}>
-                                CREATE
-                                    {/* <Link to="/dashboard">Signin</Link> */}
-                            {/* </div> */}
-
-                            {/* <PlacesAutocomplete
-                                    // value={this.state.address}
-                                    onChange={(e) => { this.setState({ place: e }) }}
-                                /> */}
 
                         </div>
+
                         <div className={'mapBox'}>
 
-                            <GoogleMapReact
+                            {/* <GoogleMapReact
                                 bootstrapURLKeys={{ key: 'AIzaSyA_d3pS7JqjFnGWc9hHkvT2MUQvAKo5Bio' }}
                                 defaultCenter={this.state.center}
                                 defaultZoom={this.state.zoom}
-                            />
+                            /> */}
 
+                            <Map
+                                initialCenter={this.state.center}
+                                google={this.props.google}
+                                // style={{ width: 500, height: 500, position: 'relative' }}
+                                zoom={this.state.zoom}
+                            >
+                                {/* ?{this.state.zones.map(value => (
+                                    console.log("check value lat = "+value.latitude),
+                                    console.log("check value long = "+value.longitude)
+                                    
+                                    // this.createCircle(value.latitude, value.longitude, value.radius)
+                                    
+                                ))} :{console.log("Hate u")} */}
+
+                            </Map>
                         </div>
 
                     </div>
@@ -146,4 +188,7 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard;
+
+export default GoogleApiWrapper({
+    apiKey: ('AIzaSyA_d3pS7JqjFnGWc9hHkvT2MUQvAKo5Bio')
+})(Dashboard)

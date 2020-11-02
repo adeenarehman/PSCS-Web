@@ -45,44 +45,9 @@ class Signin extends Component {
         });
     }
 
-    //   onInputChange(event) {
-    //     console.log(event.target.name,event.target.value);
-    //     this.setState({ ...this.state,[event.target.name]: event.target.value });
-    //   }
-
     onInputChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
-
-
-    // getCoordinates = async () => {
-
-    //     const admin = require('firebase-admin');
-    //     admin.initializeApp();
-
-    //     const db = admin.firestore();
-
-    //     const snapshot = await db.collection('Users').get();
-    //     snapshot.forEach((doc) => {
-    //         console.log(doc.id, '=>', doc.data());
-    //     });
-
-
-    //             // const db = firebase.firestore();
-
-    //             var docRef = db.collection("Cordinates").doc("Tu8cP7woGQkkxfjOA4Y5");
-    //     const doc = await docRef.get();
-    //         if (doc.exists) {
-    //             console.log("Document data:", doc.data());
-    //         } else {
-    //             // doc.data() will be undefined in this case
-    //             console.log("No such document!");
-    // }
-
-
-    // componentDidMount() {
-    //     this.getCoordinates();
-    // }
 
     render() {
 

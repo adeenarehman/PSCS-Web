@@ -9,6 +9,7 @@
     "firebase": "^7.24.0",
     "firebase-admin": "^9.2.0",
     "google-map-react": "^2.1.8",
+    "google-maps-react": "^2.0.6",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-google-location": "^1.2.2",

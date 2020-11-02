@@ -16,7 +16,7 @@
 {
     background-color: none;
     height: 100vh;
-    width: 1300px;
+    width: 1450px;
     /* justify-content: center;
     align-items: center; */
     display: flex;
@@ -34,6 +34,8 @@
     align-items: center;
     display: flex;
     flex-direction: row;
+    border-color: blue;
+    border-width: 1vh;
 }
 
 .inputBox
@@ -62,22 +64,24 @@
 
 .searchBar      /*Autoplaces Complete Input*/
 {
-    background-color: pink;
+    /* background-color: pink; */
     /* margin-top: 10%; */
     /* margin-bottom: 2%; */
     height: 5vh;
-    width: 60%;
+    width: 53%;
     position: sticky;
 }
 
 .addButton
 {
-    background-color: #0D3AA9;
-    color: white;
+    
+    
+    background-color: white;
+    color: black;
     height: 5.3vh;
     width: 10%;
-    border: #0D3AA9;
-    border-radius: 10vh;
+    /* border: #0D3AA9; */
+    /* border-radius: 10vh; */
     cursor: pointer;
     outline: 0;
     justify-content: center;
@@ -85,7 +89,28 @@
     display: flex;
     font-size: 2.5vh;
     /* position: relative; */
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 20px;
+}
+
+.addButton1
+{
+    
+    
+    
+    border-color: #0D3AA9;
+    border-width: 3px;
+    background-color: white;
+    color: black;
+    height: 5.3vh;
+    width: 100%;
+    /* border: #0D3AA9; */
+    /* border-radius: 10vh; */
+    cursor: pointer;
+    outline: 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 2.5vh;
+    /* position: relative; */
 }
 
 
@@ -94,6 +119,7 @@
     /* background-color: red; */
     height: 85vh;
     width: 100%;
+margin-bottom: 1%;
     /* /* justify-content: center;
     align-items: center; */
     display: flex;
@@ -103,42 +129,28 @@
 
 .listBox
 {
-    background-color: lightgrey;
+    background-color: lightgray;
     height: 85vh;
-    width: 40%;
-    /* justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column; */
-    position: static;
-}
-
-.deleteButton
-{
-    background-color: #889dd1;
-    color: white;
-    height: 5vh;
-    width: 20%;
-    border: #889dd1;
-    border-radius: 5vh;
-    cursor: pointer;
-    outline: 0;
+    width: 60%;
+    /* overflow-y: scroll */
     justify-content: center;
     align-items: center;
     display: flex;
-    font-size: 1.5vh;
-    margin-left: 75%;
+    /*flex-direction: column; */
+    /* position: relative; */
 }
+
+
 
 .mapBox
 {
     /* background-color: blanchedalmond; */
     height: 85vh;
-    width: 60%;
+    width: 40%;
     justify-content: center;
     align-items: center;
     display: flex;
-    position: unset;
+    position: relative;
     
 }
 
@@ -169,5 +181,24 @@
     font-size: 1rem;
     font-weight: bold;
     color: black;
+    
     /* margin-left: 5rem; */
+  }
+
+  .deleteButton
+  {
+      background-color: white;
+      /* color: white; */
+      height: 100%;
+      width: 100%;
+      /* border-radius: 20vh; */
+      /* margin-top: 3%; */
+      cursor: pointer;
+      outline: 0;
+      border-color: #0D3AA9;
+      border-width: 3px;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      font-size: 2vh;
   }
