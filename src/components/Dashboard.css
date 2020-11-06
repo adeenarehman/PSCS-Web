@@ -151,7 +151,6 @@
 .mapBox
 {
     border: 0.4vh solid #026e7a;
-
     height: 85vh;
     width: 40%;
     justify-content: center;
@@ -161,7 +160,7 @@
     
 }
 
-
+/* 
 .location-search-input{
     font-family: 'Lato', sans-serif;
     width: 30%;
@@ -172,11 +171,11 @@
     font-size: 1rem;
     color: black;
     font-weight: bold;
-    /* margin-top: 300px; */
+    margin-top: 300px;
     margin-left: 5rem;
   
-  }
-  
+  } */
+/*   
   .input-suggestion{
     font-family: 'Lato', sans-serif;
     width: 30%;
@@ -189,8 +188,8 @@
     font-weight: bold;
     color: black;
     
-    /* margin-left: 5rem; */
-  }
+    
+  } */
 
   .deleteButton
   {
@@ -209,3 +208,39 @@
       display: flex;
       font-size: 2vh;
   }
+
+  /* .style-list {
+    cursor: pointer;
+    list-style: armenian;
+    border-bottom: 1px solid #aaa;
+    height: 40px;
+    padding-left: 20px;
+    line-height: 40px;
+    white-space: normal;
+    background-color: white;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+} */
+
+.location-search-input
+{
+  height: 5vh;
+  width: 100%;
+}
+
+.autocomplete-dropdown-container
+{
+  height: 0vh;
+  width: 100%;
+  background-color: orange;
+}
+/* 
+.list-style
+{
+  height: 5vh;
+  width: 100%;
+  background-color:blue;
+  border-radius: 1%;
+  border-color: rgb(red, green, blue);
+} */
+

@@ -7,10 +7,11 @@ import withFirebaseAuth from 'react-with-firebase-auth'
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { firebaseConfig } from './FirebaseConfig';
-import {
-    BrowserRouter as Router,
-    Link
-} from "react-router-dom";
+// import {
+//     BrowserRouter as 
+//     Router,
+//     //Link
+// } from "react-router-dom";
 
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
@@ -57,7 +58,7 @@ class Signin extends Component {
 
                     <div className={'innerLeftContainer'}>
                         {/*<img src={Background} className={'logo'}/>*/}
-                        <center><h1 style={{ marginBottom: '35%', color: '#0D3AA9' }}>PANDEMIC SITUATION CONTROLLING SYSTEM</h1></center>
+                        <center><h1 style={{ marginBottom: '35%', color: 'white' }}>PANDEMIC SITUATION CONTROLLING SYSTEM</h1></center>
 
 
                     </div>
