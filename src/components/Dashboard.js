@@ -29,8 +29,6 @@ export class Dashboard extends Component {
             radius: null,           //for create zones
             address: '',
             placeholder: 'Search Places ...',
-            //latitude:null,
-            //longitude:null
         };
         this.onInputChange = this.onInputChange.bind(this);
     }

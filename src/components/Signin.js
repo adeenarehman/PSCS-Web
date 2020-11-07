@@ -12,7 +12,8 @@ import { firebaseConfig } from './FirebaseConfig';
 //     Router,
 //     //Link
 // } from "react-router-dom";
-
+//import { BrowserRouter as Router } from 'react-router-dom'
+import history from '../history';
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
@@ -33,8 +34,9 @@ class Signin extends Component {
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
         .then(function (result) {
             // console.log(result.user.email);
-            
-            alert('Signin successfull')
+            history.push('/dashboard')
+            //this.props.history.push('/dashboard')
+            //alert('Signin successfull')
         })
 
         .catch(function (error) {

@@ -10,6 +10,7 @@
     "firebase-admin": "^9.2.0",
     "google-map-react": "^2.1.8",
     "google-maps-react": "^2.0.6",
+    "history": "^5.0.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-geocode": "^0.2.2",
