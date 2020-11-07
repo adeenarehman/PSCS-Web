@@ -13,7 +13,6 @@ import PlacesAutocomplete, {
 import Geocode from "react-geocode";
 
 
-// const names = ['James', 'Paul', 'John', 'George', 'Ringo', 'James', 'Paul', 'John', 'George', 'Ringo', 'James', 'Paul', 'John', 'George', 'Ringo',];
 // const API_KEY = "AIzaSyB7Hwn_-eHX2Or_vobRHT0f4bejWcYPpx0"
 // const firebaseApp = firebase.initializeApp(firebaseConfig);
 // const names = ['James', 'Paul', 'John', 'George', 'Ringo'];
@@ -30,10 +29,11 @@ export class Dashboard extends Component {
             Zones: [],
             zoom: 11,
             place: {},
-            zones_latitude:null,    //for create zones 
-            zones_longitude:null,   //for create zones
+            zones_latitude: null,    //for create zones 
+            zones_longitude: null,   //for create zones
             radius: null,           //for create zones
             address: '',
+            placeholder: 'Search Places ...',
             //latitude:null,
             //longitude:null
         };
@@ -58,7 +58,14 @@ export class Dashboard extends Component {
                 console.error(error);
             }
         );
+        // console.log("ajkda: ",address);
+        this.setState({ placeholder: address })
     };
+
+    // setPlaceholder = (abc) => {
+
+    //     this.setState({placeholder:abc});
+    // }
 
     createCircle(lat, long, rad) {  //create circles/Zones
         return (
@@ -94,23 +101,60 @@ export class Dashboard extends Component {
     }
 
 
-
     addCordinates = async () => {
         const db = firebase.firestore();
-        const docRef = db.collection('Cordinates').doc();
+        const docRef = db.collection('zones').doc();
         await docRef.set({
-            latitude: this.state.latitude,
-            longitude: this.state.longitude,
-            radius: this.state.radius
+            latitude: this.state.zones_latitude,
+            longitude: this.state.zones_longitude,
+            radius: parseInt(this.state.radius, 10),
+            place: this.state.address
         });
+    }
+
+    deleteCordinates = async () => {
+        const db = firebase.firestore();
+
+        // const res = await db.collection('zones').doc().where('place','==', 'Korangi, Karachi, Pakistan').delete();
+        firebase.firestore().collection('zones').where('place', '==', 'Stadium Commercial Area Defence V Defence Housing Authority, Karachi, Pakistan').get()
+            .then(querySnapshot => {
+
+                querySnapshot.docs[0].ref.delete();
+                alert('delete successfully')
+            })
+        // db.collection("zones").doc("W2ngxpJv4dmnw2bAdbYF").delete().then(function() {
+        //     console.log("Document successfully deleted!");
+        // }).catch(function(error) {
+        //     console.error("Error removing document: ", error);
+        // });
+
     }
 
     onInputChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
 
+    refreshPage = async () => {
+        window.location.reload(false)
+    }
+
+    reloadPage = async() => {
+        window.location.reload(true)
+    }
     render() {
-        console.log("Values = ", this.state.zones_latitude, this.state.zones_longitude);
+        console.log("hkgdehkd: ", this.state.Zones);
+        // function changeEffect(color) {
+        //     color.target.style.background='lightgrey'
+        // }
+
+        // function changeEffect1(color) {
+        //     color.target.style.background='white'
+        // }
+
+
+
+        // console.log("Values = ", this.state.zones_latitude, this.state.zones_longitude);
+
         return (
             <div className={'mainPage'}  /*container div*/ >
 
@@ -119,24 +163,11 @@ export class Dashboard extends Component {
                     <div className={'headerBox'} /*container div of place & radius*/>
 
                         <div className={'searchBar'} /*search place div*/>
-                            {/* <GoogleComponent
-                                apiKey={API_KEY}
-                                placeholder={'Start typing location'}
-                                language={'en'}
-                                country={'country:pk'}
-                                coordinates={true}
-                                color={'black'}
-                                shouldFetchSuggestions={this.state.place.length > 3}
-                                // locationBoxStyle={'custom-style'}
-                                locationListStyle= {'style-list'}
-                                onChange={(e) => { this.setState({ place: e }) }}
-                            /> */}
 
                             <PlacesAutocomplete
                                 value={this.state.address}
                                 onChange={this.handleChange}
                                 onSelect={this.handleSelect}
-                                shouldFetchSuggestions={this.state.address.length >= 2}
                             >
                                 {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                                     <div>
@@ -154,14 +185,19 @@ export class Dashboard extends Component {
                                                     : 'suggestion-item';
                                                 // inline style for demonstration purpose
                                                 const style = suggestion.active
-                                                    ? { backgroundColor: 'grey', cursor: 'pointer' }
-                                                    : { backgroundColor: 'grey', cursor: 'pointer' };
+                                                    ? {
+                                                        backgroundColor: 'white', cursor: 'pointer', height: '5vh', alignItems: 'center', display: 'flex',
+                                                        border: '0.4vh solid #026e7a',
+                                                    }
+                                                    : {
+                                                        backgroundColor: '#fafafa', cursor: 'pointer', height: '5vh', alignItems: 'center', display: 'flex',
+                                                        border: '0.2vh solid black'
+                                                    };
                                                 return (
                                                     <div
                                                         {...getSuggestionItemProps(suggestion, {
                                                             className,
-                                                            style: { backgroundColor: 'white', position: 'sticky',
-                                                            height:'5vh',width:'100%',},
+                                                            style,
                                                         })}
                                                     >
                                                         <span>{suggestion.description}</span>
@@ -186,11 +222,17 @@ export class Dashboard extends Component {
                             />
                         </div>
 
-                        <Ripples color="#DCDCDC" during={1200} className={'addButton'} /*Add zone button*/>
+                        <Ripples color="#DCDCDC" during={1200} className={'addButton'}>
                             <button
+                                // reload = {true}
+                                // onClick={alert('hfiehfn')}
+
                                 // onClick={this.addCordinates}
+                                onClick={() => { this.addCordinates() && this.reloadPage() }}
                                 className={'addButton1'}
-                            >Add</button>
+                            >
+                                Add
+                            </button>
                         </Ripples>
 
                     </div>
@@ -199,40 +241,37 @@ export class Dashboard extends Component {
 
                         <div className={'listBox'} /*list container div*/>
 
-                            <div style={{ height: '99%', width: '100%', overflowY: 'scroll', overflowX: 'hidden' }}>
+                            <div className={'listInnerContainer'}>
 
                                 {this.state.Zones.map(value => (
 
-                                    <div style={{
-                                        height: '8%', width: '99%', backgroundColor: "white", marginBottom: '0.5%', marginLeft: '0.4%',
-                                        alignItems: 'center', display: 'flex', justifyContent: 'space-around'
-                                    }}>
+                                    <div className={'singleRow'}>
 
-                                        <div style={{
-                                            height: '100%', width: '80%', alignItems: 'center',
-                                            display: 'flex', marginLeft: '0.5%'
-                                        }}>
+                                        <div className={'textDiv'}>
 
-                                            <p style={{ fontSize: '2vh', height: '70%', width: '100%' }}>
+                                            <p className={'text'}>
                                                 {value.place}
                                             </p>
 
                                         </div>
 
-                                        <div style={{
-                                            height: '85%', width: '20%', marginRight: '0.5%', borderColor: '#0D3AA9',
-                                            borderWidth: '1%'
-                                        }}>
+                                        <div className={'buttonDiv'}>
 
-                                            <Ripples color="#DCDCDC" during={1200} className={'deleteButton'} >
-                                                <button className={'deleteButton'}>DELETE</button>
-                                            </Ripples>
+                                            <button className={'deleteButton'}
+                                                // onClick={() => { this.deleteCordinates() && this.refreshPage() }}
+
+                                            >DELETE</button>
+
 
                                         </div>
 
                                     </div>
                                 ))}
 
+                                            <button className={'deleteButton'}  
+                                                onClick={() => { this.deleteCordinates() && this.refreshPage()}}
+
+                                            >DELETE</button>
                             </div>
 
                         </div>

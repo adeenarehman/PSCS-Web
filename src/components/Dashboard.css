@@ -34,19 +34,18 @@
     width: 99.5%;
     margin-bottom: 1%;
     margin-top: 0.5%;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     display: flex;
     flex-direction: row;
     border: 0.4vh solid #026e7a;
-
 }
 
 .inputBox
 {
      /* background-color: green; */
-     height: 5vh;
-     width: 25%; 
+     height: 4.8vh;
+     width: 30%; 
      /* border-bottom: 0.4vh solid #0D3AA9; */
      display: flex;
      align-items: center;
@@ -57,13 +56,13 @@
 {
     background-color: none;
     width: 80%;
-    height: 4.8vh;
+    height: 4.6vh;
     font-size: 2vh;
     border: 0;
     outline: none;
     color: #37352f;
     text-indent: 2%;
-    border-bottom: 0.4vh solid #0D3AA9;
+    border: 0.4vh solid #0D3AA9;
 }
 
 .searchBar      /*Autoplaces Complete Input*/
@@ -71,20 +70,35 @@
     /* background-color: pink; */
     /* margin-top: 10%; */
     /* margin-bottom: 2%; */
-    height: 5.1vh;
-    width: 53%;
+    height: 5.2vh;
+    width: 57%;
     position: sticky;
-    border-bottom: 0.4vh solid #0D3AA9;
+    margin-left: 0.8%;
+    border: 0.4vh solid #0D3AA9;
+}
+ 
+.location-search-input
+{
+  height: 4.5vh;
+  width: 99%;
+  outline: 0; 
+  /* border: 0;
+  color: black;*/
+}
+
+.autocomplete-dropdown-container
+{
+  height: 5%;
+  width: 100%;
+  background-color: white;
 }
 
 .addButton
 {
-    
-    
     background-color: none;
     color: black;
     height: 5.6vh;
-    width: 10%;
+    width: 11%;
     /* border: #0D3AA9; */
     /* border-radius: 10vh; */
     cursor: pointer;
@@ -132,8 +146,7 @@
 
 .listBox
 {
-    border: 0.4vh solid #026e7a;
-
+    border: 0.4vh solid #026d79;
     background-color: #50A6C2;
     height: 85vh;
     width: 60%;
@@ -146,7 +159,55 @@
     /* position: relative; */
 }
 
+.listInnerContainer
+{
+  height: 99%;
+  width: 100%; 
+overflow-y: scroll;
+  overflow-x: hidden;
+  /* background-color: #50A6C2; */
+}
 
+.singleRow
+{
+  height: 8%; 
+  width: 99%; 
+  background-color: white;
+  margin-bottom: 0.5%;
+  margin-left: 0.5%;
+  align-items: center;
+  display: flex;
+  /* justify-content: space-around */
+}
+
+.text
+{
+  font-size: 2vh;
+  height: 70%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.textDiv
+{
+  height: auto;
+  width: 80%;
+  align-items: center;
+  /* background-color:blue; */
+  display: flex;
+  margin-left: 0.5%;
+  /* margin-top: 1% */
+}
+
+.buttonDiv
+{
+  height: 80%;
+  width: 20%;
+  margin-right: 0.5%;
+  border-color: #0D3AA9;
+  border-width: 1%;
+}
 
 .mapBox
 {
@@ -160,38 +221,7 @@
     
 }
 
-/* 
-.location-search-input{
-    font-family: 'Lato', sans-serif;
-    width: 30%;
-    height: 5vh;
-    background: none;
-    border: 2px solid black;
-    border-radius: 5px;
-    font-size: 1rem;
-    color: black;
-    font-weight: bold;
-    margin-top: 300px;
-    margin-left: 5rem;
-  
-  } */
-/*   
-  .input-suggestion{
-    font-family: 'Lato', sans-serif;
-    width: 30%;
-    height: 5vh;
-    background-color: white;
-    border-bottom: 1px black dotted;
-    display: flex;
-    align-items: center;
-    font-size: 1rem;
-    font-weight: bold;
-    color: black;
-    
-    
-  } */
-
-  .deleteButton
+.deleteButton
   {
       background-color: white;
       /* color: white; */
@@ -209,38 +239,5 @@
       font-size: 2vh;
   }
 
-  /* .style-list {
-    cursor: pointer;
-    list-style: armenian;
-    border-bottom: 1px solid #aaa;
-    height: 40px;
-    padding-left: 20px;
-    line-height: 40px;
-    white-space: normal;
-    background-color: white;
-    overflow: hidden !important;
-    text-overflow: ellipsis;
-} */
 
-.location-search-input
-{
-  height: 5vh;
-  width: 100%;
-}
-
-.autocomplete-dropdown-container
-{
-  height: 0vh;
-  width: 100%;
-  background-color: orange;
-}
-/* 
-.list-style
-{
-  height: 5vh;
-  width: 100%;
-  background-color:blue;
-  border-radius: 1%;
-  border-color: rgb(red, green, blue);
-} */
 
