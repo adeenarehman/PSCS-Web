@@ -12,11 +12,6 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import Geocode from "react-geocode";
 
-
-// const API_KEY = "AIzaSyB7Hwn_-eHX2Or_vobRHT0f4bejWcYPpx0"
-// const firebaseApp = firebase.initializeApp(firebaseConfig);
-// const names = ['James', 'Paul', 'John', 'George', 'Ringo'];
-
 export class Dashboard extends Component {
 
     constructor(props) {
@@ -62,11 +57,6 @@ export class Dashboard extends Component {
         this.setState({ placeholder: address })
     };
 
-    // setPlaceholder = (abc) => {
-
-    //     this.setState({placeholder:abc});
-    // }
-
     createCircle(lat, long, rad) {  //create circles/Zones
         return (
             <Circle
@@ -93,13 +83,12 @@ export class Dashboard extends Component {
         const db = firebase.firestore();
         const snapshot = await db.collection('zones').get();
         snapshot.forEach((doc) => {
-            // console.log(doc.id, '=>', doc.data());
-            tempdata.push(doc.data())
-
+            let tempobj={'uid' : doc.id , 'latitude' : doc.data().latitude , 
+            'longitude' : doc.data().longitude , 'place' : doc.data().place , 'radius' : doc.data().radius};
+            tempdata.push(tempobj)
         });
         this.setState({ Zones: tempdata })
     }
-
 
     addCordinates = async () => {
         const db = firebase.firestore();
@@ -110,23 +99,14 @@ export class Dashboard extends Component {
             radius: parseInt(this.state.radius, 10),
             place: this.state.address
         });
+        await this.reloadPage();
     }
 
-    deleteCordinates = async () => {
+    deleteCordinates = async (delete_id) => {
         const db = firebase.firestore();
 
-        // const res = await db.collection('zones').doc().where('place','==', 'Korangi, Karachi, Pakistan').delete();
-        firebase.firestore().collection('zones').where('place', '==', 'Stadium Commercial Area Defence V Defence Housing Authority, Karachi, Pakistan').get()
-            .then(querySnapshot => {
-
-                querySnapshot.docs[0].ref.delete();
-                alert('delete successfully')
-            })
-        // db.collection("zones").doc("W2ngxpJv4dmnw2bAdbYF").delete().then(function() {
-        //     console.log("Document successfully deleted!");
-        // }).catch(function(error) {
-        //     console.error("Error removing document: ", error);
-        // });
+        const res = await db.collection('zones').doc(delete_id).delete();
+        await this.reloadPage();
 
     }
 
@@ -134,26 +114,12 @@ export class Dashboard extends Component {
         this.setState({ [event.target.name]: event.target.value });
     }
 
-    refreshPage = async () => {
-        window.location.reload(false)
-    }
 
     reloadPage = async() => {
         window.location.reload(true)
     }
     render() {
-        console.log("hkgdehkd: ", this.state.Zones);
-        // function changeEffect(color) {
-        //     color.target.style.background='lightgrey'
-        // }
-
-        // function changeEffect1(color) {
-        //     color.target.style.background='white'
-        // }
-
-
-
-        // console.log("Values = ", this.state.zones_latitude, this.state.zones_longitude);
+        console.log("Values = ", this.state.zones);
 
         return (
             <div className={'mainPage'}  /*container div*/ >
@@ -224,11 +190,7 @@ export class Dashboard extends Component {
 
                         <Ripples color="#DCDCDC" during={1200} className={'addButton'}>
                             <button
-                                // reload = {true}
-                                // onClick={alert('hfiehfn')}
-
-                                // onClick={this.addCordinates}
-                                onClick={() => { this.addCordinates() && this.reloadPage() }}
+                                onClick={() => { this.addCordinates();}}
                                 className={'addButton1'}
                             >
                                 Add
@@ -258,20 +220,13 @@ export class Dashboard extends Component {
                                         <div className={'buttonDiv'}>
 
                                             <button className={'deleteButton'}
-                                                // onClick={() => { this.deleteCordinates() && this.refreshPage() }}
-
-                                            >DELETE</button>
-
-
+                                                onClick={() => { this.deleteCordinates(value.uid) }}
+                                            >DELETE
+                                            </button>
                                         </div>
 
                                     </div>
                                 ))}
-
-                                            <button className={'deleteButton'}  
-                                                onClick={() => { this.deleteCordinates() && this.refreshPage()}}
-
-                                            >DELETE</button>
                             </div>
 
                         </div>
