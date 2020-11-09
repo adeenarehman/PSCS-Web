@@ -6,34 +6,19 @@ import {
 } from "react-router-dom";
 import Signin from './Signin'
 import Dashboard from "./Dashboard"
-import history from '../history'
-// using an ES6 transpiler, like babel
-//import history from 'history'
- 
-// const history=history.createHistory()
 
 export default function App() {
     return (
-        <Router history={history}>
+        <Router>
             <div>
-
-                {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
                 <Switch>
-                
-
-                    <Route path="/">
-                        <Signin />
-                    </Route>
-
                     <Route path="/dashboard">
                         <Dashboard />
                     </Route>
 
-                    {/* <Route path="/dashboard">
-                        <Dashboard />
-                    </Route> */}
-
+                    <Route path="/">
+                        <Signin />
+                    </Route>
                 </Switch>
             </div>
         </Router>

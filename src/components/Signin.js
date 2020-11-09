@@ -7,13 +7,7 @@ import withFirebaseAuth from 'react-with-firebase-auth'
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { firebaseConfig } from './FirebaseConfig';
-// import {
-//     BrowserRouter as 
-//     Router,
-//     //Link
-// } from "react-router-dom";
-//import { BrowserRouter as Router } from 'react-router-dom'
-import history from '../history';
+import history from "../history";
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
@@ -28,23 +22,20 @@ class Signin extends Component {
         this.onInputChange = this.onInputChange.bind(this);
     }
 
-
     signInWithEmailPassword = () => {
         console.log(this.state.email, this.state.password);
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-        .then(function (result) {
-            // console.log(result.user.email);
-            history.push('/dashboard')
-            //this.props.history.push('/dashboard')
-            //alert('Signin successfull')
-        })
+            .then(function (result) {
+                history.push('/dashboard');
+                window.location.reload(false);
+            })
 
-        .catch(function (error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorMessage);
-        });
+            .catch(function (error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log(errorMessage);
+            });
     }
 
     onInputChange(event) {
@@ -52,7 +43,6 @@ class Signin extends Component {
     }
 
     render() {
-
         return (
             <div className={'mainContainer'}>
 
@@ -99,7 +89,7 @@ class Signin extends Component {
                                 SIGN IN
                             </button>
                         </Ripples>
-                            {/* <button>SIGN IN</button>
+                        {/* <button>SIGN IN</button>
                             <Link to="/dashboard">Signin</Link> */}
                     </div>
 
