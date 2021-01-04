@@ -7,6 +7,8 @@ import { firebaseConfig } from './FirebaseConfig';
 import {BrowserRouter as Router,
     Link,
     } from "react-router-dom";
+import history from "../history";
+
 
 
 export class Dashboard extends Component {
@@ -45,16 +47,16 @@ export class Dashboard extends Component {
 
                 <div className={'innerDiv'} /*inner container div*/>
 
-                    <div className={'header'} /*container div of place & radius*/>
+                    <div className={'fineHeader'} /*container div of place & radius*/>
 
                         <div className={'logoImg'}>
-                            <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/Logo%2Btext.png?alt=media&token=56500bea-00cd-43f5-b5cd-7b82c98d2261" className={'logoPic'} />
+                            <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/Pandemic%20Control.png?alt=media&token=36e2120b-4201-429b-abda-6847fa47dd59" className={'logoPic'} />
                         </div>
 
-                        <h1>Violation List</h1>
+                        <h1 style={{color : 'white'}}>Violation List</h1>
 
                         <div className={'logout'}>
-                        <Link to="/signin">
+                        {/* <Link to="/signin"> */}
                             <Ripples color="#DCDCDC" during={1200} className={'logoutButton'}>
                                 <button
                                     className={'logoutButton1'}
@@ -62,7 +64,7 @@ export class Dashboard extends Component {
                                     Logout
                                 </button>
                             </Ripples>
-                        </Link>  
+                        {/* </Link>   */}
                         </div>
 
                     </div>

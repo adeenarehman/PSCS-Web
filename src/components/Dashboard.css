@@ -27,9 +27,9 @@
 }
 
 
-.header
+.dashboardHeader
 {
-    background-color: 	#F0F0F0;
+    background-color: #50A6C2;
     height: 12vh;
     width: 100%;
     margin-bottom: 1.1%;
@@ -42,18 +42,38 @@
     /* border: 0.4vh solid #026e7a; */
 }
 
-.logoImg{
-  margin-left: 3vh;
+.dashboardLogoImg{
+  /* margin-left: 3vh; */
   /* background-color: aqua; */
+  align-items: center;
+  /* justify-content:space-between; */
+  display: flex;
   height: fit-content;
-  width: 6%;
+  width: 9%;
 }
-.logoPic{
+.dashboardLogoPic{
   height: 10.5vh;
   width: 100%;
 }
 
-.logout{
+
+.dashboardHeaderHeading{
+  /* margin-left: 3vh; */
+  /* background-color: aqua; */
+  align-items: center;
+  /* justify-content:space-between; */
+  display: flex;
+  height: fit-content;
+  width: 20%;
+}
+.dashboardHeading{
+  height: 9vh;
+  width: 100%;
+}
+
+
+
+.dashboardLogout{
   /* background-color: #0D3AA9; */
   height: 10vh;
   width: 15%;
@@ -61,7 +81,7 @@
   align-items: center;
 }
 
-.logoutButton
+.dashboardLogoutButton
 {
     background-color: none;
     color: black;
@@ -79,7 +99,7 @@
     /* position: relative; */
 }
 
-.logoutButton1
+.dashboardLogoutButton1
 {
     border-color: #0D3AA9;
     border-width: 3px;

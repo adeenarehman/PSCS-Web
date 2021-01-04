@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './Dashboard.css'
 import Ripples from 'react-ripples'
-import history from "../history";
+import history from "../historyone";
 import {BrowserRouter as Router,
-Link,
+Link,  useHistory 
 } from "react-router-dom";
+
 
 export class Dashboard extends Component {
 
@@ -13,6 +14,21 @@ export class Dashboard extends Component {
         this.state = {}
         };
     
+        // goToViewFine = () =>{
+        //     let history = useHistory();
+        //     history.push("/viewfine");
+
+        // }
+
+        goToViewFine = () =>{
+            history.push('/viewfine');
+            // window.location.reload(true);
+        }
+
+        // goToViewFine = () =>{
+        //     history.push('/viewfine');
+        // }
+
     render() {
         console.log("Values = ", this.state.zones);
 
@@ -21,20 +37,26 @@ export class Dashboard extends Component {
 
                 <div className={'innerDiv'} /*inner container div*/>
 
-                    <div className={'header'} /*container div of place & radius*/>
+                    <div className={'dashboardHeader'} /*container div of place & radius*/>
 
-                        <div className={'logoImg'}>
-                            <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/Logo%2Btext.png?alt=media&token=56500bea-00cd-43f5-b5cd-7b82c98d2261" className={'logoPic'}/>
+                        <div className={'dashboardLogoImg'}>
+                            <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/white_lock.png?alt=media&token=6a8c8a6c-7150-4d39-8b36-35078bff679a" className={'dashboardLogoPic'}/>
                         </div>
-                        <div className={'logout'}>
-                            <Ripples color="#DCDCDC" during={1200} className={'logoutButton'}>
-                            <Link to="/signin">
+
+                        <div className={'dashboardHeaderHeading'}>
+
+                        <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/white_text.png?alt=media&token=a540a39a-e153-4a04-89c3-3fe86660ba60" className={'dashboardHeading'}/>
+                        </div>
+
+                        <div className={'dashboardLogout'}>
+                            <Ripples color="#DCDCDC" during={1200} className={'dashboardLogoutButton'}>
+                            {/* <Link to="/signin"> */}
                                 <button 
-                                    className={'logoutButton1'}
+                                    className={'dashboardLogoutButton1'}
                                 >
                                     Logout
                                 </button>
-                                </Link>
+                                {/* </Link> */}
                             </Ripples>
                         </div>
 
@@ -44,24 +66,25 @@ export class Dashboard extends Component {
 
                         
                         <div className={'leftBox'} /*list container div*/
-                        
+                         onClick={this.goToViewFine()}
                         >
-                            <div className={'leftpic'} >
-                                <Link to="/viewfine">
+                            <div className={'leftpic'}
+                            
+                            >
+                                
+                                {/* <Link to="/viewfine"> */}
                                 <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/FineImg.png?alt=media&token=64bd2cf8-14a8-4413-bec8-cb50825a757a" className={'leftBoxImg'} />
-                                </Link>
+                                {/* </Link> */}
                             </div>
 
-                            <Link to="/viewfine">
+                            {/* <Link to="/viewfine"> */}
                             <text className={'leftText'}>View Violation</text>
-                            </Link>
+                            {/* </Link> */}
 
                         </div>
                             
                         
-                        <div className={'rightBox'} /*Map container div*/
-                         onClick={history.push('/viewmap')}
-                        >
+                        <div className={'rightBox'} /*Map container div*/>
 
                             <Link to="/viewmap">    
                             <div className={'rightpic'}>
