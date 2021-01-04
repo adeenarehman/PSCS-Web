@@ -97,14 +97,16 @@ export class ViewMap extends Component {
             radius: parseInt(this.state.radius, 10),
             place: this.state.address
         });
-        await this.reloadPage();
+        // await this.reloadPage();
+        this.getCordinates();
     }
 
     deleteCordinates = async (delete_id) => {
         const db = firebase.firestore();
 
         const res = await db.collection('zones').doc(delete_id).delete();
-        await this.reloadPage();
+        // await this.reloadPage();
+        this.getCordinates();
 
     }
 
@@ -150,11 +152,11 @@ export class ViewMap extends Component {
                                                 // inline style for demonstration purpose
                                                 const style = suggestion.active
                                                     ? {
-                                                        backgroundColor: 'white', cursor: 'pointer', height: '5vh', alignItems: 'center', display: 'flex',
+                                                        backgroundColor: 'white', cursor: 'pointer', height: '6.5vh', alignItems: 'center', display: 'flex',
                                                         border: '0.4vh solid #026e7a',
                                                     }
                                                     : {
-                                                        backgroundColor: '#fafafa', cursor: 'pointer', height: '5vh', alignItems: 'center', display: 'flex',
+                                                        backgroundColor: '#fafafa', cursor: 'pointer', height: '6.5vh', alignItems: 'center', display: 'flex',
                                                         border: '0.2vh solid black'
                                                     };
                                                 return (
@@ -189,6 +191,7 @@ export class ViewMap extends Component {
                         <Ripples color="#DCDCDC" during={1200} className={'addButton'}>
                             <button
                                 onClick={() => { this.addCordinates();}}
+                                
                                 className={'addButton1'}
                             >
                                 Add
@@ -205,11 +208,11 @@ export class ViewMap extends Component {
 
                                 {this.state.Zones.map(value => (
 
-                                    <div className={'singleRow'}>
+                                    <div className={'mapSingleRow'}>
 
-                                        <div className={'textDiv'}>
+                                        <div className={'mapTextDiv'}>
 
-                                            <p className={'text'}>
+                                            <p className={'mapText'}>
                                                 {value.place}
                                             </p>
 

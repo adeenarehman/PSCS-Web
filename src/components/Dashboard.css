@@ -76,9 +76,10 @@
 .dashboardLogout{
   /* background-color: #0D3AA9; */
   height: 10vh;
-  width: 15%;
+  width: 10%;
   display: flex;
   align-items: center;
+  margin-right: 3vh;
 }
 
 .dashboardLogoutButton
@@ -87,7 +88,7 @@
     color: black;
     height: 5.6vh;
     width: 100%;
-    margin-right: 3vh;
+    /* margin-left: 10vh; */
     /* border: #0D3AA9; */
     /* border-radius: 10vh; */
     cursor: pointer;
@@ -118,7 +119,7 @@
     /* position: relative; */
 }
 
-.footer
+.dashboardFooter
 {
     /* background-color: red; */
     /* border: 0.4vh solid #026e7a; */

@@ -169,7 +169,7 @@ overflow-y: scroll;
   /* background-color: #50A6C2; */
 }
 
-.singleRow
+.mapSingleRow
 {
   height: 8%; 
   width: 99%; 
@@ -178,19 +178,22 @@ overflow-y: scroll;
   margin-left: 0.5%;
   align-items: center;
   display: flex;
+  /* justify-content: flex-start; */
+
   /* justify-content: space-around */
 }
 
-.text
+.mapText
 {
   font-size: 2vh;
   height: 70%;
   width: 100%;
   display: flex;
+  
   align-items: center;
 }
 
-.textDiv
+.mapTextDiv
 {
   height: auto;
   width: 80%;

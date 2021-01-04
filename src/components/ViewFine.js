@@ -7,7 +7,6 @@ import { firebaseConfig } from './FirebaseConfig';
 import {BrowserRouter as Router,
     Link,
     } from "react-router-dom";
-import history from "../history";
 
 
 
@@ -25,18 +24,26 @@ export class Dashboard extends Component {
     };
 
     componentDidMount() {
-        this.getCordinates();
+        setInterval(()=>{
+            this.getViolationData();
+            console.warn("kdbcjkbckajs")
+        },5000
+        
+        )   
+
     }
 
-    getCordinates = async () => { //get violations data from firebase
+    getViolationData = async () => { //get violations data from firebase
         let tempdata = []
         const db = firebase.firestore();
         const snapshot = await db.collection('violations').get();
+
         snapshot.forEach((doc) => {
             let tempobj = { 'uid': doc.id, 'name': doc.data().name, 'fine': doc.data().fine };
             tempdata.push(tempobj)
         });
         this.setState({ violations: tempdata })
+
     }
 
     render() {
@@ -49,27 +56,27 @@ export class Dashboard extends Component {
 
                     <div className={'fineHeader'} /*container div of place & radius*/>
 
-                        <div className={'logoImg'}>
-                            <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/Pandemic%20Control.png?alt=media&token=36e2120b-4201-429b-abda-6847fa47dd59" className={'logoPic'} />
+                        <div className={'fineLogoImg'}>
+                            <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/Pandemic%20Control.png?alt=media&token=36e2120b-4201-429b-abda-6847fa47dd59" className={'fineLogoPic'} />
                         </div>
 
                         <h1 style={{color : 'white'}}>Violation List</h1>
 
-                        <div className={'logout'}>
-                        {/* <Link to="/signin"> */}
-                            <Ripples color="#DCDCDC" during={1200} className={'logoutButton'}>
+                        <div className={'fineLogout'}>
+                        <Link to="/signin" style={{textDecoration: 'none', width:'100%'}}>
+                            <Ripples color="#DCDCDC" during={1200} className={'fineLogoutButton'}>
                                 <button
-                                    className={'logoutButton1'}
+                                    className={'fineLogoutButton1'}
                                 >
                                     Logout
                                 </button>
                             </Ripples>
-                        {/* </Link>   */}
+                        </Link>  
                         </div>
 
                     </div>
 
-                    <div className={'footer'} /*container div for zones list & view map*/>
+                    <div className={'fineFooter'} /*container div for zones list & view map*/>
 
                         <div className={'fine'} /*list container div*/>
 

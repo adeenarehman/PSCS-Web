@@ -22,6 +22,7 @@ export class Dashboard extends Component {
 
         goToViewFine = () =>{
             history.push('/viewfine');
+            console.log("jdhhvchava")
             // window.location.reload(true);
         }
 
@@ -50,36 +51,36 @@ export class Dashboard extends Component {
 
                         <div className={'dashboardLogout'}>
                             <Ripples color="#DCDCDC" during={1200} className={'dashboardLogoutButton'}>
-                            {/* <Link to="/signin"> */}
+                            <Link to="/signin" style={{textDecoration: 'none', width:'100%'}}>
                                 <button 
                                     className={'dashboardLogoutButton1'}
                                 >
                                     Logout
                                 </button>
-                                {/* </Link> */}
+                                </Link>
                             </Ripples>
                         </div>
 
                     </div>
 
-                    <div className={'footer'} /*container div for zones list & view map*/>
+                    <div className={'dashboardFooter'} /*container div for zones list & view map*/>
 
                         
                         <div className={'leftBox'} /*list container div*/
-                         onClick={this.goToViewFine()}
+                        //  onClick = {this.goToViewFine()}
                         >
                             <div className={'leftpic'}
                             
                             >
                                 
-                                {/* <Link to="/viewfine"> */}
+                                <Link to="/viewfine">
                                 <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/FineImg.png?alt=media&token=64bd2cf8-14a8-4413-bec8-cb50825a757a" className={'leftBoxImg'} />
-                                {/* </Link> */}
+                                </Link>
                             </div>
 
-                            {/* <Link to="/viewfine"> */}
+                            <Link to="/viewfine" style={{textDecoration: 'none'}}>
                             <text className={'leftText'}>View Violation</text>
-                            {/* </Link> */}
+                            </Link>
 
                         </div>
                             
@@ -92,7 +93,7 @@ export class Dashboard extends Component {
                             </div>
                             </Link>
 
-                            <Link to="/viewmap">
+                            <Link to="/viewmap" style={{textDecoration: 'none'}}>
                             <text className={'rightText'}>View Map</text>
                             </Link>
 
