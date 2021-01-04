@@ -50,8 +50,10 @@ class Signin extends Component {
 
                     <div className={'innerLeftContainer'}>
                         {/*<img src={Background} className={'logo'}/>*/}
-                        <center><h1 style={{ marginBottom: '35%', color: 'white' }}>PANDEMIC SITUATION CONTROLLING SYSTEM</h1></center>
-
+                        {/* <center><h1 style={{ marginBottom: '35%', color: 'blue' }}>PANDEMIC SITUATION CONTROLLING SYSTEM</h1></center> */}
+                        <div className={'logoContainer'}>
+                            <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/Logo%2Btext.png?alt=media&token=93540c12-a601-4ab2-ac0d-31c48ebc8cac" className={'logo'}/>
+                        </div>
 
                     </div>
 
@@ -60,7 +62,7 @@ class Signin extends Component {
                         <div className={'heading'}>Sign in</div>
 
                         <div className={'inputContainer'}>
-                            <HiOutlineMail style={{ height: 30, width: 30, color: '#0D3AA9' }} />
+                            <HiOutlineMail style={{ height: 30, width: 30, color: '#5499C7' }} />
                             <input className={'input'}
                                 type={'text'}
                                 placeholder={'Email'}
@@ -71,7 +73,7 @@ class Signin extends Component {
                         </div>
 
                         <div className={'inputContainer'}>
-                            <FiLock style={{ height: 27, width: 27, color: '#0D3AA9' }} />
+                            <FiLock style={{ height: 27, width: 27, color: '#5499C7' }} />
                             <input className={'input'}
                                 type={'password'}
                                 placeholder={'Password'}

@@ -1,0 +1,244 @@
+.mainPage
+{
+    /* background-color: aqua; */
+    background-image: url('./images/background.png');
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex: 1;
+}
+
+
+.innerPage
+{
+    background-color: none;
+    height: 100vh;
+    width: 1250px;
+    /* justify-content: center;
+    align-items: center; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+.headerBox
+{
+    background-color: #50A6C2;
+    height: 15vh;
+    width: 99.5%;
+    margin-bottom: 1%;
+    margin-top: 0.5%;
+    /* justify-content: center; */
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    border: 0.4vh solid #026e7a;
+}
+
+.inputBox
+{
+     /* background-color: green; */
+     height: 4.8vh;
+     width: 30%; 
+     /* border-bottom: 0.4vh solid #0D3AA9; */
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+
+.input1
+{
+    background-color: none;
+    width: 80%;
+    height: 4.6vh;
+    font-size: 2vh;
+    border: 0;
+    outline: none;
+    color: #37352f;
+    text-indent: 2%;
+    border: 0.4vh solid #0D3AA9;
+}
+
+.searchBar      /*Autoplaces Complete Input*/
+{
+    /* background-color: pink; */
+    /* margin-top: 10%; */
+    /* margin-bottom: 2%; */
+    height: 5.2vh;
+    width: 57%;
+    position: sticky;
+    margin-left: 0.8%;
+    border: 0.4vh solid #0D3AA9;
+}
+ 
+.location-search-input
+{
+  height: 4.5vh;
+  width: 99%;
+  outline: 0; 
+  /* border: 0;
+  color: black;*/
+}
+
+.autocomplete-dropdown-container
+{
+  height: 5%;
+  width: 100%;
+  background-color: white;
+}
+
+.addButton
+{
+    background-color: none;
+    color: black;
+    height: 5.6vh;
+    width: 11%;
+    /* border: #0D3AA9; */
+    /* border-radius: 10vh; */
+    cursor: pointer;
+    outline: 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 2.5vh;
+    /* position: relative; */
+}
+
+.addButton1
+{
+    border-color: #0D3AA9;
+    border-width: 3px;
+    background-color: white;
+    color: black;
+    height: 5.5vh;
+    width: 100%;
+    /* border: #0D3AA9; */
+    /* border-radius: 10vh; */
+    cursor: pointer;
+    outline: 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 2.5vh;
+    /* position: relative; */
+}
+
+
+.footerBox
+{
+    /* background-color: #50A6C2; */
+    /* border: 0.4vh solid #026e7a; */
+    height: 85vh;
+    width: 100%;
+    margin-bottom: 0.5%;
+    /* /* justify-content: center;
+    align-items: center; */
+    display: flex;
+}
+
+
+
+.listBox
+{
+    border: 0.4vh solid #026d79;
+    background-color: #50A6C2;
+    height: 85vh;
+    width: 60%;
+    /* overflow-y: scroll */
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-right: 1%;
+    /*flex-direction: column; */
+    /* position: relative; */
+}
+
+.listInnerContainer
+{
+  height: 99%;
+  width: 100%; 
+overflow-y: scroll;
+  overflow-x: hidden;
+  /* background-color: #50A6C2; */
+}
+
+.singleRow
+{
+  height: 8%; 
+  width: 99%; 
+  background-color: white;
+  margin-bottom: 0.5%;
+  margin-left: 0.5%;
+  align-items: center;
+  display: flex;
+  /* justify-content: space-around */
+}
+
+.text
+{
+  font-size: 2vh;
+  height: 70%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.textDiv
+{
+  height: auto;
+  width: 80%;
+  align-items: center;
+  /* background-color:blue; */
+  display: flex;
+  margin-left: 0.5%;
+  /* margin-top: 1% */
+}
+
+.buttonDiv
+{
+  height: 80%;
+  width: 20%;
+  margin-right: 0.5%;
+  border-color: #0D3AA9;
+  border-width: 1%;
+}
+
+.mapBox
+{
+    border: 0.4vh solid #026e7a;
+    height: 85vh;
+    width: 40%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: relative;
+    
+}
+
+.deleteButton
+  {
+      background-color: white;
+      /* color: white; */
+      height: 100%;
+      width: 100%;
+      /* border-radius: 20vh; */
+      /* margin-top: 3%; */
+      cursor: pointer;
+      outline: 0;
+      border-color: #0D3AA9;
+      border-width: 3px;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      font-size: 2vh;
+  }
+
+
+
