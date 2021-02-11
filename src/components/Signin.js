@@ -28,7 +28,7 @@ class Signin extends Component {
             .then(function (result) {
                 history.push('/dashboard');
                 window.location.reload(false);
-                alert('Login Success')
+                
             })
 
             .catch(function (error) {
@@ -36,6 +36,7 @@ class Signin extends Component {
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 console.log(errorMessage);
+                alert(errorMessage)
             });
     }
 

@@ -21,6 +21,7 @@ export class Dashboard extends Component {
             cnic: null,
             name: null,
             query: null,
+            query_status: null,
         }
         this.handleClick = this.handleClick.bind(this);
     };
@@ -49,12 +50,24 @@ export class Dashboard extends Component {
         const snapshot = await db.collection('queries').get();
 
         snapshot.forEach((doc) => {
-            let tempobj = { 'cnic': doc.data().cnic, 'name': doc.data().name, 'query': doc.data().query };
+            let tempobj = { 'uid': doc.id, 'cnic': doc.data().cnic, 'name': doc.data().name, 'query': doc.data().query };
             tempdata.push(tempobj)
         });
         this.setState({ queries: tempdata })
 
     }
+
+    addQueryData = async (add_id,add_status) => { //get violations data from firebase
+        const db = firebase.firestore();
+        const docRef = db.collection('queries').doc(add_id);
+        await docRef.update(
+            {
+                query_status: add_status
+            }
+          )  
+    }
+
+    
 
     render() {
         // console.log("Values = ", this.state.violations);
@@ -158,27 +171,28 @@ export class Dashboard extends Component {
                                         </div>
 
                                         <div className={'queryListLastTextBox'}>
-
+                                        {/* {value.uid} */}
                                             <div className={'queryAcceptButtonDiv'}>
-                                                <button className={this.state.button ? "acceptButtonTrue": "acceptButtonFalse"}
+                                                {/* {value.uid} */}
+                                                <button className={'acceptButtonTrue'}
                                                 // onClick={() => { this.handleClick}}
                                                 // onClick={this.handleClick}
+                                                onClick={() => { this.addQueryData(value.uid,'Accepted')}}
                                                 >
-                                                    Accept
-                                            </button>
-                                            </div>
+                                                    Accept                                           
+                                                </button>
+                                            </div> 
+                                           
                                             <div className={'queryDenyButtonDiv'}>
-                                                <button className={this.state.button ? "denyButtonTrue": "denyButtonFalse"}
+                                                <button className={'denyButtonTrue'}
                                                 // onClick={() => { this.deleteCordinates(value.uid) }}
                                                 // onClick={this.handleClick}
-
+                                                onClick={() => { this.addQueryData(value.uid,'Denied')}}
                                                 >
                                                     Deny
                                             </button>
                                             </div>
                                         </div>
-
-
 
                                     </div>
                                 ))}
