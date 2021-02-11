@@ -11,6 +11,10 @@ import PlacesAutocomplete, {
     getLatLng
 } from "react-places-autocomplete";
 import Geocode from "react-geocode";
+import {
+    BrowserRouter as Router,
+    Link, Redirect, useHistory
+} from "react-router-dom";
 
 export class ViewMap extends Component {
 
@@ -81,8 +85,10 @@ export class ViewMap extends Component {
         const db = firebase.firestore();
         const snapshot = await db.collection('zones').get();
         snapshot.forEach((doc) => {
-            let tempobj={'uid' : doc.id , 'latitude' : doc.data().latitude , 
-            'longitude' : doc.data().longitude , 'place' : doc.data().place , 'radius' : doc.data().radius};
+            let tempobj = {
+                'uid': doc.id, 'latitude': doc.data().latitude,
+                'longitude': doc.data().longitude, 'place': doc.data().place, 'radius': doc.data().radius
+            };
             tempdata.push(tempobj)
         });
         this.setState({ Zones: tempdata })
@@ -115,138 +121,169 @@ export class ViewMap extends Component {
     }
 
 
-    reloadPage = async() => {
+    reloadPage = async () => {
         window.location.reload(true)
     }
     render() {
         console.log("Values = ", this.state.zones);
 
         return (
-            <div className={'mainPage'}  /*container div*/ >
+            <div className={'mapMainPage'}  /*container div*/ >
 
-                <div className={'innerPage'} /*inner container div*/>
+                <div className={'mapInnerPage'} /*inner container div*/>
 
-                    <div className={'headerBox'} /*container div of place & radius*/>
+                    <div className={'mapHeader'} /*container div of logo & Logout button*/>
 
-                        <div className={'searchBar'} /*search place div*/>
-
-                            <PlacesAutocomplete
-                                value={this.state.address}
-                                onChange={this.handleChange}
-                                onSelect={this.handleSelect}
-                            >
-                                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                                    <div>
-                                        <input
-                                            {...getInputProps({
-                                                placeholder: 'Search Places ...',
-                                                className: 'location-search-input',
-                                            })}
-                                        />
-                                        <div className="autocomplete-dropdown-container">
-                                            {loading && <div>Loading...</div>}
-                                            {suggestions.map(suggestion => {
-                                                const className = suggestion.active
-                                                    ? 'suggestion-item--active'
-                                                    : 'suggestion-item';
-                                                // inline style for demonstration purpose
-                                                const style = suggestion.active
-                                                    ? {
-                                                        backgroundColor: 'white', cursor: 'pointer', height: '6.5vh', alignItems: 'center', display: 'flex',
-                                                        border: '0.4vh solid #026e7a',
-                                                    }
-                                                    : {
-                                                        backgroundColor: '#fafafa', cursor: 'pointer', height: '6.5vh', alignItems: 'center', display: 'flex',
-                                                        border: '0.2vh solid black'
-                                                    };
-                                                return (
-                                                    <div
-                                                        {...getSuggestionItemProps(suggestion, {
-                                                            className,
-                                                            style,
-                                                        })}
-                                                    >
-                                                        <span>{suggestion.description}</span>
-                                                    </div>
-                                                );
-                                            })}
-                                        </div>
-                                    </div>
-                                )}
-                            </PlacesAutocomplete>
+                        <div className={'mapLogoImg'}>
+                            <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/white_lock.png?alt=media&token=6a8c8a6c-7150-4d39-8b36-35078bff679a" className={'mapLogoPic'} />
                         </div>
 
+                        <div className={'mapHeaderHeading'}>
 
-                        <div className={'inputBox'} /*input radius div*/>
-                            <input className={'input1'}
-                                type={'text'}
-                                placeholder={'Radius'}
-                                name={'radius'}
-                                value={this.state.radius}
-                                onChange={this.onInputChange}
-
-                            />
+                            <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/white_text.png?alt=media&token=a540a39a-e153-4a04-89c3-3fe86660ba60" className={'mapHeading'} />
                         </div>
 
-                        <Ripples color="#DCDCDC" during={1200} className={'addButton'}>
-                            <button
-                                onClick={() => { this.addCordinates();}}
-                                
-                                className={'addButton1'}
-                            >
-                                Add
-                            </button>
-                        </Ripples>
+                        <div className={'mapLogout'}>
+                            <Ripples color="#DCDCDC" during={1200} className={'mapLogoutButton'}>
+                                <Link to="/signin" style={{ textDecoration: 'none', width: '100%' }}>
+                                    <button
+                                        className={'mapLogoutButton1'}
+                                    >
+                                        Logout
+                                    </button>
+                                </Link>
+                            </Ripples>
+                        </div>
 
                     </div>
 
+
+
                     <div className={'footerBox'} /*container div for zones list & view map*/>
 
-                        <div className={'listBox'} /*list container div*/>
+                        <div className={'headerBox'} /*container div of place & radius*/>
 
-                            <div className={'listInnerContainer'}>
+                            <div className={'searchBar'} /*search place div*/>
 
-                                {this.state.Zones.map(value => (
-
-                                    <div className={'mapSingleRow'}>
-
-                                        <div className={'mapTextDiv'}>
-
-                                            <p className={'mapText'}>
-                                                {value.place}
-                                            </p>
-
+                                <PlacesAutocomplete
+                                    value={this.state.address}
+                                    onChange={this.handleChange}
+                                    onSelect={this.handleSelect}
+                                >
+                                    {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                                        <div>
+                                            <input
+                                                {...getInputProps({
+                                                    placeholder: 'Search Places ...',
+                                                    className: 'location-search-input',
+                                                })}
+                                            />
+                                            <div className="autocomplete-dropdown-container">
+                                                {loading && <div>Loading...</div>}
+                                                {suggestions.map(suggestion => {
+                                                    const className = suggestion.active
+                                                        ? 'suggestion-item--active'
+                                                        : 'suggestion-item';
+                                                    // inline style for demonstration purpose
+                                                    const style = suggestion.active
+                                                        ? {
+                                                            backgroundColor: 'white', cursor: 'pointer', height: '6.5vh', alignItems: 'center', display: 'flex',
+                                                            border: '0.4vh solid #026e7a',
+                                                        }
+                                                        : {
+                                                            backgroundColor: '#fafafa', cursor: 'pointer', height: '6.5vh', alignItems: 'center', display: 'flex',
+                                                            border: '0.2vh solid black'
+                                                        };
+                                                    return (
+                                                        <div
+                                                            {...getSuggestionItemProps(suggestion, {
+                                                                className,
+                                                                style,
+                                                            })}
+                                                        >
+                                                            <span>{suggestion.description}</span>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
                                         </div>
-
-                                        <div className={'buttonDiv'}>
-
-                                            <button className={'deleteButton'}
-                                                onClick={() => { this.deleteCordinates(value.uid) }}
-                                            >DELETE
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                ))}
+                                    )}
+                                </PlacesAutocomplete>
                             </div>
+
+
+                            <div className={'inputBox'} /*input radius div*/>
+                                <input className={'input1'}
+                                    type={'text'}
+                                    placeholder={'Radius'}
+                                    name={'radius'}
+                                    value={this.state.radius}
+                                    onChange={this.onInputChange}
+
+                                />
+                            </div>
+
+                            <Ripples color="#DCDCDC" during={1200} className={'addButton'}>
+                                <button
+                                    onClick={() => { this.addCordinates(); }}
+
+                                    className={'addButton1'}
+                                >
+                                    Add
+    </button>
+                            </Ripples>
 
                         </div>
 
-                        <div className={'mapBox'} /*Map container div*/>
+                        <div style={{height: '80vh', width: '100%', flexDirection:'row', display: 'flex', justifyContent: 'center'}}>
 
-                            <Map
-                                initialCenter={this.state.map_center}
-                                google={this.props.google}
-                                // style={{ width: 500, height: 500, position: 'relative' }}
-                                zoom={this.state.zoom}
-                            //onReady={this.createCircle()} 
-                            >
-                                {this.state.Zones.map(value => (
-                                    // console.log("check value lat = "+value.latitude),
-                                    // console.log("check value long = "+value.longitude),            
-                                    this.createCircle(value.latitude, value.longitude, value.radius)
-                                ))}
-                            </Map>
+                            <div className={'listBox'} /*list container div*/>
+
+                                <div className={'listInnerContainer'}>
+
+                                    {this.state.Zones.map(value => (
+
+                                        <div className={'mapSingleRow'}>
+
+                                            <div className={'mapTextDiv'}>
+
+                                                <p className={'mapText'}>
+                                                    {value.place}
+                                                </p>
+
+                                            </div>
+
+                                            <div className={'buttonDiv'}>
+
+                                                <button className={'deleteButton'}
+                                                    onClick={() => { this.deleteCordinates(value.uid) }}
+                                                >DELETE
+                </button>
+                                            </div>
+
+                                        </div>
+                                    ))}
+                                </div>
+
+                            </div>
+
+                            <div className={'mapBox'} /*Map container div*/>
+
+                                <Map
+                                    initialCenter={this.state.map_center}
+                                    google={this.props.google}
+                                    // style={{ width: 500, height: 500, position: 'relative' }}
+                                    zoom={this.state.zoom}
+                                //onReady={this.createCircle()} 
+                                >
+                                    {this.state.Zones.map(value => (
+                                        // console.log("check value lat = "+value.latitude),
+                                        // console.log("check value long = "+value.longitude),            
+                                        this.createCircle(value.latitude, value.longitude, value.radius)
+                                    ))}
+                                </Map>
+
+                            </div>
 
                         </div>
 

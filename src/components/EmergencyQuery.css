@@ -1,0 +1,364 @@
+.mainDiv
+{
+    /* background-color: aqua; */
+    background-image: url('./images/background.png');
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex: 1;
+}
+
+
+.innerDiv
+{
+    /* background-color: purple; */
+    height: 100vh;
+    width: 80%;
+    /* /* justify-content: center;
+    align-items: center; */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;   
+}
+
+
+.queryHeader
+{
+    background-color:#50A6C2;
+    height: 12vh;
+    width: 100%;
+    margin-bottom: 1.1%;
+    /* margin-top: 0.5%; */
+    /* justify-content: center; */
+    align-items: center;
+    justify-content:space-between;
+    display: flex;
+    flex-direction: row;
+    /* border: 0.4vh solid #026e7a; */
+}
+
+.queryLogoImg{
+  margin-left: 3vh;
+  /* background-color: aqua; */
+  height: fit-content;
+  width: 6%;
+}
+.queryLogoPic{
+  height: 10.5vh;
+  width: 100%;
+}
+
+.queryLogout{
+  /* background-color: #0D3AA9; */
+  height: 10vh;
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 3vh;
+}
+
+.queryLogoutButton
+{
+    background-color: none;
+    color: black;
+    height: 5.6vh;
+    width: 100%;
+    /* margin-right: 41vh; */
+    /* border: #0D3AA9; */
+    /* border-radius: 10vh; */
+    cursor: pointer;
+    outline: 0;
+    /* justify-content: flex-end; */
+    /* align-items: center; */
+    display: flex;
+    font-size: 2.5vh;
+    /* position: relative; */
+}
+
+.queryLogoutButton1
+{
+    border-color: #0D3AA9;
+    border-width: 3px;
+    background-color: white;
+    color: black;
+    height: 5.5vh;
+    width: 100%;
+    /* border: #0D3AA9; */
+    /* border-radius: 10vh; */
+    cursor: pointer;
+    outline: 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 2.5vh;
+    /* position: relative; */
+}
+
+.queryFooter
+{
+    /* background-color: red; */
+    /* border: 0.4vh solid #026e7a; */
+    height: 85vh;
+    width: 100%;
+    /* margin-bottom: 0.5%; */
+     justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.query
+{
+    background-color: #50A6C2;
+    border: 0.4vh solid #026e7a;
+    height: 84vh;
+    width: 100%;
+    /* justify-content: center; */
+    display: flex;
+    flex-direction: column;
+}
+
+
+.queryListInnerContainer
+{
+  height: 99%;
+  width: 100%; 
+overflow-y: scroll;
+  overflow-x: hidden;
+  /* background-color: #50A6C2; */
+}
+
+.queryListRows
+{
+  height: 8%; 
+  width: 99%; 
+  background-color: white;
+  margin-bottom: 0.5%;
+  margin-left: 0.5%;
+  align-items: center;
+  display: flex;
+  /* justify-content: center */
+}
+
+
+.queryListTextBox
+{
+  height: auto;
+  width: 80%;
+  align-items: center;
+  /* background-color:blue; */
+  display: flex;
+  /* margin-left: 0.2%; */
+  border-right: 0.4vh solid #50A6C2;
+/* margin-top: 1% */
+}
+.text
+{
+  font-size: 2vh;
+  height: 70%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #373737;
+}
+/* .queryListTextBox
+{
+  font-size: 2vh;
+  height: 70%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #373737;
+} */
+
+.queryListTextHeading
+{
+  font-size: 3vh;
+  height: 70%;
+  width: 100%;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.queryListTextBox
+{
+  height: auto;
+  width: 80%;
+  align-items: center;
+  /* background-color:blue; */
+  display: flex;
+  /* margin-left: 0.2%; */
+  border-right: 0.4vh solid #50A6C2;
+/* margin-top: 1% */
+}
+
+
+
+.queryListTextHeading
+{
+  font-size: 3vh;
+  height: 70%;
+  width: 100%;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* .textHeading
+{
+  font-size: 3vh;
+  height: 70%;
+  width: 100%;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+.queryListLastTextBox
+{
+  height: auto;
+  width: 80%;
+  align-items: center;
+  justify-content: space-around;
+
+  /* background-color:blue; */
+  display: flex;
+  /* margin-left: 0.2%; */
+  /* border-right: 0.4vh solid #50A6C2; */
+/* margin-top: 1% */
+}
+
+/* .queryListButton
+{
+  height: auto;
+  width: 80%;
+  align-items: center;
+  justify-content: space-around;
+  /* background-color:blue; */
+  /* display: flex; */
+  /* margin-left: 0.2%; */
+  /* border-right: 0.4vh solid #50A6C2; */
+/* margin-top: 1%
+} */
+
+.queryAcceptButtonDiv
+{
+    background-color: #373737;
+  height: 5vh;
+  width: 40%;
+  /* margin-right: 0.5%; */
+  border-color: #0D3AA9;
+  border-width: 1%;
+}
+
+.queryAcceptButton
+  {
+      background-color: white;
+      /* color: white; */
+      height: 100%;
+      width: 100%;
+      /* border-radius: 20vh; */
+      /* margin-top: 3%; */
+      cursor: pointer;
+      outline: 0;
+      border-color: #0D3AA9;
+      border-width: 3px;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      font-size: 2vh;
+  }
+
+  .acceptButtonTrue {
+    background-color: white;
+    /* color: white; */
+    height: 100%;
+    width: 100%;
+    /* border-radius: 20vh; */
+    /* margin-top: 3%; */
+    cursor: pointer;
+    outline: 0;
+    border-color: #0D3AA9;
+    border-width: 3px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: 2vh;
+  }
+  
+  .acceptButtonFalse {
+    background-color: lightgreen;
+    /* color: white; */
+    height: 100%;
+    width: 100%;
+    /* border-radius: 20vh; */
+    /* margin-top: 3%; */
+    cursor: pointer;
+    outline: 0;
+    border-color: #0D3AA9;
+    border-width: 3px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: 2vh;
+  }
+  
+
+  .queryDenyButtonDiv
+{
+    background-color: #373737;
+
+  height: 5vh;
+  width: 40%;
+  /* margin-right: 0.5%; */
+  border-color: #0D3AA9;
+  border-width: 1%;
+}
+
+.denyButtonTrue
+  {
+      background-color: white;
+      /* color: white; */
+      height: 100%;
+      width: 100%;
+      /* border-radius: 20vh; */
+      /* margin-top: 3%; */
+      cursor: pointer;
+      outline: 0;
+      border-color: #0D3AA9;
+      border-width: 3px;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      font-size: 2vh;
+  }
+
+  .denyButtonFalse
+  {
+      background-color: rgb(247, 99, 99);
+      /* color: white; */
+      height: 100%;
+      width: 100%;
+      /* border-radius: 20vh; */
+      /* margin-top: 3%; */
+      cursor: pointer;
+      outline: 0;
+      border-color: #0D3AA9;
+      border-width: 3px;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      font-size: 2vh;
+  }

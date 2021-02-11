@@ -2,60 +2,61 @@ import React, { Component } from 'react';
 import './Dashboard.css'
 import Ripples from 'react-ripples'
 import history from "../historyone";
-import {BrowserRouter as Router,
-Link,  useHistory 
+import {
+    BrowserRouter as Router,
+    Link, Redirect, useHistory
 } from "react-router-dom";
 
 
 export class Dashboard extends Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {}
-        };
-    
-        // goToViewFine = () =>{
-        //     let history = useHistory();
-        //     history.push("/viewfine");
+    // constructor(props) {
+    //     super(props)
+    //     this.state = {}
+    //     };
 
-        // }
+    // goToViewFine = () =>{
+    //     let history = useHistory();
+    //     history.push("/viewfine");
 
-        goToViewFine = () =>{
-            history.push('/viewfine');
-            console.log("jdhhvchava")
-            // window.location.reload(true);
-        }
+    // }
 
-        // goToViewFine = () =>{
-        //     history.push('/viewfine');
-        // }
+    // goToViewFine = () =>{
+    //     history.push('/viewfine');
+    //     console.log("jdhhvchava")
+    //     // window.location.reload(true);
+    // }
+
+    // goToViewFine = () =>{
+    //     history.push('/viewfine');
+    // }
 
     render() {
-        console.log("Values = ", this.state.zones);
+        // console.log("Values = ", this.state.zones);
 
         return (
-            <div className={'mainDiv'}  /*container div*/ >
+            <div className={'dashboardMainDiv'}  /*container div*/ >
 
-                <div className={'innerDiv'} /*inner container div*/>
+                <div className={'dashboardInnerDiv'} /*inner container div*/>
 
-                    <div className={'dashboardHeader'} /*container div of place & radius*/>
+                    <div className={'dashboardHeader'} /*container div of logo & Logout button*/>
 
                         <div className={'dashboardLogoImg'}>
-                            <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/white_lock.png?alt=media&token=6a8c8a6c-7150-4d39-8b36-35078bff679a" className={'dashboardLogoPic'}/>
+                            <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/white_lock.png?alt=media&token=6a8c8a6c-7150-4d39-8b36-35078bff679a" className={'dashboardLogoPic'} />
                         </div>
 
                         <div className={'dashboardHeaderHeading'}>
 
-                        <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/white_text.png?alt=media&token=a540a39a-e153-4a04-89c3-3fe86660ba60" className={'dashboardHeading'}/>
+                            <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/white_text.png?alt=media&token=a540a39a-e153-4a04-89c3-3fe86660ba60" className={'dashboardHeading'} />
                         </div>
 
                         <div className={'dashboardLogout'}>
                             <Ripples color="#DCDCDC" during={1200} className={'dashboardLogoutButton'}>
-                            <Link to="/signin" style={{textDecoration: 'none', width:'100%'}}>
-                                <button 
-                                    className={'dashboardLogoutButton1'}
-                                >
-                                    Logout
+                                <Link to="/signin" style={{ textDecoration: 'none', width: '100%' }}>
+                                    <button
+                                        className={'dashboardLogoutButton1'}
+                                    >
+                                        Logout
                                 </button>
                                 </Link>
                             </Ripples>
@@ -64,41 +65,55 @@ export class Dashboard extends Component {
                     </div>
 
                     <div className={'dashboardFooter'} /*container div for zones list & view map*/>
-
+                        {/* <div className={'dashboardEmptyDiv'}>
                         
-                        <div className={'leftBox'} /*list container div*/
-                        //  onClick = {this.goToViewFine()}
-                        >
-                            <div className={'leftpic'}
-                            
+                         </div> */}
+
+                        <div className={'dashboardBoxes'}>
+
+                            <div className={'leftBox'} /*list container div*/
+                            //  onClick = {this.goToViewFine()}
                             >
-                                
+                                <div className={'leftpic'}>
                                 <Link to="/viewfine">
-                                <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/FineImg.png?alt=media&token=64bd2cf8-14a8-4413-bec8-cb50825a757a" className={'leftBoxImg'} />
+                                    <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/FineImg.png?alt=media&token=64bd2cf8-14a8-4413-bec8-cb50825a757a" className={'leftBoxImg'} />
                                 </Link>
                             </div>
 
-                            <Link to="/viewfine" style={{textDecoration: 'none'}}>
-                            <text className={'leftText'}>View Violation</text>
+                            <Link to="/viewfine" style={{ textDecoration: 'none' }}>
+                                <text className={'leftText'}>Violations</text>
                             </Link>
 
-                        </div>
-                            
-                        
-                        <div className={'rightBox'} /*Map container div*/>
-
-                            <Link to="/viewmap">    
-                            <div className={'rightpic'}>
-                                <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/map.PNG?alt=media&token=347b0ed1-3224-422c-9ed0-2a0ee4440280" className={'rightBoxImg'}/>
                             </div>
+
+                            <div className={'centerBox'} /*Map container div*/>
+
+                                <Link to="/emergencyqueries">
+                                <div className={'centerpic'}>
+                                    <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/queries.png?alt=media&token=78bafdbc-343e-4dd8-b3dd-14056ff893d4" className={'centerBoxImg'} />
+                                </div>
                             </Link>
 
-                            <Link to="/viewmap" style={{textDecoration: 'none'}}>
-                            <text className={'rightText'}>View Map</text>
+                            <Link to="/emergencyqueries" style={{ textDecoration: 'none' }}>
+                                <text className={'centerText'}>Emergency Queries</text>
                             </Link>
 
+                            </div>
+
+                            <div className={'rightBox'} /*Map container div*/>
+
+                                <Link to="/viewmap">
+                                <div className={'rightpic'}>
+                                    <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/Map1.png?alt=media&token=408c9edc-2107-4226-9955-d31b9c19f7f1" className={'rightBoxImg'} />
+                                </div>
+                            </Link>
+
+                            <Link to="/viewmap" style={{ textDecoration: 'none' }}>
+                                <text className={'rightText'}>Zones</text>
+                            </Link>
+
+                            </div>
                         </div>
-
                     </div>
 
                 </div>

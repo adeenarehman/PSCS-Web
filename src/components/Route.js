@@ -4,16 +4,20 @@ import {
     Switch,
     Route,
 } from "react-router-dom";
-import Signin from './Signin'
-import Dashboard from "./Dashboard"
+import Signin from './Signin';
+import Dashboard from "./Dashboard";
 import ViewMap from "./ViewMap";
 import ViewFine from "./ViewFine";
+import EmergencyQueries from "./EmergencyQuery";
 
 export default function App() {
     return (
         <Router>
             <div>
                 <Switch>
+                    <Route path="/emergencyqueries">
+                        <EmergencyQueries/>
+                    </Route>
 
                     <Route path="/viewfine">
                         <ViewFine/>

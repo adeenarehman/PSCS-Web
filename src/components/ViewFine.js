@@ -24,6 +24,8 @@ export class Dashboard extends Component {
     };
 
     componentDidMount() {
+        this.getViolationData();
+
         setInterval(()=>{
             this.getViolationData();
             console.warn("kdbcjkbckajs")
@@ -47,12 +49,12 @@ export class Dashboard extends Component {
     }
 
     render() {
-        console.log("Values = ", this.state.violations);
+        // console.log("Values = ", this.state.violations);
 
         return (
-            <div className={'mainDiv'}  /*container div*/ >
+            <div className={'fineMainDiv'}  /*container div*/ >
 
-                <div className={'innerDiv'} /*inner container div*/>
+                <div className={'fineInnerDiv'} /*inner container div*/>
 
                     <div className={'fineHeader'} /*container div of place & radius*/>
 

@@ -28,6 +28,7 @@ class Signin extends Component {
             .then(function (result) {
                 history.push('/dashboard');
                 window.location.reload(false);
+                alert('Login Success')
             })
 
             .catch(function (error) {

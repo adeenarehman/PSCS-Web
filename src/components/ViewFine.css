@@ -1,9 +1,9 @@
-.mainDiv
+.fineMainDiv
 {
     /* background-color: aqua; */
-    background-image: url('./images/background.png');
+    /* background-image: url('./images/background.png');
     background-position: center;
-    background-size: cover;
+    background-size: cover; */
     height: 100vh;
     width: 100%;
     justify-content: center;
@@ -13,11 +13,11 @@
 }
 
 
-.innerDiv
+.fineInnerDiv
 {
     /* background-color: purple; */
     height: 100vh;
-    width: 80%;
+    width: 95%;
     /* /* justify-content: center;
     align-items: center; */
     display: flex;
@@ -32,7 +32,10 @@
     background-color:#50A6C2;
     height: 12vh;
     width: 100%;
-    margin-bottom: 1.1%;
+    margin-bottom: 1%;
+    /* border-bottom-left-radius: 2vh ;
+    border-bottom-right-radius: 2vh ; */
+    box-shadow: 0 8px 6px -6px black;
     /* margin-top: 0.5%; */
     /* justify-content: center; */
     align-items: center;
@@ -49,7 +52,7 @@
   width: 6%;
 }
 .fineLogoPic{
-  height: 10.5vh;
+  height: 9vh;
   width: 100%;
 }
 
@@ -104,18 +107,19 @@
 {
     /* background-color: red; */
     /* border: 0.4vh solid #026e7a; */
-    height: 85vh;
+    height: 84vh;
     width: 100%;
     /* margin-bottom: 0.5%; */
      justify-content: center;
     align-items: center;
     display: flex;
+    box-shadow: 0 9px 4px -4px black;
 }
 
 .fine
 {
     background-color: #50A6C2;
-    border: 0.4vh solid #026e7a;
+    border: 0.2vh solid #026e7a;
     height: 84vh;
     width: 100%;
     /* justify-content: center; */
@@ -138,6 +142,7 @@ overflow-y: scroll;
   height: 8%; 
   width: 99%; 
   background-color: white;
+  margin-top: 0.2%;
   margin-bottom: 0.5%;
   margin-left: 0.5%;
   align-items: center;
