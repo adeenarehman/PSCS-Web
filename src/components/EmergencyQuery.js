@@ -61,9 +61,9 @@ export class Dashboard extends Component {
 
 
         return (
-            <div className={'mainDiv'}  /*container div*/ >
+            <div className={'queryMainDiv'}  /*container div*/ >
 
-                <div className={'innerDiv'} /*inner container div*/>
+                <div className={'queryInnerDiv'} /*inner container div*/>
 
                     <div className={'queryHeader'} /*container div of place & radius*/>
 
