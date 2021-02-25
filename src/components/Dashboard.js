@@ -65,54 +65,64 @@ export class Dashboard extends Component {
                     </div>
 
                     <div className={'dashboardFooter'} /*container div for zones list & view map*/>
-                        {/* <div className={'dashboardEmptyDiv'}>
-                        
-                         </div> */}
 
                         <div className={'dashboardBoxes'}>
 
-                            <div className={'leftBox'} /*list container div*/
-                            //  onClick = {this.goToViewFine()}
-                            >
-                                <div className={'leftpic'}>
+                            <div className={'fineBox'} /*list container div*/>
+                                <div className={'finepic'}>
                                 <Link to="/viewfine">
-                                    <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/FineImg.png?alt=media&token=64bd2cf8-14a8-4413-bec8-cb50825a757a" className={'leftBoxImg'} />
+                                    <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/FineImg.png?alt=media&token=64bd2cf8-14a8-4413-bec8-cb50825a757a" className={'fineBoxImg'} />
                                 </Link>
                             </div>
 
                             <Link to="/viewfine" style={{ textDecoration: 'none' }}>
-                                <text className={'leftText'}>Violations</text>
+                                <text className={'fineText'}>Violations</text>
                             </Link>
 
                             </div>
 
-                            <div className={'centerBox'} /*Map container div*/>
+                            <div className={'queryBox'} /*Map container div*/>
 
                                 <Link to="/emergencyqueries">
-                                <div className={'centerpic'}>
-                                    <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/queries.png?alt=media&token=78bafdbc-343e-4dd8-b3dd-14056ff893d4" className={'centerBoxImg'} />
+                                <div className={'querypic'}>
+                                    <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/queries.png?alt=media&token=78bafdbc-343e-4dd8-b3dd-14056ff893d4" className={'queryBoxImg'} />
                                 </div>
-                            </Link>
+                                </Link>
 
                             <Link to="/emergencyqueries" style={{ textDecoration: 'none' }}>
-                                <text className={'centerText'}>Emergency Queries</text>
+                                <text className={'queryText'}>Queries</text>
                             </Link>
 
                             </div>
 
-                            <div className={'rightBox'} /*Map container div*/>
+                            <div className={'zoneBox'} /*Map container div*/>
 
                                 <Link to="/viewmap">
-                                <div className={'rightpic'}>
-                                    <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/Map1.png?alt=media&token=408c9edc-2107-4226-9955-d31b9c19f7f1" className={'rightBoxImg'} />
+                                <div className={'zonePic'}>
+                                    <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/Map1.png?alt=media&token=408c9edc-2107-4226-9955-d31b9c19f7f1" className={'zoneBoxImg'} />
                                 </div>
                             </Link>
 
                             <Link to="/viewmap" style={{ textDecoration: 'none' }}>
-                                <text className={'rightText'}>Zones</text>
+                                <text className={'zoneText'}>Zones</text>
                             </Link>
 
                             </div>
+
+                            <div className={'signupBox'} /*Map container div*/>
+
+                                <Link to="/signup">
+                                <div className={'signupPic'}>
+                                    <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/signup2.png?alt=media&token=c5334c86-d3fa-4772-857e-ae1dadbaed0d" className={'signupBoxImg'} />
+                                </div>
+                            </Link>
+
+                            <Link to="/signup" style={{ textDecoration: 'none' }}>
+                                <text className={'signupText'}>SignUp</text>
+                            </Link>
+
+                            </div> 
+                            
                         </div>
                     </div>
 

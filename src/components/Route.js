@@ -9,26 +9,34 @@ import Dashboard from "./Dashboard";
 import ViewMap from "./ViewMap";
 import ViewFine from "./ViewFine";
 import EmergencyQueries from "./EmergencyQuery";
+import SignUp from "./SignUp";
+
 
 export default function App() {
     return (
         <Router>
             <div>
                 <Switch>
+                    
+
                     <Route path="/emergencyqueries">
-                        <EmergencyQueries/>
+                        <EmergencyQueries />
                     </Route>
 
                     <Route path="/viewfine">
-                        <ViewFine/>
+                        <ViewFine />
                     </Route>
 
                     <Route path="/viewmap">
                         <ViewMap />
                     </Route>
 
+                    <Route path="/signup">
+                        <SignUp />
+                    </Route>
+
                     <Route path="/dashboard">
-                        <Dashboard/>
+                        <Dashboard />
                     </Route>
 
                     <Route path="/">

@@ -15,6 +15,9 @@ import {
     BrowserRouter as Router,
     Link, Redirect, useHistory
 } from "react-router-dom";
+// import { RadioGroup, RadioButton, ReversedRadioButton,RadioIcon } from 'react-radio-buttons';
+import Dropdown from 'react-dropdown';
+
 
 export class ViewMap extends Component {
 
@@ -31,11 +34,19 @@ export class ViewMap extends Component {
             zones_latitude: null,    //for create zones 
             zones_longitude: null,   //for create zones
             radius: null,           //for create zones
+            zones_type: null,
             address: '',
             placeholder: 'Search Places ...',
         };
         this.onInputChange = this.onInputChange.bind(this);
+        this._onSelect = this._onSelect.bind(this)
+
     }
+
+    _onSelect (option) {
+        // console.log('You selected ', option.label)
+        this.setState({zones_type: option.label})
+      }
 
     handleChange = address => {     //send seaarch address
         this.setState({ address });
@@ -59,9 +70,10 @@ export class ViewMap extends Component {
         this.setState({ placeholder: address })
     };
 
-    createCircle(lat, long, rad) {  //create circles/Zones
-        return (
-            <Circle
+    createCircle(lat, long, rad,zones_type) {  //create circles/Zones
+    if (zones_type == 'Critical') {
+        return(
+        <Circle
                 radius={rad}
                 center={{ lat: lat, lng: long }}
                 onMouseover={() => console.log('mouseover')}
@@ -74,6 +86,24 @@ export class ViewMap extends Component {
                 fillOpacity={0.5}
             />
         );
+
+    } else {
+        return(
+            <Circle
+            radius={rad}
+            center={{ lat: lat, lng: long }}
+            onMouseover={() => console.log('mouseover')}
+            onClick={() => console.log('click')}
+            onMouseout={() => console.log('mouseout')}
+            strokeColor='transparent'
+            strokeOpacity={0}
+            strokeWeight={5}
+            fillColor='#20FF20'
+            fillOpacity={0.5}
+        />
+        );
+    }
+            
     }
 
     componentDidMount() {
@@ -86,7 +116,7 @@ export class ViewMap extends Component {
         const snapshot = await db.collection('zones').get();
         snapshot.forEach((doc) => {
             let tempobj = {
-                'uid': doc.id, 'latitude': doc.data().latitude,
+                'uid': doc.id, 'latitude': doc.data().latitude, 'zones_type': doc.data().zones_type,
                 'longitude': doc.data().longitude, 'place': doc.data().place, 'radius': doc.data().radius
             };
             tempdata.push(tempobj)
@@ -101,6 +131,7 @@ export class ViewMap extends Component {
             latitude: this.state.zones_latitude,
             longitude: this.state.zones_longitude,
             radius: parseInt(this.state.radius, 10),
+            zones_type: this.state.zones_type,
             place: this.state.address
         });
         // await this.reloadPage();
@@ -126,6 +157,11 @@ export class ViewMap extends Component {
     }
     render() {
         console.log("Values = ", this.state.zones);
+
+        const options = 
+        [
+         'Critical', 'Mild'
+        ];
 
         return (
             <div className={'mapMainPage'}  /*container div*/ >
@@ -215,11 +251,23 @@ export class ViewMap extends Component {
                             <div className={'inputBox'} /*input radius div*/>
                                 <input className={'input1'}
                                     type={'text'}
-                                    placeholder={'Radius'}
+                                    placeholder={'Radius...'}
                                     name={'radius'}
                                     value={this.state.radius}
                                     onChange={this.onInputChange}
 
+                                />
+                            </div>
+
+
+                            <div className={'dropdownBox'} /*input radius div*/>
+
+                                <Dropdown 
+                                options={options} controlClassName='myMapControlClassName' className={'myMapClassName'}
+                                onChange={this._onSelect} 
+                                //  value={defaultOption}   
+                                menuClassName='myMapMenuClassName'
+                                placeholder="Select zone type"
                                 />
                             </div>
 
@@ -235,7 +283,7 @@ export class ViewMap extends Component {
 
                         </div>
 
-                        <div style={{height: '80vh', width: '100%', flexDirection:'row', display: 'flex', justifyContent: 'center'}}>
+                        <div style={{ height: '80vh', width: '100%', flexDirection: 'row', display: 'flex', justifyContent: 'center' }}>
 
                             <div className={'listBox'} /*list container div*/>
 
@@ -279,7 +327,7 @@ export class ViewMap extends Component {
                                     {this.state.Zones.map(value => (
                                         // console.log("check value lat = "+value.latitude),
                                         // console.log("check value long = "+value.longitude),            
-                                        this.createCircle(value.latitude, value.longitude, value.radius)
+                                        this.createCircle(value.latitude, value.longitude, value.radius,value.zones_type)
                                     ))}
                                 </Map>
 

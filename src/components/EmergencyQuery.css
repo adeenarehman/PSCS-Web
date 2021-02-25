@@ -168,9 +168,9 @@ overflow-y: scroll;
   font-size: 2vh;
   height: 70%;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  /* display: flex; */
+  /* align-items: center;
+  justify-content: center; */
   color: #373737;
 }
 /* .queryListTextBox
@@ -303,9 +303,9 @@ overflow-y: scroll;
     display: flex;
     font-size: 2vh;
   }
-  
-  .acceptButtonFalse {
-    background-color: lightgreen;
+
+  .acceptButtonTrue1 {
+    background-color: white;
     /* color: white; */
     height: 100%;
     width: 100%;
@@ -320,7 +320,6 @@ overflow-y: scroll;
     display: flex;
     font-size: 2vh;
   }
-  
 
   .queryDenyButtonDiv
 {
@@ -351,9 +350,9 @@ overflow-y: scroll;
       font-size: 2vh;
   }
 
-  .denyButtonFalse
+  .denyButtonTrue1
   {
-      background-color: rgb(247, 99, 99);
+      background-color: white;
       /* color: white; */
       height: 100%;
       width: 100%;

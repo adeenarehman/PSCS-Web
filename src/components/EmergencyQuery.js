@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './EmergencyQuery.css'
 import Ripples from 'react-ripples'
 import * as firebase from 'firebase/app';
+// import Ripples from 'react-ripples';
 import firestore from 'firebase/firestore'
 import { firebaseConfig } from './FirebaseConfig';
 import {
@@ -19,7 +20,8 @@ export class Dashboard extends Component {
             button: true,
             queries: [],
             cnic: null,
-            name: null,
+            first_name: null,
+            last_name: null,
             query: null,
             query_status: null,
         }
@@ -50,14 +52,14 @@ export class Dashboard extends Component {
         const snapshot = await db.collection('queries').get();
 
         snapshot.forEach((doc) => {
-            let tempobj = { 'uid': doc.id, 'cnic': doc.data().cnic, 'name': doc.data().name, 'query': doc.data().query };
+            let tempobj = { 'uid': doc.id, 'cnic': doc.data().cnic, 'first_name': doc.data().first_name, 'last_name': doc.data().last_name, 'query': doc.data().query };
             tempdata.push(tempobj)
         });
         this.setState({ queries: tempdata })
 
     }
 
-    addQueryData = async (add_id,add_status) => { //get violations data from firebase
+    addQueryData = async (add_id,add_status) => {
         const db = firebase.firestore();
         const docRef = db.collection('queries').doc(add_id);
         await docRef.update(
@@ -111,7 +113,7 @@ export class Dashboard extends Component {
                                     <div className={'queryListTextBox'}>
 
                                         <h1 className={'queryListTextHeading'}>
-                                            CNIC
+                                           FIRST NAME
                                         </h1>
 
                                     </div>
@@ -119,7 +121,15 @@ export class Dashboard extends Component {
                                     <div className={'queryListTextBox'}>
 
                                         <h1 className={'queryListTextHeading'}>
-                                            NAME
+                                            LAST NAME
+                                        </h1>
+
+                                    </div>
+
+                                    <div className={'queryListTextBox'}>
+
+                                        <h1 className={'queryListTextHeading'}>
+                                            CNIC
                                         </h1>
 
                                     </div>
@@ -149,17 +159,25 @@ export class Dashboard extends Component {
                                         <div className={'queryListTextBox'}>
 
                                             <h1 className={'text'}>
-                                                {value.cnic}
+                                            {value.first_name}
                                             </h1>
-
                                         </div>
 
                                         <div className={'queryListTextBox'}>
 
                                             <h1 className={'text'}>
-                                                {value.name}
+                                            {value.last_name}
                                             </h1>
+                                        </div>
 
+                                        <div className={'queryListTextBox'}>
+
+                                            <h1 className={'text'}>
+                                               
+                                                {value.cnic}
+
+                                            </h1>
+                                          
                                         </div>
 
                                         <div className={'queryListTextBox'}>
@@ -173,24 +191,29 @@ export class Dashboard extends Component {
                                         <div className={'queryListLastTextBox'}>
                                         {/* {value.uid} */}
                                             <div className={'queryAcceptButtonDiv'}>
+                                                <Ripples color="#DCDCDC" during={1200} className={'acceptButtonTrue1'}>
                                                 {/* {value.uid} */}
                                                 <button className={'acceptButtonTrue'}
                                                 // onClick={() => { this.handleClick}}
                                                 // onClick={this.handleClick}
-                                                onClick={() => { this.addQueryData(value.uid,'Accepted')}}
+                                                onClick={() => { this.addQueryData(value.uid,'Your Request Has Been Accepted')}}
                                                 >
                                                     Accept                                           
                                                 </button>
+                                                </Ripples>
                                             </div> 
                                            
                                             <div className={'queryDenyButtonDiv'}>
+                                                <Ripples color="#DCDCDC" during={1200} className={'denyButtonTrue1'}>
+
                                                 <button className={'denyButtonTrue'}
                                                 // onClick={() => { this.deleteCordinates(value.uid) }}
                                                 // onClick={this.handleClick}
-                                                onClick={() => { this.addQueryData(value.uid,'Denied')}}
+                                                onClick={() => { this.addQueryData(value.uid,'Your Request Has Been Denied')}}
                                                 >
                                                     Deny
                                             </button>
+                                            </Ripples>
                                             </div>
                                         </div>
 
