@@ -24,6 +24,7 @@ export class Dashboard extends Component {
             last_name: null,
             query: null,
             query_status: null,
+            query_description: null,
         }
         this.handleClick = this.handleClick.bind(this);
     };
@@ -52,12 +53,14 @@ export class Dashboard extends Component {
         const snapshot = await db.collection('queries').get();
 
         snapshot.forEach((doc) => {
-            let tempobj = { 'uid': doc.id, 'cnic': doc.data().cnic, 'first_name': doc.data().first_name, 'last_name': doc.data().last_name, 'query': doc.data().query };
+            let tempobj = { 'uid': doc.id, 'cnic': doc.data().cnic, 'first_name': doc.data().first_name, 'last_name': doc.data().last_name,
+                            'query': doc.data().query, 'query_description': doc.data().description  
+                          };
             tempdata.push(tempobj)
         });
         this.setState({ queries: tempdata })
-
     }
+
 
     addQueryData = async (add_id,add_status) => {
         const db = firebase.firestore();
@@ -121,14 +124,6 @@ export class Dashboard extends Component {
                                     <div className={'queryListTextBox'}>
 
                                         <h1 className={'queryListTextHeading'}>
-                                            LAST NAME
-                                        </h1>
-
-                                    </div>
-
-                                    <div className={'queryListTextBox'}>
-
-                                        <h1 className={'queryListTextHeading'}>
                                             CNIC
                                         </h1>
 
@@ -138,6 +133,14 @@ export class Dashboard extends Component {
 
                                         <h1 className={'queryListTextHeading'}>
                                             QUERY
+                                        </h1>
+
+                                    </div>
+
+                                    <div className={'queryListTextBox'}>
+
+                                        <h1 className={'queryListTextHeading'}>
+                                            QUERY DESCRIPTION
                                         </h1>
 
                                     </div>
@@ -160,12 +163,7 @@ export class Dashboard extends Component {
 
                                             <h1 className={'text'}>
                                             {value.first_name}
-                                            </h1>
-                                        </div>
-
-                                        <div className={'queryListTextBox'}>
-
-                                            <h1 className={'text'}>
+                                            {}
                                             {value.last_name}
                                             </h1>
                                         </div>
@@ -173,11 +171,8 @@ export class Dashboard extends Component {
                                         <div className={'queryListTextBox'}>
 
                                             <h1 className={'text'}>
-                                               
                                                 {value.cnic}
-
                                             </h1>
-                                          
                                         </div>
 
                                         <div className={'queryListTextBox'}>
@@ -185,6 +180,20 @@ export class Dashboard extends Component {
                                             <h1 className={'text'}>
                                                 {value.query}
                                             </h1>
+                                          
+                                        </div>
+
+                                        <div className={'queryListTextBox'}>
+
+                                                <h1 className={'text'}>
+                                                   
+                                                    <text className={'acceptButtonTrue'}
+                                                    onClick={() => {alert(value.query_description)}}
+                                                    >
+                                                      Read Description                                           
+                                                    </text>
+                                                    
+                                                </h1>
 
                                         </div>
 
@@ -196,7 +205,7 @@ export class Dashboard extends Component {
                                                 <button className={'acceptButtonTrue'}
                                                 // onClick={() => { this.handleClick}}
                                                 // onClick={this.handleClick}
-                                                onClick={() => { this.addQueryData(value.uid,'Your Request Has Been Accepted')}}
+                                                onClick={() => { this.addQueryData(value.uid,'Your Request Has Been Accepted For')}}
                                                 >
                                                     Accept                                           
                                                 </button>
@@ -209,7 +218,7 @@ export class Dashboard extends Component {
                                                 <button className={'denyButtonTrue'}
                                                 // onClick={() => { this.deleteCordinates(value.uid) }}
                                                 // onClick={this.handleClick}
-                                                onClick={() => { this.addQueryData(value.uid,'Your Request Has Been Denied')}}
+                                                onClick={() => { this.addQueryData(value.uid,'Your Request Has Been Denied For')}}
                                                 >
                                                     Deny
                                             </button>

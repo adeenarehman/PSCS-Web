@@ -10,6 +10,7 @@ import ViewMap from "./ViewMap";
 import ViewFine from "./ViewFine";
 import EmergencyQueries from "./EmergencyQuery";
 import SignUp from "./SignUp";
+import RelaxingZones from "./RelaxingZones";
 
 
 export default function App() {
@@ -17,8 +18,11 @@ export default function App() {
         <Router>
             <div>
                 <Switch>
-                    
 
+                <Route path="/relaxingzones">
+                        <RelaxingZones/>
+                    </Route>
+                    
                     <Route path="/emergencyqueries">
                         <EmergencyQueries />
                     </Route>

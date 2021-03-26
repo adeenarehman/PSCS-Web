@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component  } from 'react';
+// import { useState  } from 'react';
 import './ViewMap.css'
 import { GoogleComponent } from 'react-google-location'
 import Ripples from 'react-ripples'
@@ -17,6 +18,10 @@ import {
 } from "react-router-dom";
 // import { RadioGroup, RadioButton, ReversedRadioButton,RadioIcon } from 'react-radio-buttons';
 import Dropdown from 'react-dropdown';
+import Popup from 'reactjs-popup';
+// import 'reactjs-popup/dist/index.css';
+import DateTimePicker from 'react-datetime-picker'
+
 
 
 export class ViewMap extends Component {
@@ -35,6 +40,7 @@ export class ViewMap extends Component {
             zones_longitude: null,   //for create zones
             radius: null,           //for create zones
             zones_type: null,
+            updated_radius: null,
             address: '',
             placeholder: 'Search Places ...',
         };
@@ -43,10 +49,10 @@ export class ViewMap extends Component {
 
     }
 
-    _onSelect (option) {
+    _onSelect(option) {
         // console.log('You selected ', option.label)
-        this.setState({zones_type: option.label})
-      }
+        this.setState({ zones_type: option.label })
+    }
 
     handleChange = address => {     //send seaarch address
         this.setState({ address });
@@ -70,40 +76,40 @@ export class ViewMap extends Component {
         this.setState({ placeholder: address })
     };
 
-    createCircle(lat, long, rad,zones_type) {  //create circles/Zones
-    if (zones_type == 'Critical') {
-        return(
-        <Circle
-                radius={rad}
-                center={{ lat: lat, lng: long }}
-                onMouseover={() => console.log('mouseover')}
-                onClick={() => console.log('click')}
-                onMouseout={() => console.log('mouseout')}
-                strokeColor='transparent'
-                strokeOpacity={0}
-                strokeWeight={5}
-                fillColor='#FF0000'
-                fillOpacity={0.5}
-            />
-        );
+    createCircle(lat, long, rad, zones_type) {  //create circles/Zones
+        if (zones_type == 'Critical') {
+            return (
+                <Circle
+                    radius={rad}
+                    center={{ lat: lat, lng: long }}
+                    onMouseover={() => console.log('mouseover')}
+                    onClick={() => console.log('click')}
+                    onMouseout={() => console.log('mouseout')}
+                    strokeColor='transparent'
+                    strokeOpacity={0}
+                    strokeWeight={5}
+                    fillColor='#FF0000'
+                    fillOpacity={0.5}
+                />
+            );
 
-    } else {
-        return(
-            <Circle
-            radius={rad}
-            center={{ lat: lat, lng: long }}
-            onMouseover={() => console.log('mouseover')}
-            onClick={() => console.log('click')}
-            onMouseout={() => console.log('mouseout')}
-            strokeColor='transparent'
-            strokeOpacity={0}
-            strokeWeight={5}
-            fillColor='#20FF20'
-            fillOpacity={0.5}
-        />
-        );
-    }
-            
+        } else {
+            return (
+                <Circle
+                    radius={rad}
+                    center={{ lat: lat, lng: long }}
+                    onMouseover={() => console.log('mouseover')}
+                    onClick={() => console.log('click')}
+                    onMouseout={() => console.log('mouseout')}
+                    strokeColor='transparent'
+                    strokeOpacity={0}
+                    strokeWeight={5}
+                    fillColor='#20FF20'
+                    fillOpacity={0.5}
+                />
+            );
+        }
+
     }
 
     componentDidMount() {
@@ -147,6 +153,15 @@ export class ViewMap extends Component {
 
     }
 
+    updateRadius = async (update_id) => {
+        const db = firebase.firestore();
+
+        const res = await db.collection('zones').doc(update_id).update({radius:parseInt(this.state.updated_radius)});
+        // await this.reloadPage();
+        this.getCordinates();
+
+    }
+
     onInputChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
@@ -155,13 +170,37 @@ export class ViewMap extends Component {
     reloadPage = async () => {
         window.location.reload(true)
     }
+
+//     editPopup () {
+//         return(
+//         <Popup
+//           trigger={<button className={'editButton'}
+//         //   onClick={() => { this.editPopup() }}
+//           >
+//               EDIT
+//   </button>}
+//           modal
+//           nested
+//         >
+//           {close => (
+//             <div className="modal">
+//               <button className="close" onClick={close}>
+//                 &times;
+//               </button>
+//               <div>HElLO </div>
+//             </div> 
+//           )}
+//         </Popup>
+//         );
+//       }
+
     render() {
         console.log("Values = ", this.state.zones);
 
-        const options = 
-        [
-         'Critical', 'Mild'
-        ];
+        const options =
+            [
+                'Critical', 'Mild'
+            ];       
 
         return (
             <div className={'mapMainPage'}  /*container div*/ >
@@ -194,6 +233,7 @@ export class ViewMap extends Component {
                     </div>
 
 
+{/* FOOTER BOX DIV */}
 
                     <div className={'footerBox'} /*container div for zones list & view map*/>
 
@@ -201,6 +241,7 @@ export class ViewMap extends Component {
 
                             <div className={'searchBar'} /*search place div*/>
 
+{/* PLACES AUTO-COMPLETE WORK */}
                                 <PlacesAutocomplete
                                     value={this.state.address}
                                     onChange={this.handleChange}
@@ -247,7 +288,7 @@ export class ViewMap extends Component {
                                 </PlacesAutocomplete>
                             </div>
 
-
+{/* INPUT RADIUS WORK */}
                             <div className={'inputBox'} /*input radius div*/>
                                 <input className={'input1'}
                                     type={'text'}
@@ -259,30 +300,83 @@ export class ViewMap extends Component {
                                 />
                             </div>
 
+{/*DROPDOWN FOR ZONE TYPE */}
+                            <div className={'dropdownBox'} >
 
-                            <div className={'dropdownBox'} /*input radius div*/>
-
-                                <Dropdown 
-                                options={options} controlClassName='myMapControlClassName' className={'myMapClassName'}
-                                onChange={this._onSelect} 
-                                //  value={defaultOption}   
-                                menuClassName='myMapMenuClassName'
-                                placeholder="Select zone type"
+                                <Dropdown
+                                    options={options} controlClassName='myMapControlClassName' className={'myMapClassName'}
+                                    onChange={this._onSelect}
+                                    //  value={defaultOption}   
+                                    menuClassName='myMapMenuClassName'
+                                    placeholder="Select Zone Type"
+                                    placeholderClassName='myPlaceholderClassName'
                                 />
                             </div>
 
-                            <Ripples color="#DCDCDC" during={1200} className={'addButton'}>
-                                <button
-                                    onClick={() => { this.addCordinates(); }}
+                            
+ {/* ADD ZONE POPUP */}
+                            <Popup
+                                trigger={
+                                    <Ripples color="#DCDCDC" during={1200} className={'addButton'}>
+                                        <button className={'addButton1'} onClick={() => { this.addCordinates(); }}>
+                                            Add
+                                        </button>
+                                    </Ripples>
+                                        }
+                                modal
+                                className={'add-popup'}
+                            >
+                                <div style={{fontSize: '2.5vh'}}>
+                                    Zone Has Been Added Succesfully.
+                                </div>
+                                
+                                    <button className={'closeButton'} // onClick={() => { this.addCordinates(); }}
+                                    >
+                                        OK
+                                    </button>
+                            </Popup>
 
-                                    className={'addButton1'}
+{/* VIEW MAP POPUP */}
+                            <Popup 
+                                trigger={
+                                    <Ripples color="#DCDCDC" during={1200} className={'addButton'}>
+                                        <button className={'addButton1'}> View Map</button>
+                                    </Ripples>
+                                }
+                                modal
+                                nested
+                                className={'map-popup'}
+                            >
+                                <div className={'mapBox'} /*Map container div*/>
+
+                                    <Map
+                                        initialCenter={this.state.map_center}
+                                        google={this.props.google}
+                                        // style={{ width: 500, height: 500, position: 'relative' }}
+                                        zoom={this.state.zoom}
+                                    //onReady={this.createCircle()} 
+                                    >
+                                        {this.state.Zones.map(value => (
+                                            // console.log("check value lat = "+value.latitude),
+                                            // console.log("check value long = "+value.longitude),            
+                                            this.createCircle(value.latitude, value.longitude, value.radius, value.zones_type)
+                                        ))}
+                                    </Map>
+
+                                </div>
+                            </Popup>
+
+                            {/* <div className={'buttonDiv'}>
+
+                                <button className={'deleteButton'}
+                                onClick={() => { this.deleteCordinates(value.uid) }}
                                 >
-                                    Add
-    </button>
-                            </Ripples>
-
+                                    EDIT
+                                </button>
+                            </div> */}
                         </div>
 
+{/*ZONES LIST WORK */}
                         <div style={{ height: '80vh', width: '100%', flexDirection: 'row', display: 'flex', justifyContent: 'center' }}>
 
                             <div className={'listBox'} /*list container div*/>
@@ -300,36 +394,65 @@ export class ViewMap extends Component {
                                                 </p>
 
                                             </div>
+                                            
+                                            
+{/* EDIT ZONE POPUP */}                  
+                                            <Popup 
+                                                trigger={
+                                                    <button className={'editButton'}
+                                                    // onClick={() => { this.deleteCordinates(value.uid) }}
+                                                    >
+                                                        EDIT
+                                                    </button>
+                                                }
+                                                modal
+                                                className={'edit-popup'}
+                                            >
+                                                
+                                                <button className="close"                                                   
+                                                >
+                                                    &times;
+                                                </button>
 
-                                            <div className={'buttonDiv'}>
+                        {/*EDIT ZONE DIV */}   <div className={'editPopup-InputDropdown'}> 
+                                                    
+                                                    <div className={'editInputBox'} /*input radius div*/>
+                                                        <input className={'input1'}
+                                                            type={'text'}
+                                                            placeholder={'Radius...'}
+                                                            name={'updated_radius'}
+                                                            value={this.state.updated_radius}
+                                                            onChange={this.onInputChange}
 
-                                                <button className={'deleteButton'}
-                                                    onClick={() => { this.deleteCordinates(value.uid) }}
-                                                >DELETE
-                </button>
-                                            </div>
+                                                        />
+                                                    </div>
+
+                                                   
+
+                                                    <button className={'editPopupButton'}
+                                                     onClick={() => { this.updateRadius(value.uid)}} 
+                                                    >                         
+                                                        Add Zone
+                                                    </button>
+
+                                                    <button className={'deleteButton'}
+                                                        onClick={() => { this.deleteCordinates(value.uid) }}
+                                                    >
+                                                        Delete Zone
+                                                    </button>
+                {/*EDIT ZONE DIV FINISHED*/}    </div>
+
+                                                <div className={'editPopup-DeleteButton'}>
+                                                    
+                                                </div>
+
+                                            </Popup>
 
                                         </div>
+
+                                        
                                     ))}
                                 </div>
-
-                            </div>
-
-                            <div className={'mapBox'} /*Map container div*/>
-
-                                <Map
-                                    initialCenter={this.state.map_center}
-                                    google={this.props.google}
-                                    // style={{ width: 500, height: 500, position: 'relative' }}
-                                    zoom={this.state.zoom}
-                                //onReady={this.createCircle()} 
-                                >
-                                    {this.state.Zones.map(value => (
-                                        // console.log("check value lat = "+value.latitude),
-                                        // console.log("check value long = "+value.longitude),            
-                                        this.createCircle(value.latitude, value.longitude, value.radius,value.zones_type)
-                                    ))}
-                                </Map>
 
                             </div>
 

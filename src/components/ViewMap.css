@@ -134,7 +134,7 @@
     width: 99.5%;
     /* margin-bottom: 1%; */
     /* margin-top: 0.5%; */
-    /* justify-content: center; */
+    justify-content: space-around;
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -145,7 +145,7 @@
 {
      /* background-color: green; */
      height: 4.8vh;
-     width: 17%; 
+     width: 16%; 
      /* border-bottom: 0.4vh solid #0D3AA9; */
      display: flex;
      align-items: center;
@@ -155,7 +155,7 @@
 .input1
 {
     /* background-color: pink; */
-    width: 90%;
+    width: 100%;
     height: 4.6vh;
     font-size: 2vh;
     border: 0;
@@ -171,16 +171,16 @@
     /* margin-top: 10%; */
     /* margin-bottom: 2%; */
     height: 5.2vh;
-    width: 57.1%;
+    width: 45%;
     position: sticky;
-    margin-left: 0.8%;
+    margin-left: 0.5%;
     border: 0.4vh solid #0D3AA9;
 }
  
 .location-search-input
 {
   height: 4.5vh;
-  width: 99%;
+  width: 98.7%;
   outline: 0; 
   /* border: 0;
   color: black;*/
@@ -199,11 +199,18 @@
      height: 4.8vh;
      width: 13%;
      margin-right: 0.5%;
-       border: 0.4vh solid #0D3AA9;
+     border: 0.4vh solid #0D3AA9;
      /* border-bottom: 0.4vh solid #0D3AA9; */
      /* display: flex;
      align-items: center;
      justify-content: center; */
+}
+
+.myPlaceholderClassName
+{
+  font-family: 'Arial';
+  color: gray;
+  font-size: 2vh;
 }
 
 .myMapClassName{
@@ -223,7 +230,7 @@
 
 .myMapMenuClassName{
   /* background-color: yellowgreen; */
-  height: 10.5vh;
+  height: 11vh;
 
 }
 
@@ -263,6 +270,37 @@
     /* position: relative; */
 }
 
+.add-popup-content
+{
+  background-color:  whitesmoke;
+  height: 20vh;
+  width: 30%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: 0.4vh solid #0D3AA9;
+  box-shadow: 5px 5px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+.closeButton
+  {
+      background-color: #50A6C2;
+      /* color: white; */
+      height: 20%;
+      width: 30%;
+      /* border-radius: 20vh; */
+      /* margin-top: 3%; */
+      cursor: pointer;
+      outline: 0;
+      border-color: #0D3AA9;
+      border-width: 3px;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      font-size: 2vh;
+  }
 
 .footerBox
 {
@@ -283,22 +321,22 @@
 {
     border: 0.4vh solid #0D3AA9;
     background-color: #50A6C2;
-    height: 74vh;
-    width: 57%;
-    /* overflow-y: scroll */
+    height: 72.5vh;
+    width: 98%;
     justify-content: center;
     align-items: center;
     display: flex;
-    margin-right: 0.8%;
+    /* margin-right: 0.8%; */
     /*flex-direction: column; */
     /* position: relative; */
+    /* overflow-y: scroll */
 }
 
 .listInnerContainer
 {
   height: 99%;
   width: 100%; 
-overflow-y: scroll;
+  overflow-y: scroll;
   overflow-x: hidden;
   /* background-color: #50A6C2; */
 }
@@ -312,61 +350,75 @@ overflow-y: scroll;
   margin-left: 0.5%;
   align-items: center;
   display: flex;
+  justify-content: space-around
   /* justify-content: flex-start; */
-
-  /* justify-content: space-around */
 }
 
 .mapText
 {
-  font-size: 2vh;
+  font-size: 2.2vh;
   height: 70%;
   width: 100%;
   display: flex;
-  
   align-items: center;
+  /* background-color: tomato; */
 }
 
 .mapTextDiv
 {
   height: auto;
-  width: 80%;
+  width: 90%;
   align-items: center;
-  /* background-color:blue; */
   display: flex;
   margin-left: 0.5%;
+  /* background-color:blue; */
   /* margin-top: 1% */
 }
 
-.buttonDiv
+.map-popup-content
 {
-  height: 80%;
-  width: 20%;
-  margin-right: 0.5%;
-  border-color: #0D3AA9;
-  border-width: 1%;
+  background-color: white;
+  height: 80vh;
+  width: 80%;
+  /* position: absolute; */
+  display: block;
+  justify-content: center;
+  align-items: center;
+  border: 0.4vh solid #0D3AA9;
+  box-shadow: 5px 5px 3px 3px rgba(0, 0, 0, 0.2);
+  /* display: flex;
+  position: relative; */
 }
 
 .mapBox
 {
-    border: 0.4vh solid #0D3AA9;
-    height: 74vh;
-    width: 40%;
+    /* border: 0.4vh solid #0D3AA9; */
+    height: 100%;
+    width: 100%;
     justify-content: center;
     align-items: center;
     display: flex;
     position: relative;
-    
 }
 
-.deleteButton
+/* .buttonDiv
+{
+  height: 80%;
+  width: 10%;
+  margin-right: 0.5%;
+  border-color: #0D3AA9;
+  border-width: 1%;
+  background-color: violet;
+} */
+
+.editButton
   {
       background-color: white;
       /* color: white; */
-      height: 100%;
-      width: 100%;
+      height: 80%;
+      width: 10%;
       /* border-radius: 20vh; */
-      /* margin-top: 3%; */
+      margin-right: 1.5%;
       cursor: pointer;
       outline: 0;
       border-color: #0D3AA9;
@@ -375,6 +427,109 @@ overflow-y: scroll;
       justify-content: center;
       display: flex;
       font-size: 2vh;
+  }
+
+  .edit-popup-content
+{
+  background-color: white;
+  height: 60vh;
+  width: 50%;
+  /* position: absolute; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.4vh solid #0D3AA9;
+  box-shadow: 5px 5px 3px 3px rgba(0, 0, 0, 0.2);
+  /* display: flex;
+  position: relative; */
+}
+
+.editPopup-InputDropdown
+{
+  background-color: red;
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.editDropdownBox
+{
+     /* background-color: blueviolet; */
+     height: 4.8vh;
+     width: 25%;
+     margin-right: 0.5%;
+     border: 0.4vh solid #0D3AA9;
+     /* border-bottom: 0.4vh solid #0D3AA9; */
+     /* display: flex;
+     align-items: center;
+     justify-content: center; */
+}
+
+
+.editInputBox
+{
+     /* background-color: green; */
+     height: 4.8vh;
+     width: 25%; 
+     /* border-bottom: 0.4vh solid #0D3AA9; */
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+
+
+.editPopupButton
+  {
+      background-color: white;
+      /* color: white; */
+      height: 55%;
+      width: 20%;
+      /* border-radius: 20vh; */
+      margin-right: 1.5%;
+      cursor: pointer;
+      outline: 0;
+      border-color: #0D3AA9;
+      border-width: 3px;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      font-size: 2vh;
+  }
+
+  .deleteButton
+  {
+      background-color: white;
+      /* color: white; */
+      height: 55%;
+      width: 20%;
+      /* border-radius: 20vh; */
+      /* margin-right: 1.5%; */
+      cursor: pointer;
+      outline: 0;
+      border-color: #0D3AA9;
+      border-width: 3px;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      font-size: 2vh;
+  }
+
+.close {
+    cursor: pointer;
+    outline: 0;
+    position: absolute;
+    display: block;
+    padding: 2px 5px;
+    line-height: 20px;
+    right: -10px;
+    top: -10px;
+    font-size: 24px;
+    background: #50A6C2;
+    border-radius: 18px;
+    border: 1px solid #cfcece;
   }
 
 
