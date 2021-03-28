@@ -199,6 +199,7 @@
   background-color: white;
   height: 31vh;
   width: fit-content;
+  border-top-left-radius: 6vh ;
   /* margin-bottom: 1vh; */
 }
 

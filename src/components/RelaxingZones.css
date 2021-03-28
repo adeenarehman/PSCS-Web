@@ -93,7 +93,7 @@
 {
     background-color: none;
     color: black;
-    height: 5.6vh;
+    height: 5.2vh;
     width: 100%;
     /* margin-left: 10vh; */
     /* border: #0D3AA9; */
@@ -141,9 +141,10 @@
 {
      /* background-color: blueviolet; */
      height: 4.8vh;
-     width: 50%;
+     width: 37%;
      margin-right: 0.5%;
-     border: 0.4vh solid #0D3AA9;
+     margin-left: 0.8%;
+     /* border: 0.4vh solid #0D3AA9; */
      /* border-bottom: 0.4vh solid #0D3AA9; */
      /* display: flex;
      align-items: center;
@@ -170,6 +171,8 @@
   /* display: flex;
   justify-content: center;
   align-items: center; */
+  border: 0.4vh solid #0D3AA9;
+
 }
 
 .relaxingMenuClassName{
