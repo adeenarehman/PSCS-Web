@@ -9,6 +9,8 @@ import {
     BrowserRouter as Router,
     Link,
 } from "react-router-dom";
+import Modal from 'react-awesome-modal';
+
 
 
 
@@ -25,6 +27,8 @@ export class Dashboard extends Component {
             query: null,
             query_status: null,
             query_description: null,
+            visible : false
+
         }
         this.handleClick = this.handleClick.bind(this);
     };
@@ -71,6 +75,19 @@ export class Dashboard extends Component {
             }
           )  
     }
+
+    openModal() {
+        this.setState({
+            visible : true
+        });
+    }
+
+    closeModal() {
+        this.setState({
+            visible : false
+        });
+    }
+
 
     
 
@@ -185,10 +202,47 @@ export class Dashboard extends Component {
 
                                         <div className={'queryListTextBox'}>
 
+                                        {/* <h3 style={{marginLeft:'9vh'}}
+                                        onClick={() => this.openModal()}
+                                        >
+                                            Read Description     
+                                        </h3>
+                                           
+                                           <Modal 
+                                               visible={this.state.visible}
+                                               width="600"
+                                               height="300"
+                                               effect="fadeInUp"
+                                               onClickAway={() => this.closeModal()}
+                                           >
+                                               <div>
+                                                    <h3 style={{display:'flex', justifyContent:'flex-start'}}>
+                                                        {value.first_name}
+                                                        {value.last_name}
+                                                    </h3>
+
+                                                    <p style={{height:'20vh', width:'100%',display:'flex', justifyContent:'center', overflowY:'scroll'}}>
+                                                        {value.query_description}
+                                                    </p>
+
+                                                    <div style={{height:'10vh', width:'100%',display:'flex', alignItems:'center', justifyContent:'center'}}>
+                                                        <a href="javascript:void(0);" style={{height:'5vh', width:'20%'}} >
+                                                            <button className={'closePopupButton'}
+                                                                onClick={() => this.closeModal()}
+                                                            >
+                                                                Close
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                               </div>
+                                           </Modal> */}
+
+
                                                 <h1 className={'text'}>
+
                                                    
                                                     <text className={'acceptButtonTrue'}
-                                                    onClick={() => {alert(value.query_description)}}
+                                                    onClick={() => {alert(value.first_name, value.last_name,value.query_description)}}
                                                     >
                                                       Read Description                                           
                                                     </text>

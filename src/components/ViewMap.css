@@ -270,37 +270,7 @@
     /* position: relative; */
 }
 
-.add-popup-content
-{
-  background-color:  whitesmoke;
-  height: 20vh;
-  width: 30%;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  border: 0.4vh solid #0D3AA9;
-  box-shadow: 5px 5px 3px 3px rgba(0, 0, 0, 0.2);
-}
 
-.closeButton
-  {
-      background-color: #50A6C2;
-      /* color: white; */
-      height: 20%;
-      width: 30%;
-      /* border-radius: 20vh; */
-      /* margin-top: 3%; */
-      cursor: pointer;
-      outline: 0;
-      border-color: #0D3AA9;
-      border-width: 3px;
-      align-items: center;
-      justify-content: center;
-      display: flex;
-      font-size: 2vh;
-  }
 
 .footerBox
 {
@@ -416,7 +386,7 @@
       background-color: white;
       /* color: white; */
       height: 80%;
-      width: 10%;
+      width: 12%;
       /* border-radius: 20vh; */
       margin-right: 1.5%;
       cursor: pointer;
@@ -446,7 +416,7 @@
 
 .editPopup-InputDropdown
 {
-  background-color: red;
+  /* background-color: red; */
   height: 10vh;
   width: 100%;
   display: flex;
@@ -459,7 +429,7 @@
 {
      /* background-color: blueviolet; */
      height: 4.8vh;
-     width: 25%;
+     width: 30%;
      margin-right: 0.5%;
      border: 0.4vh solid #0D3AA9;
      /* border-bottom: 0.4vh solid #0D3AA9; */
@@ -473,7 +443,7 @@
 {
      /* background-color: green; */
      height: 4.8vh;
-     width: 25%; 
+     width: 28%; 
      /* border-bottom: 0.4vh solid #0D3AA9; */
      display: flex;
      align-items: center;
@@ -499,14 +469,33 @@
       font-size: 2vh;
   }
 
+  
+.closePopupButton
+{
+    background-color: white;
+    /* color: white; */
+    height: 5vh;
+    width: 100%;
+    /* border-radius: 20vh; */
+    /* margin-right: 1.5%; */
+    cursor: pointer;
+    outline: 0;
+    border-color: #0D3AA9;
+    border-width: 3px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: 2vh;
+}
+
   .deleteButton
   {
       background-color: white;
       /* color: white; */
-      height: 55%;
-      width: 20%;
+      height: 80%;
+      width: 12%;
       /* border-radius: 20vh; */
-      /* margin-right: 1.5%; */
+      margin-right: 3%;
       cursor: pointer;
       outline: 0;
       border-color: #0D3AA9;
@@ -516,21 +505,5 @@
       display: flex;
       font-size: 2vh;
   }
-
-.close {
-    cursor: pointer;
-    outline: 0;
-    position: absolute;
-    display: block;
-    padding: 2px 5px;
-    line-height: 20px;
-    right: -10px;
-    top: -10px;
-    font-size: 24px;
-    background: #50A6C2;
-    border-radius: 18px;
-    border: 1px solid #cfcece;
-  }
-
 
 

@@ -18,9 +18,10 @@ import {
 } from "react-router-dom";
 // import { RadioGroup, RadioButton, ReversedRadioButton,RadioIcon } from 'react-radio-buttons';
 import Dropdown from 'react-dropdown';
+import Modal from 'react-awesome-modal';
 import Popup from 'reactjs-popup';
 // import 'reactjs-popup/dist/index.css';
-import DateTimePicker from 'react-datetime-picker'
+// import DateTimePicker from 'react-datetime-picker'
 
 
 
@@ -41,17 +42,24 @@ export class ViewMap extends Component {
             radius: null,           //for create zones
             zones_type: null,
             updated_radius: null,
+            updated_zones_type: null,
             address: '',
             placeholder: 'Search Places ...',
+            visible : false
         };
         this.onInputChange = this.onInputChange.bind(this);
         this._onSelect = this._onSelect.bind(this)
-
+        this._onSelect1 = this._onSelect1.bind(this)
     }
 
     _onSelect(option) {
         // console.log('You selected ', option.label)
         this.setState({ zones_type: option.label })
+    }
+
+    _onSelect1(option) {
+        // console.log('You selected ', option.label)
+        this.setState({ updated_zones_type: option.label })
     }
 
     handleChange = address => {     //send seaarch address
@@ -156,7 +164,7 @@ export class ViewMap extends Component {
     updateRadius = async (update_id) => {
         const db = firebase.firestore();
 
-        const res = await db.collection('zones').doc(update_id).update({radius:parseInt(this.state.updated_radius)});
+        const res = await db.collection('zones').doc(update_id).update({radius:parseInt(this.state.updated_radius), zones_type:this.state.updated_zones_type});
         // await this.reloadPage();
         this.getCordinates();
 
@@ -171,28 +179,17 @@ export class ViewMap extends Component {
         window.location.reload(true)
     }
 
-//     editPopup () {
-//         return(
-//         <Popup
-//           trigger={<button className={'editButton'}
-//         //   onClick={() => { this.editPopup() }}
-//           >
-//               EDIT
-//   </button>}
-//           modal
-//           nested
-//         >
-//           {close => (
-//             <div className="modal">
-//               <button className="close" onClick={close}>
-//                 &times;
-//               </button>
-//               <div>HElLO </div>
-//             </div> 
-//           )}
-//         </Popup>
-//         );
-//       }
+    openModal() {
+        this.setState({
+            visible : true
+        });
+    }
+
+    closeModal() {
+        this.setState({
+            visible : false
+        });
+    }
 
     render() {
         console.log("Values = ", this.state.zones);
@@ -296,7 +293,6 @@ export class ViewMap extends Component {
                                     name={'radius'}
                                     value={this.state.radius}
                                     onChange={this.onInputChange}
-
                                 />
                             </div>
 
@@ -315,26 +311,11 @@ export class ViewMap extends Component {
 
                             
  {/* ADD ZONE POPUP */}
-                            <Popup
-                                trigger={
                                     <Ripples color="#DCDCDC" during={1200} className={'addButton'}>
                                         <button className={'addButton1'} onClick={() => { this.addCordinates(); }}>
                                             Add
                                         </button>
                                     </Ripples>
-                                        }
-                                modal
-                                className={'add-popup'}
-                            >
-                                <div style={{fontSize: '2.5vh'}}>
-                                    Zone Has Been Added Succesfully.
-                                </div>
-                                
-                                    <button className={'closeButton'} // onClick={() => { this.addCordinates(); }}
-                                    >
-                                        OK
-                                    </button>
-                            </Popup>
 
 {/* VIEW MAP POPUP */}
                             <Popup 
@@ -394,28 +375,25 @@ export class ViewMap extends Component {
                                                 </p>
 
                                             </div>
-                                            
-                                            
-{/* EDIT ZONE POPUP */}                  
-                                            <Popup 
-                                                trigger={
-                                                    <button className={'editButton'}
-                                                    // onClick={() => { this.deleteCordinates(value.uid) }}
-                                                    >
-                                                        EDIT
-                                                    </button>
-                                                }
-                                                modal
-                                                className={'edit-popup'}
-                                            >
-                                                
-                                                <button className="close"                                                   
-                                                >
-                                                    &times;
-                                                </button>
 
-                        {/*EDIT ZONE DIV */}   <div className={'editPopup-InputDropdown'}> 
-                                                    
+                                            <button className={'deleteButton'}
+                                                onClick={() => { this.deleteCordinates(value.uid)}}
+                                            >
+                                                Delete
+                                            </button>
+                                            
+                                            <input type="button" value="Edit" onClick={() => this.openModal()} className={'editButton'}/>
+                                           
+                                            <Modal 
+                                                visible={this.state.visible}
+                                                width="600"
+                                                height="140"
+                                                effect="fadeInUp"
+                                                onClickAway={() => this.closeModal()}
+                                            >
+                                                <div>
+
+                                                <div className={'editPopup-InputDropdown'}> 
                                                     <div className={'editInputBox'} /*input radius div*/>
                                                         <input className={'input1'}
                                                             type={'text'}
@@ -423,30 +401,42 @@ export class ViewMap extends Component {
                                                             name={'updated_radius'}
                                                             value={this.state.updated_radius}
                                                             onChange={this.onInputChange}
-
                                                         />
                                                     </div>
 
-                                                   
+                                                    <div className={'editDropdownBox'} >
+                                                        <Dropdown
+                                                            options={options} controlClassName='myMapControlClassName' className={'myMapClassName'}
+                                                            onChange={this._onSelect1}
+                                                            //  value={defaultOption}   
+                                                            menuClassName='myMapMenuClassName'
+                                                            placeholder="Select Zone Type"
+                                                            placeholderClassName='myPlaceholderClassName'
+                                                        />
+                                                    </div>
 
                                                     <button className={'editPopupButton'}
-                                                     onClick={() => { this.updateRadius(value.uid)}} 
+                                                        onClick={() => { this.updateRadius(value.uid)}} 
                                                     >                         
-                                                        Add Zone
-                                                    </button>
+                                                            Update
+                                                    </button> 
 
-                                                    <button className={'deleteButton'}
-                                                        onClick={() => { this.deleteCordinates(value.uid) }}
-                                                    >
-                                                        Delete Zone
-                                                    </button>
-                {/*EDIT ZONE DIV FINISHED*/}    </div>
+                                                </div> 
 
-                                                <div className={'editPopup-DeleteButton'}>
-                                                    
+                                                <div style={{height:'10vh', width:'100%',display:'flex', alignItems:'center', justifyContent:'center'}}>
+
+                                                     <a href="javascript:void(0);" style={{height:'5vh', width:'20%'}} >
+                                                         <button className={'closePopupButton'}
+                                                            onClick={() => this.closeModal()}
+                                                         >
+                                                             Close
+                                                         </button>
+                                                     </a>
+
                                                 </div>
 
-                                            </Popup>
+                                                </div>
+                                            </Modal>
 
                                         </div>
 
