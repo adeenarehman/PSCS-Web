@@ -1,4 +1,4 @@
-import React, { Component,useState} from 'react';
+import React, { Component, useState } from 'react';
 // import { useState  } from 'react';
 import './RelaxingZones.css'
 import { GoogleComponent } from 'react-google-location'
@@ -16,54 +16,57 @@ import Dropdown from 'react-dropdown';
 // import DateTimePicker from 'react-datetime-picker'
 import DateTimePicker from 'react-datetime-picker/dist/entry.nostyle';
 
-
 export class relaxingZones extends Component {
-
     constructor(props) {
         super(props)
-        this.state = {
-            
+        this.state = {   
             Zones: [],
-            hour:null,
-            mins:null,
-            day:null,
-            month:null,
-            year:null,
-            uid_relaxing:'',
-            place_relaxing:null,
-            zones_type:null
-
+            hour: null,
+            mins: null,
+            day: null,
+            month: null,
+            year: null,
+            uid_relaxing: '',
+            place_relaxing: null,
+            zones_type: null,
+            yella:null
         };
-      
-        this._onSelect = this._onSelect.bind(this)
+        
+        this._onSelectZone = this._onSelectZone.bind(this)
         this._onSelectHour = this._onSelectHour.bind(this)
         this._onSelectMins = this._onSelectMins.bind(this)
         this._onSelectDay = this._onSelectDay.bind(this)
         this._onSelectMonth = this._onSelectMonth.bind(this)
-        this._onSelectYear = this._onSelectYear.bind(this)
-
+        this._onSelectYear = this._onSelectYear.bind(this)    
+        // this.onChangeTime = this.onChangeTime.bind(this)    
     }
+    
+    // componentDidMount(){
+
+    //     const [value, onChange] = useState(new Date());
+    // }
+
+    // onChangeTime(event) {
+    //     // this.setState({  yella:new Date() });
+    //     this.setState({ [event.target.yella]: event.target.value });
+    //     console.log(this.state.yella)
+    // }
 
     reloadPage = async () => {
         window.location.reload(true)
     }
-
-    onInputChange(event) {
-        this.setState({ [event.target.name]: event.target.value });
-    }
-
-
-    _onSelect(option) {
+    
+    _onSelectZone(option) {
         this.setState({ uid_relaxing: option.value });
         this.setState({ place_relaxing: option.label });
         // console.log("You selected ", this.state.uid_relaxing);
         console.log("You selected ", this.state.place_relaxing);
     }
-
+    
     _onSelectHour(option) {
         // console.log('You selected ', hoursArray.label)
         this.setState({ hour: option.label })
-        console.log(this.state.hour)
+        // console.log(this.state.hour)
     }
 
     _onSelectMins(option) {
@@ -79,7 +82,7 @@ export class relaxingZones extends Component {
     _onSelectMonth(option) {
         // console.log('You selected ', option.label)
         this.setState({ month: option.label })
-        console.log(this.state.month)
+        // console.log(this.state.month)
     }
 
     _onSelectYear(option) {
@@ -90,8 +93,8 @@ export class relaxingZones extends Component {
     handleChange = address => {     //send seaarch address
         this.setState({ address });
     };
-
-
+    
+    
     handleSelect = address => {   //convert address to cordinates
         Geocode.setApiKey("AIzaSyB7Hwn_-eHX2Or_vobRHT0f4bejWcYPpx0");
 
@@ -109,8 +112,6 @@ export class relaxingZones extends Component {
         // console.log("ajkda: ",address);
         this.setState({ placeholder: address })
     };
-
-    
 
     componentDidMount() {
         this.getCordinates();
@@ -142,33 +143,39 @@ export class relaxingZones extends Component {
 
     updateData = async () => {
         const db = firebase.firestore();
-        const res = await db.collection('zones').doc(this.state.uid_relaxing).update({ hour: this.state.hour });
+        const res = await db.collection('zones').doc(this.state.uid_relaxing).update({
+            hour: this.state.hour,
+            mins: this.state.mins, day: this.state.day, month: this.state.month, year: this.state.year, key: 1
+        });
         // await this.reloadPage();
         this.getCordinates();
-
     }
-  
+
     render() {
-        const hoursArray=[];
-        const minsArray=[];
-        const daysArray=[];
-        const monthArray=["Jan","Feb","Mar","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec"];
-        const yearArray=[];
+        const hoursArray = [];
+        const minsArray = [];
+        const daysArray = [];
+        const monthArray = [];
+        const yearArray = [];
 
         for (let index = 1; index <= 24; index++) {
-            hoursArray[index] =index;
+            hoursArray[index] = index;
         }
 
-        for (let a = 1; a <= 60; a++) {
-            minsArray[a] =a;
+        for (let a = 0; a <= 60; a++) {
+            minsArray[a] = a;
         }
 
         for (let b = 1; b <= 31; ++b) {
-            daysArray[b] =b;
+            daysArray[b] = b;
+        }
+
+        for (let d = 1; d <= 31; ++d) {
+            monthArray[d] = d;
         }
 
         for (let c = 2021; c <= 2030; ++c) {
-            yearArray[c] =c;
+            yearArray[c] = c;
         }
 
         return (
@@ -214,9 +221,9 @@ export class relaxingZones extends Component {
                                     options={this.state.Zones.map((value) => ({
                                         value: value.uid,
                                         label: value.place,
-                                      }))}
+                                    }))}
                                     controlClassName='relaxingControlClassName' className={'relaxingClassName'}
-                                    onChange={this._onSelect}
+                                    onChange={this._onSelectZone}
                                     //  value={defaultOption}   
                                     menuClassName='relaxingMenuClassName'
                                     placeholder="Select Zone"
@@ -224,9 +231,16 @@ export class relaxingZones extends Component {
                                 />
                             </div>
 
-                            <div style={{flexDirection:'row',display:'flex',justifyContent:'space-around',alignItems:'center',
-                                height:'5vh',width:'50%',marginRight:'1%',marginLeft:'1%',color:'white'
+                            <div style={{
+                                flexDirection: 'row', display: 'flex', justifyContent: 'space-around', alignItems: 'center',
+                                height: '5vh', width: '50%', marginRight: '1%', marginLeft: '1%', color: 'white'
                             }}>
+
+                                {/* <DateTimePicker
+                                    // name = {'yella'}
+                                    value={this.state.yella}
+                                    onChange={this.onChangeTime}
+                                /> */}
                                 <p style={{fontSize:'2.5vh'}}>Select Date & Time:</p>
                                 <Dropdown
                                     options={hoursArray}
@@ -275,21 +289,19 @@ export class relaxingZones extends Component {
                                 />
                             </div>
                             <div className={'relaxingLogout'}>
-                            <Ripples color="#DCDCDC" during={1200} className={'relaxingLogoutButton'}>
-                            
+                                <Ripples color="#DCDCDC" during={1200} className={'relaxingLogoutButton'}>
+
                                     <button onClick={() => this.updateData()}
                                         className={'relaxingLogoutButton1'}
                                     >
                                         Submit
                                     </button>
-                                
-                            </Ripples>
+
+                                </Ripples>
+                            </div>
                         </div>
 
-
-                        </div>
-
-{/*ZONES LIST WORK */}
+                        {/*ZONES LIST WORK */}
                         <div style={{ height: '80vh', width: '100%', flexDirection: 'row', display: 'flex', justifyContent: 'center' }}>
 
                             <div className={'relaxingListBox'} /*list container div*/>
@@ -308,7 +320,7 @@ export class relaxingZones extends Component {
 
                                             </div>
 
-                                            
+
                                         </div>
 
                                     ))}

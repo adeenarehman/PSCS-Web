@@ -3,8 +3,10 @@ import './Dashboard.css'
 import Ripples from 'react-ripples'
 import history from "../historyone";
 import {
-    BrowserRouter as Router,
-    Link, Redirect, useHistory
+    BrowserRouter as
+    Router,
+    Link, 
+    Redirect, useHistory
 } from "react-router-dom";
 
 
@@ -140,7 +142,7 @@ export class Dashboard extends Component {
                                 </Link>
 
                                 <Link to="/signup" style={{ textDecoration: 'none' }}>
-                                    <text className={'signupText'}>SignUp</text>
+                                    <text className={'signupText'}>Register</text>
                                 </Link>
 
                             </div>

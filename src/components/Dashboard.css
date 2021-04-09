@@ -76,8 +76,6 @@
   width: 100%;
 }
 
-
-
 .dashboardLogout{
   /* background-color: #0D3AA9; */
   height: 10vh;
@@ -175,7 +173,7 @@
 
 .fineBox
 {
-    border: 0.4vh solid #026d79;
+    border: 0.5vh solid #0D3AA9;
     background-color: white;
     height: 38vh;
     width: 70%;
@@ -214,7 +212,7 @@
     font-size: 5vh;
     font-weight: bold;
     color: #026d79;
-    height:fit-content;
+    /* height:fit-content; */
     display: flex;
     justify-content: center;
     border-bottom-right-radius: 6vh ;
@@ -223,8 +221,8 @@
 
   .queryBox
 {
-    border: 0.4vh solid #026d79;
-    background-color: white;
+  border: 0.5vh solid #0D3AA9;
+  background-color: white;
     height: 38vh;
     width: 70%;
     /* border-radius: 1.5vh; */
@@ -269,7 +267,7 @@
 
   .relaxingBox
   {
-      border: 0.4vh solid #026d79;
+    border: 0.5vh solid #0D3AA9;
       background-color: white;
       height: 60vh;
       width: 100%;
@@ -316,7 +314,7 @@
 .zoneBox
 {
     background-color: white;
-    border: 0.4vh solid #026e7a;
+    border: 0.5vh solid #0D3AA9;
     height: 38vh;
     width: 70%;
     /* margin-top: 3.5%; */
@@ -360,8 +358,8 @@
 
   .signupBox
 {
-    border: 0.4vh solid #026d79;
-    background-color: white;
+  border: 0.5vh solid #0D3AA9;
+  background-color: white;
     height: 38vh;
     width: 70%;
     /* border-radius: 1.5vh; */

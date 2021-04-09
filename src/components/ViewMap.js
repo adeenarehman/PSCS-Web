@@ -23,8 +23,6 @@ import Popup from 'reactjs-popup';
 // import 'reactjs-popup/dist/index.css';
 // import DateTimePicker from 'react-datetime-picker'
 
-
-
 export class ViewMap extends Component {
 
     constructor(props) {
@@ -45,11 +43,23 @@ export class ViewMap extends Component {
             updated_zones_type: null,
             address: '',
             placeholder: 'Search Places ...',
-            visible : false
+            visible : false,
+            hour:null,
+            mins:null,
+            day:null,
+            month:null,
+            year:null,
+            key:0,
+            // currentHour:current_hour,
+            // currentMin:current_min,
+            // currentDay:current_day,
+            // currentMonth:current_month,
+            // currentYear:current_year,
+           
         };
         this.onInputChange = this.onInputChange.bind(this);
-        this._onSelect = this._onSelect.bind(this)
-        this._onSelect1 = this._onSelect1.bind(this)
+        this._onSelect = this._onSelect.bind(this);
+        this._onSelect1 = this._onSelect1.bind(this);
     }
 
     _onSelect(option) {
@@ -84,24 +94,113 @@ export class ViewMap extends Component {
         this.setState({ placeholder: address })
     };
 
-    createCircle(lat, long, rad, zones_type) {  //create circles/Zones
+    createCircle(lat, long, rad, zones_type, hour, mins, day, month, year, key) {  //create circles/Zones
         if (zones_type == 'Critical') {
-            return (
-                <Circle
-                    radius={rad}
-                    center={{ lat: lat, lng: long }}
-                    onMouseover={() => console.log('mouseover')}
-                    onClick={() => console.log('click')}
-                    onMouseout={() => console.log('mouseout')}
-                    strokeColor='transparent'
-                    strokeOpacity={0}
-                    strokeWeight={5}
-                    fillColor='#FF0000'
-                    fillOpacity={0.5}
-                />
-            );
+            if (key == 1) {
+                var today = new Date();
+                console.log("Hour = " + today.getHours())
+                console.log("Mins = " + today.getMinutes())
+                console.log("Date = " + today.getDate())
+                console.log("Month = " + today.getMonth())
+                console.log("year = " + today.getFullYear())
+                if (hour == today.getHours() && mins == today.getMinutes() && mins <= 37 && day == today.getDate()&&
+                    month == today.getMonth() && year == today.getFullYear()
+                )
 
-        } else {
+                // if(mins == today.getMinutes() || 6 >= today.getMinutes())
+                    {
+                    return (
+                        <Circle
+                            radius={rad}
+                            center={{ lat: lat, lng: long }}
+                            onMouseover={() => console.log('mouseover')}
+                            onClick={() => console.log('click')}
+                            onMouseout={() => console.log('mouseout')}
+                            strokeColor='transparent'
+                            strokeOpacity={0}
+                            strokeWeight={5}
+                            fillColor='#ECFF03' //yellow colour
+                            fillOpacity={0.5}
+                        />
+                    );
+                    
+                } else {
+                    return (
+                        <Circle
+                            radius={rad}
+                            center={{ lat: lat, lng: long }}
+                            onMouseover={() => console.log('mouseover')}
+                            onClick={() => console.log('click')}
+                            onMouseout={() => console.log('mouseout')}
+                            strokeColor='transparent'
+                            strokeOpacity={0}
+                            strokeWeight={5}
+                            fillColor='#FF0000' //red colour
+                            fillOpacity={0.5}
+                        />
+                    );   
+                }  
+            }
+
+            else if (key == 0){
+                return (
+                    <Circle
+                        radius={rad}
+                        center={{ lat: lat, lng: long }}
+                        onMouseover={() => console.log('mouseover')}
+                        onClick={() => console.log('click')}
+                        onMouseout={() => console.log('mouseout')}
+                        strokeColor='transparent'
+                        strokeOpacity={0}
+                        strokeWeight={5}
+                        fillColor='#FF0000' //red colour
+                        fillOpacity={0.5}
+                    />
+                );
+            }
+        } 
+        else if(zones_type == 'Mild'){
+            if (key == 1) {
+                var today = new Date();
+                if (
+                    hour == today.getHours && day == today.getDate()
+                    // year == today.getFullYear()
+                    )
+                    {
+                    return (
+                        <Circle
+                            radius={rad}
+                            center={{ lat: lat, lng: long }}
+                            onMouseover={() => console.log('mouseover')}
+                            onClick={() => console.log('click')}
+                            onMouseout={() => console.log('mouseout')}
+                            strokeColor='transparent'
+                            strokeOpacity={0}
+                            strokeWeight={5}
+                            fillColor='#ECFF03' //yellow colour
+                            fillOpacity={0.5}
+                        />
+                    );
+                    
+                } else {
+                    return (
+                        <Circle
+                            radius={rad}
+                            center={{ lat: lat, lng: long }}
+                            onMouseover={() => console.log('mouseover')}
+                            onClick={() => console.log('click')}
+                            onMouseout={() => console.log('mouseout')}
+                            strokeColor='transparent'
+                            strokeOpacity={0}
+                            strokeWeight={5}
+                            fillColor='#0BFF03' //green colour
+                            fillOpacity={0.5}
+                        />
+                    ); 
+                }
+            }
+
+            else{
             return (
                 <Circle
                     radius={rad}
@@ -112,12 +211,12 @@ export class ViewMap extends Component {
                     strokeColor='transparent'
                     strokeOpacity={0}
                     strokeWeight={5}
-                    fillColor='#20FF20'
+                    fillColor='#0BFF03' //green colour
                     fillOpacity={0.5}
                 />
             );
+            }
         }
-
     }
 
     componentDidMount() {
@@ -130,8 +229,9 @@ export class ViewMap extends Component {
         const snapshot = await db.collection('zones').get();
         snapshot.forEach((doc) => {
             let tempobj = {
-                'uid': doc.id, 'latitude': doc.data().latitude, 'zones_type': doc.data().zones_type,
-                'longitude': doc.data().longitude, 'place': doc.data().place, 'radius': doc.data().radius
+                'uid': doc.id, 'latitude': doc.data().latitude, 'zones_type': doc.data().zones_type,'longitude': doc.data().longitude,
+                'place': doc.data().place, 'radius': doc.data().radius,'hour':doc.data().hour,'mins':doc.data().mins,
+                'day':doc.data().day,'month':doc.data().month,'year':doc.data().year,'key':doc.data().key,
             };
             tempdata.push(tempobj)
         });
@@ -146,7 +246,13 @@ export class ViewMap extends Component {
             longitude: this.state.zones_longitude,
             radius: parseInt(this.state.radius, 10),
             zones_type: this.state.zones_type,
-            place: this.state.address
+            place: this.state.address,
+            hour:this.state.hour,
+            mins:this.state.mins,
+            day:this.state.day,
+            month:this.state.month,
+            year:this.state.year,
+            key:this.state.key,
         });
         // await this.reloadPage();
         this.getCordinates();
@@ -154,7 +260,6 @@ export class ViewMap extends Component {
 
     deleteCordinates = async (delete_id) => {
         const db = firebase.firestore();
-
         const res = await db.collection('zones').doc(delete_id).delete();
         // await this.reloadPage();
         this.getCordinates();
@@ -162,8 +267,8 @@ export class ViewMap extends Component {
     }
 
     updateRadius = async (update_id) => {
+        console.log("Musibat= "+update_id)
         const db = firebase.firestore();
-
         const res = await db.collection('zones').doc(update_id).update({radius:parseInt(this.state.updated_radius), zones_type:this.state.updated_zones_type});
         // await this.reloadPage();
         this.getCordinates();
@@ -192,7 +297,7 @@ export class ViewMap extends Component {
     }
 
     render() {
-        console.log("Values = ", this.state.zones);
+        // console.log("Values = ", this.state.zones);
 
         const options =
             [
@@ -339,8 +444,10 @@ export class ViewMap extends Component {
                                     >
                                         {this.state.Zones.map(value => (
                                             // console.log("check value lat = "+value.latitude),
-                                            // console.log("check value long = "+value.longitude),            
-                                            this.createCircle(value.latitude, value.longitude, value.radius, value.zones_type)
+                                            // console.log("check value hour = "+value.hour),            
+                                            this.createCircle(value.latitude, value.longitude, value.radius, value.zones_type,
+                                                value.hour, value.mins, value.day, value.month, value.year, value.key
+                                                )
                                         ))}
                                     </Map>
 
