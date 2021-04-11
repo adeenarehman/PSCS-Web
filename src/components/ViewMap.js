@@ -1,4 +1,4 @@
-import React, { Component  } from 'react';
+import React, { Component } from 'react';
 // import { useState  } from 'react';
 import './ViewMap.css'
 import { GoogleComponent } from 'react-google-location'
@@ -20,8 +20,9 @@ import {
 import Dropdown from 'react-dropdown';
 import Modal from 'react-awesome-modal';
 import Popup from 'reactjs-popup';
-// import 'reactjs-popup/dist/index.css';
-// import DateTimePicker from 'react-datetime-picker'
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
 
 export class ViewMap extends Component {
 
@@ -43,19 +44,11 @@ export class ViewMap extends Component {
             updated_zones_type: null,
             address: '',
             placeholder: 'Search Places ...',
-            visible : false,
-            hour:null,
-            mins:null,
-            day:null,
-            month:null,
-            year:null,
-            key:0,
-            // currentHour:current_hour,
-            // currentMin:current_min,
-            // currentDay:current_day,
-            // currentMonth:current_month,
-            // currentYear:current_year,
-           
+            visible: false,
+            startTime: '',
+            endTime: '',
+            key: 0,
+
         };
         this.onInputChange = this.onInputChange.bind(this);
         this._onSelect = this._onSelect.bind(this);
@@ -94,55 +87,62 @@ export class ViewMap extends Component {
         this.setState({ placeholder: address })
     };
 
-    createCircle(lat, long, rad, zones_type, hour, mins, day, month, year, key) {  //create circles/Zones
+    componentDidMount() {
+        this.getCordinates();
+        setInterval(() => {
+            this.getCordinates();
+            // console.warn("kdbcjkbckajs")
+        }, 1000
+
+        )
+        // this.onChnageKey();
+    }
+
+    updateKey = async (uid, key) => {
+        const db = firebase.firestore();
+        const res = await db.collection('zones').doc(uid).update({
+            key: key
+        });
+    }
+
+    onChangeKey(uid, startTime, endTime) {
+        var today = Date()
+        var currentTime = Date.parse(today)
+
+        if (startTime == currentTime) {
+            // alert("key updated to 1")
+            this.updateKey(uid, 1)
+        }
+
+        else if (endTime == currentTime) {
+            this.updateKey(uid, 0)
+            // alert("key updated to 0")
+
+        }
+    }
+
+    createCircle(uid, lat, long, rad, zones_type, startTime, endTime, key) {  //create circles/Zones
+        this.onChangeKey(uid, startTime, endTime, key)
+
         if (zones_type == 'Critical') {
             if (key == 1) {
-                var today = new Date();
-                console.log("Hour = " + today.getHours())
-                console.log("Mins = " + today.getMinutes())
-                console.log("Date = " + today.getDate())
-                console.log("Month = " + today.getMonth())
-                console.log("year = " + today.getFullYear())
-                if (hour == today.getHours() && mins == today.getMinutes() && mins <= 37 && day == today.getDate()&&
-                    month == today.getMonth() && year == today.getFullYear()
-                )
-
-                // if(mins == today.getMinutes() || 6 >= today.getMinutes())
-                    {
-                    return (
-                        <Circle
-                            radius={rad}
-                            center={{ lat: lat, lng: long }}
-                            onMouseover={() => console.log('mouseover')}
-                            onClick={() => console.log('click')}
-                            onMouseout={() => console.log('mouseout')}
-                            strokeColor='transparent'
-                            strokeOpacity={0}
-                            strokeWeight={5}
-                            fillColor='#ECFF03' //yellow colour
-                            fillOpacity={0.5}
-                        />
-                    );
-                    
-                } else {
-                    return (
-                        <Circle
-                            radius={rad}
-                            center={{ lat: lat, lng: long }}
-                            onMouseover={() => console.log('mouseover')}
-                            onClick={() => console.log('click')}
-                            onMouseout={() => console.log('mouseout')}
-                            strokeColor='transparent'
-                            strokeOpacity={0}
-                            strokeWeight={5}
-                            fillColor='#FF0000' //red colour
-                            fillOpacity={0.5}
-                        />
-                    );   
-                }  
+                return (
+                    <Circle
+                        radius={rad}
+                        center={{ lat: lat, lng: long }}
+                        onMouseover={() => console.log('mouseover')}
+                        onClick={() => console.log('click')}
+                        onMouseout={() => console.log('mouseout')}
+                        strokeColor='transparent'
+                        strokeOpacity={0}
+                        strokeWeight={5}
+                        fillColor='#ECFF03' //yellow colour
+                        fillOpacity={0.5}
+                    />
+                );
             }
 
-            else if (key == 0){
+            else if (key == 0) {
                 return (
                     <Circle
                         radius={rad}
@@ -158,70 +158,45 @@ export class ViewMap extends Component {
                     />
                 );
             }
-        } 
-        else if(zones_type == 'Mild'){
-            if (key == 1) {
-                var today = new Date();
-                if (
-                    hour == today.getHours && day == today.getDate()
-                    // year == today.getFullYear()
-                    )
-                    {
-                    return (
-                        <Circle
-                            radius={rad}
-                            center={{ lat: lat, lng: long }}
-                            onMouseover={() => console.log('mouseover')}
-                            onClick={() => console.log('click')}
-                            onMouseout={() => console.log('mouseout')}
-                            strokeColor='transparent'
-                            strokeOpacity={0}
-                            strokeWeight={5}
-                            fillColor='#ECFF03' //yellow colour
-                            fillOpacity={0.5}
-                        />
-                    );
-                    
-                } else {
-                    return (
-                        <Circle
-                            radius={rad}
-                            center={{ lat: lat, lng: long }}
-                            onMouseover={() => console.log('mouseover')}
-                            onClick={() => console.log('click')}
-                            onMouseout={() => console.log('mouseout')}
-                            strokeColor='transparent'
-                            strokeOpacity={0}
-                            strokeWeight={5}
-                            fillColor='#0BFF03' //green colour
-                            fillOpacity={0.5}
-                        />
-                    ); 
-                }
-            }
+        }
 
-            else{
-            return (
-                <Circle
-                    radius={rad}
-                    center={{ lat: lat, lng: long }}
-                    onMouseover={() => console.log('mouseover')}
-                    onClick={() => console.log('click')}
-                    onMouseout={() => console.log('mouseout')}
-                    strokeColor='transparent'
-                    strokeOpacity={0}
-                    strokeWeight={5}
-                    fillColor='#0BFF03' //green colour
-                    fillOpacity={0.5}
-                />
-            );
+        else if (zones_type == 'Mild') {
+            if (key == 1) {
+                return (
+                    <Circle
+                        radius={rad}
+                        center={{ lat: lat, lng: long }}
+                        onMouseover={() => console.log('mouseover')}
+                        onClick={() => console.log('click')}
+                        onMouseout={() => console.log('mouseout')}
+                        strokeColor='transparent'
+                        strokeOpacity={0}
+                        strokeWeight={5}
+                        fillColor='#ECFF03' //yellow colour
+                        fillOpacity={0.5}
+                    />
+                );
+            }
+    
+            else if (key == 0) {
+                return (
+                    <Circle
+                        radius={rad}
+                        center={{ lat: lat, lng: long }}
+                        onMouseover={() => console.log('mouseover')}
+                        onClick={() => console.log('click')}
+                        onMouseout={() => console.log('mouseout')}
+                        strokeColor='transparent'
+                        strokeOpacity={0}
+                        strokeWeight={5}
+                        fillColor='#0BFF03' //green colour
+                        fillOpacity={0.5}
+                    />
+                );
             }
         }
     }
 
-    componentDidMount() {
-        this.getCordinates();
-    }
 
     getCordinates = async () => { //get zones data from firebase
         let tempdata = []
@@ -229,9 +204,9 @@ export class ViewMap extends Component {
         const snapshot = await db.collection('zones').get();
         snapshot.forEach((doc) => {
             let tempobj = {
-                'uid': doc.id, 'latitude': doc.data().latitude, 'zones_type': doc.data().zones_type,'longitude': doc.data().longitude,
-                'place': doc.data().place, 'radius': doc.data().radius,'hour':doc.data().hour,'mins':doc.data().mins,
-                'day':doc.data().day,'month':doc.data().month,'year':doc.data().year,'key':doc.data().key,
+                'uid': doc.id, 'latitude': doc.data().latitude, 'zones_type': doc.data().zones_type, 'longitude': doc.data().longitude,
+                'place': doc.data().place, 'radius': doc.data().radius, 'startTime': doc.data().startTime, 'endTime': doc.data().endTime,
+                'key': doc.data().key,
             };
             tempdata.push(tempobj)
         });
@@ -247,13 +222,12 @@ export class ViewMap extends Component {
             radius: parseInt(this.state.radius, 10),
             zones_type: this.state.zones_type,
             place: this.state.address,
-            hour:this.state.hour,
-            mins:this.state.mins,
-            day:this.state.day,
-            month:this.state.month,
-            year:this.state.year,
-            key:this.state.key,
+            startTime: this.state.startTime,
+            endTime: this.state.endTime,
+            key: this.state.key,
         });
+        toast('Zone Added Successfully', 
+                     {position: toast.POSITION.BOTTOM_CENTER})
         // await this.reloadPage();
         this.getCordinates();
     }
@@ -261,16 +235,20 @@ export class ViewMap extends Component {
     deleteCordinates = async (delete_id) => {
         const db = firebase.firestore();
         const res = await db.collection('zones').doc(delete_id).delete();
+        toast('Zone Deleted Successfull', 
+                     {position: toast.POSITION.BOTTOM_CENTER})
         // await this.reloadPage();
         this.getCordinates();
 
     }
 
     updateRadius = async (update_id) => {
-        console.log("Musibat= "+update_id)
+        console.log("Musibat= " + update_id)
         const db = firebase.firestore();
-        const res = await db.collection('zones').doc(update_id).update({radius:parseInt(this.state.updated_radius), zones_type:this.state.updated_zones_type});
+        const res = await db.collection('zones').doc(update_id).update({ radius: parseInt(this.state.updated_radius), zones_type: this.state.updated_zones_type });
         // await this.reloadPage();
+        toast('Zone Updated Successfull', 
+                     {position: toast.POSITION.BOTTOM_CENTER})
         this.getCordinates();
 
     }
@@ -286,13 +264,13 @@ export class ViewMap extends Component {
 
     openModal() {
         this.setState({
-            visible : true
+            visible: true
         });
     }
 
     closeModal() {
         this.setState({
-            visible : false
+            visible: false
         });
     }
 
@@ -302,7 +280,7 @@ export class ViewMap extends Component {
         const options =
             [
                 'Critical', 'Mild'
-            ];       
+            ];
 
         return (
             <div className={'mapMainPage'}  /*container div*/ >
@@ -335,7 +313,7 @@ export class ViewMap extends Component {
                     </div>
 
 
-{/* FOOTER BOX DIV */}
+                    {/* FOOTER BOX DIV */}
 
                     <div className={'footerBox'} /*container div for zones list & view map*/>
 
@@ -343,7 +321,7 @@ export class ViewMap extends Component {
 
                             <div className={'searchBar'} /*search place div*/>
 
-{/* PLACES AUTO-COMPLETE WORK */}
+                                {/* PLACES AUTO-COMPLETE WORK */}
                                 <PlacesAutocomplete
                                     value={this.state.address}
                                     onChange={this.handleChange}
@@ -390,7 +368,7 @@ export class ViewMap extends Component {
                                 </PlacesAutocomplete>
                             </div>
 
-{/* INPUT RADIUS WORK */}
+                            {/* INPUT RADIUS WORK */}
                             <div className={'inputBox'} /*input radius div*/>
                                 <input className={'input1'}
                                     type={'text'}
@@ -401,7 +379,7 @@ export class ViewMap extends Component {
                                 />
                             </div>
 
-{/*DROPDOWN FOR ZONE TYPE */}
+                            {/*DROPDOWN FOR ZONE TYPE */}
                             <div className={'dropdownBox'} >
 
                                 <Dropdown
@@ -414,16 +392,16 @@ export class ViewMap extends Component {
                                 />
                             </div>
 
-                            
- {/* ADD ZONE POPUP */}
-                                    <Ripples color="#DCDCDC" during={1200} className={'addButton'}>
-                                        <button className={'addButton1'} onClick={() => { this.addCordinates(); }}>
-                                            Add
-                                        </button>
-                                    </Ripples>
 
-{/* VIEW MAP POPUP */}
-                            <Popup 
+                            {/* ADD ZONE POPUP */}
+                            <Ripples color="#DCDCDC" during={1200} className={'addButton'}>
+                                <button className={'addButton1'} onClick={() => { this.addCordinates(); }}>
+                                    Add
+                                        </button>
+                            </Ripples>
+
+                            {/* VIEW MAP POPUP */}
+                            <Popup
                                 trigger={
                                     <Ripples color="#DCDCDC" during={1200} className={'addButton'}>
                                         <button className={'addButton1'}> View Map</button>
@@ -445,9 +423,13 @@ export class ViewMap extends Component {
                                         {this.state.Zones.map(value => (
                                             // console.log("check value lat = "+value.latitude),
                                             // console.log("check value hour = "+value.hour),            
-                                            this.createCircle(value.latitude, value.longitude, value.radius, value.zones_type,
-                                                value.hour, value.mins, value.day, value.month, value.year, value.key
-                                                )
+                                            // this.createCircle(value.latitude, value.longitude, value.radius, value.zones_type,
+                                            //     value.startTime, value.endTime, value.key
+                                            //     )
+                                            this.createCircle(value.uid, value.latitude, value.longitude, value.radius, value.zones_type,
+                                                value.startTime, value.endTime, value.key
+                                            )
+
                                         ))}
                                     </Map>
 
@@ -464,7 +446,7 @@ export class ViewMap extends Component {
                             </div> */}
                         </div>
 
-{/*ZONES LIST WORK */}
+                        {/*ZONES LIST WORK */}
                         <div style={{ height: '80vh', width: '100%', flexDirection: 'row', display: 'flex', justifyContent: 'center' }}>
 
                             <div className={'listBox'} /*list container div*/>
@@ -484,14 +466,14 @@ export class ViewMap extends Component {
                                             </div>
 
                                             <button className={'deleteButton'}
-                                                onClick={() => { this.deleteCordinates(value.uid)}}
+                                                onClick={() => { this.deleteCordinates(value.uid) }}
                                             >
                                                 Delete
                                             </button>
-                                            
-                                            <input type="button" value="Edit" onClick={() => this.openModal()} className={'editButton'}/>
-                                           
-                                            <Modal 
+
+                                            <input type="button" value="Edit" onClick={() => this.openModal()} className={'editButton'} />
+
+                                            <Modal
                                                 visible={this.state.visible}
                                                 width="600"
                                                 height="140"
@@ -500,54 +482,54 @@ export class ViewMap extends Component {
                                             >
                                                 <div>
 
-                                                <div className={'editPopup-InputDropdown'}> 
-                                                    <div className={'editInputBox'} /*input radius div*/>
-                                                        <input className={'input1'}
-                                                            type={'text'}
-                                                            placeholder={'Radius...'}
-                                                            name={'updated_radius'}
-                                                            value={this.state.updated_radius}
-                                                            onChange={this.onInputChange}
-                                                        />
-                                                    </div>
+                                                    <div className={'editPopup-InputDropdown'}>
+                                                        <div className={'editInputBox'} /*input radius div*/>
+                                                            <input className={'input1'}
+                                                                type={'text'}
+                                                                placeholder={'Radius...'}
+                                                                name={'updated_radius'}
+                                                                value={this.state.updated_radius}
+                                                                onChange={this.onInputChange}
+                                                            />
+                                                        </div>
 
-                                                    <div className={'editDropdownBox'} >
-                                                        <Dropdown
-                                                            options={options} controlClassName='myMapControlClassName' className={'myMapClassName'}
-                                                            onChange={this._onSelect1}
-                                                            //  value={defaultOption}   
-                                                            menuClassName='myMapMenuClassName'
-                                                            placeholder="Select Zone Type"
-                                                            placeholderClassName='myPlaceholderClassName'
-                                                        />
-                                                    </div>
+                                                        <div className={'editDropdownBox'} >
+                                                            <Dropdown
+                                                                options={options} controlClassName='myMapControlClassName' className={'myMapClassName'}
+                                                                onChange={this._onSelect1}
+                                                                //  value={defaultOption}   
+                                                                menuClassName='myMapMenuClassName'
+                                                                placeholder="Select Zone Type"
+                                                                placeholderClassName='myPlaceholderClassName'
+                                                            />
+                                                        </div>
 
-                                                    <button className={'editPopupButton'}
-                                                        onClick={() => { this.updateRadius(value.uid)}} 
-                                                    >                         
+                                                        <button className={'editPopupButton'}
+                                                            onClick={() => { this.updateRadius(value.uid) }}
+                                                        >
                                                             Update
-                                                    </button> 
+                                                    </button>
 
-                                                </div> 
+                                                    </div>
 
-                                                <div style={{height:'10vh', width:'100%',display:'flex', alignItems:'center', justifyContent:'center'}}>
+                                                    <div style={{ height: '10vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 
-                                                     <a href="javascript:void(0);" style={{height:'5vh', width:'20%'}} >
-                                                         <button className={'closePopupButton'}
-                                                            onClick={() => this.closeModal()}
-                                                         >
-                                                             Close
+                                                        <a href="javascript:void(0);" style={{ height: '5vh', width: '20%' }} >
+                                                            <button className={'closePopupButton'}
+                                                                onClick={() => this.closeModal()}
+                                                            >
+                                                                Close
                                                          </button>
-                                                     </a>
+                                                        </a>
 
-                                                </div>
+                                                    </div>
 
                                                 </div>
                                             </Modal>
 
                                         </div>
 
-                                        
+
                                     ))}
                                 </div>
 

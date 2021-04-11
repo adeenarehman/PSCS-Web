@@ -8,6 +8,9 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { firebaseConfig } from './FirebaseConfig';
 import history from "../history";
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
@@ -22,13 +25,14 @@ class Signin extends Component {
         this.onInputChange = this.onInputChange.bind(this);
     }
 
-    signInWithEmailPassword = () => {
+        signInWithEmailPassword = () => {
         console.log(this.state.email, this.state.password);
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
             .then(function (result) {
+                toast('Signin Successfull', 
+                     {position: toast.POSITION.BOTTOM_CENTER})
                 history.push('/dashboard');
-                window.location.reload(false);
-                
+                window.location.reload(false);     
             })
 
             .catch(function (error) {
@@ -82,10 +86,7 @@ class Signin extends Component {
                                 name={'password'}
                                 value={this.state.password}
                                 onChange={this.onInputChange}
-
                             />
-
-
                         </div>
 
                         <Ripples color="#DCDCDC" during={1200} className={'button'}>
@@ -93,8 +94,6 @@ class Signin extends Component {
                                 SIGN IN
                             </button>
                         </Ripples>
-                        {/* <button>SIGN IN</button>
-                            <Link to="/dashboard">Signin</Link> */}
                     </div>
 
                 </div>
@@ -102,7 +101,6 @@ class Signin extends Component {
             </div>
         );
     }
-
 }
 
 

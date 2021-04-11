@@ -14,46 +14,26 @@ import {
 } from "react-router-dom";
 import Dropdown from 'react-dropdown';
 import DateTimePicker from 'react-datetime-picker'
-// import DateTimePicker from 'react-datetime-picker/dist/entry.nostyle';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
 
 export class relaxingZones extends Component {
     constructor(props) {
         super(props)
         this.state = {   
             Zones: [],
-            hour: null,
-            mins: null,
-            day: null,
-            month: null,
-            year: null,
             uid_relaxing: '',
             place_relaxing: null,
             zones_type: null,
-            yella:null,
-            startRelaxingTime:new Date(),
-            endRelaxingTime:new Date()
+            startRelaxingTime:new Date,
+            endRelaxingTime:new Date
         };
         
         this._onSelectZone = this._onSelectZone.bind(this)
-        this._onSelectHour = this._onSelectHour.bind(this)
-        this._onSelectMins = this._onSelectMins.bind(this)
-        this._onSelectDay = this._onSelectDay.bind(this)
-        this._onSelectMonth = this._onSelectMonth.bind(this)
-        this._onSelectYear = this._onSelectYear.bind(this)    
-        // this.onChangeTime = this.onChangeTime.bind(this)    
     }
     
-    // componentDidMount(){
-
-    //     const [value, onChange] = useState(new Date());
-    // }
-
-    // onChangeTime(event) {
-    //     // this.setState({  yella:new Date() });
-    //     this.setState({ [event.target.yella]: event.target.value });
-    //     console.log(this.state.yella)
-    // }
-
+    
     reloadPage = async () => {
         window.location.reload(true)
     }
@@ -64,38 +44,10 @@ export class relaxingZones extends Component {
         // console.log("You selected ", this.state.uid_relaxing);
         console.log("You selected ", this.state.place_relaxing);
     }
-    
-    _onSelectHour(option) {
-        // console.log('You selected ', hoursArray.label)
-        this.setState({ hour: option.label })
-        // console.log(this.state.hour)
-    }
-
-    _onSelectMins(option) {
-        // console.log('You selected ', option.label)
-        this.setState({ mins: option.label })
-    }
-
-    _onSelectDay(option) {
-        // console.log('You selected ', option.label)
-        this.setState({ day: option.label })
-    }
-
-    _onSelectMonth(option) {
-        // console.log('You selected ', option.label)
-        this.setState({ month: option.label })
-        // console.log(this.state.month)
-    }
-
-    _onSelectYear(option) {
-        // console.log('You selected ', option.label)
-        this.setState({ year: option.label })
-    }
 
     handleChange = address => {     //send seaarch address
         this.setState({ address });
-    };
-    
+    }; 
     
     handleSelect = address => {   //convert address to cordinates
         Geocode.setApiKey("AIzaSyB7Hwn_-eHX2Or_vobRHT0f4bejWcYPpx0");
@@ -144,25 +96,32 @@ export class relaxingZones extends Component {
     // }
 
     updateData = async () => {
+        let startTime = this.state.startRelaxingTime 
+        let endTime = this.state.endRelaxingTime
+        let startTimestamp = Date.parse(startTime) 
+        let endTimestamp = Date.parse(endTime)
+
         const db = firebase.firestore();
         const res = await db.collection('zones').doc(this.state.uid_relaxing).update({
-            hour: this.state.hour,
-            mins: this.state.mins, day: this.state.day, month: this.state.month, year: this.state.year, key: 1
+            startTime: startTimestamp,endTime: endTimestamp
         });
         // await this.reloadPage();
+        toast('Relaxing Hour Added Successfully', 
+                     {position: toast.POSITION.BOTTOM_CENTER})
         this.getCordinates();
     }
 
     onChangeStartRelaxingTime = (date)=>{
-        console.log(date,'onChangeStartRelaxingTime')
         // TODO: FIREBASE
+        
+        console.log(date,'onChangeStartRelaxingTime')
         this.setState({
             startRelaxingTime :date
         })
     }
 
     onChangeEndRelaxingTime = (date)=>{
-        console.log(date,'onChangeEndRelaxingTime')
+        // console.log(date,'onChangeEndRelaxingTime')
         // TODO: FIREBASE
         this.setState({
             endRelaxingTime :date
@@ -170,31 +129,8 @@ export class relaxingZones extends Component {
     }
 
     render() {
-        const hoursArray = [];
-        const minsArray = [];
-        const daysArray = [];
-        const monthArray = [];
-        const yearArray = [];
-
-        for (let index = 1; index <= 24; index++) {
-            hoursArray[index] = index;
-        }
-
-        for (let a = 0; a <= 60; a++) {
-            minsArray[a] = a;
-        }
-
-        for (let b = 1; b <= 31; ++b) {
-            daysArray[b] = b;
-        }
-
-        for (let d = 1; d <= 31; ++d) {
-            monthArray[d] = d;
-        }
-
-        for (let c = 2021; c <= 2030; ++c) {
-            yearArray[c] = c;
-        }
+        // var x = Date()
+        console.log("yella = "+this.state.startRelaxingTime)
 
         return (
             <div className={'relaxingMainPage'}  /*container div*/ >
@@ -253,65 +189,22 @@ export class relaxingZones extends Component {
                                 flexDirection: 'row', display: 'flex', justifyContent: 'space-around', alignItems: 'center',
                                 height: '5vh', width: '50%', marginRight: '1%', marginLeft: '1%', color: 'white'
                             }}>
+
+                                <p style={{fontSize:'2.5vh', fontWeight:'bold'}}>From:</p>
+                                <div style={{backgroundColor:'white'}}>
                                 <DateTimePicker
                                         onChange={this.onChangeStartRelaxingTime}
                                         value={this.state.startRelaxingTime}
                                     />
-                                    <DateTimePicker
+                                </div>
+                                <p style={{fontSize:'2.5vh', fontWeight:'bold'}}>To:</p>
+                                <div style={{backgroundColor:'white'}}>
+                                <DateTimePicker
                                         onChange={this.onChangeEndRelaxingTime}
                                         value={this.state.endRelaxingTime}
                                     />
-                                {/* <DateTimePicker
-                                    // name = {'yella'}
-                                    value={this.state.yella}
-                                    onChange={this.onChangeTime}
-                                /> */}
-                                {/* <p style={{fontSize:'2.5vh'}}>Select Date & Time:</p>
-                                <Dropdown
-                                    options={hoursArray}
-                                    controlClassName='relaxingControlClassName' className={'relaxingClassName'}
-                                    onChange={this._onSelectHour}
-                                    //  value={defaultOption}   
-                                    menuClassName='relaxingMenuClassName'
-                                    placeholder="Hrs"
-                                    placeholderClassName='relaxingPlaceholderClassName'
-                                />
-                                <Dropdown
-                                    options={minsArray}
-                                    controlClassName='relaxingControlClassName' className={'relaxingClassName'}
-                                    onChange={this._onSelectMins}
-                                    //  value={defaultOption}   
-                                    menuClassName='relaxingMenuClassName'
-                                    placeholder="Mins"
-                                    placeholderClassName='relaxingPlaceholderClassName'
-                                />
-                                <Dropdown
-                                    options={daysArray}
-                                    controlClassName='relaxingControlClassName' className={'relaxingClassName'}
-                                    onChange={this._onSelectDay}
-                                    //  value={defaultOption}   
-                                    menuClassName='relaxingMenuClassName'
-                                    placeholder="Day"
-                                    placeholderClassName='relaxingPlaceholderClassName'
-                                />
-                                 <Dropdown
-                                    options={monthArray}
-                                    controlClassName='relaxingControlClassName' className={'relaxingClassName'}
-                                    onChange={this._onSelectMonth}
-                                    //  value={defaultOption}   
-                                    menuClassName='relaxingMenuClassName'
-                                    placeholder="Month"
-                                    placeholderClassName='relaxingPlaceholderClassName'
-                                />
-                                 <Dropdown
-                                    options={yearArray}
-                                    controlClassName='relaxingControlClassName' className={'relaxingClassName'}
-                                    onChange={this._onSelectYear}
-                                    //  value={defaultOption}   
-                                    menuClassName='relaxingMenuClassName'
-                                    placeholder="Year"
-                                    placeholderClassName='relaxingPlaceholderClassName'
-                                /> */}
+                                </div>                                    
+                                
                             </div>
                             <div className={'relaxingLogout'}>
                                 <Ripples color="#DCDCDC" during={1200} className={'relaxingLogoutButton'}>

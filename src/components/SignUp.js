@@ -10,13 +10,13 @@ import {
     BrowserRouter as Router,
     Link,
 } from "react-router-dom";
-// import { HiOutlineMail } from "react-icons/hi";
-// import { FiLock } from "react-icons/fi";
 import { AiFillIdcard } from "react-icons/ai";
 import { BsPerson, BsPersonFill, BsFillEnvelopeFill, BsLockFill} from "react-icons/bs";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
 
 export class Dashboard extends Component {
 
@@ -54,8 +54,8 @@ export class Dashboard extends Component {
 
         // Signed in 
         var user = userCredential.user;
-        alert("Sign Up Successful")
-            console.log(user.uid);
+        toast('User Registered Successfully', 
+            {position: toast.POSITION.BOTTOM_CENTER})
 
         this.addUser(user.uid);
 

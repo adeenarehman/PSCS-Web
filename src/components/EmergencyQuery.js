@@ -10,6 +10,9 @@ import {
     Link,
 } from "react-router-dom";
 import Modal from 'react-awesome-modal';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
 
 export class Dashboard extends Component {
 
@@ -71,6 +74,8 @@ export class Dashboard extends Component {
                 query_status: add_status
             }
           )  
+          toast('Query Updated Successfully', 
+                {position: toast.POSITION.BOTTOM_CENTER})
     }
 
     openModal() {
