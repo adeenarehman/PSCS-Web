@@ -13,8 +13,8 @@ import {
     Link, Redirect, useHistory
 } from "react-router-dom";
 import Dropdown from 'react-dropdown';
-// import DateTimePicker from 'react-datetime-picker'
-import DateTimePicker from 'react-datetime-picker/dist/entry.nostyle';
+import DateTimePicker from 'react-datetime-picker'
+// import DateTimePicker from 'react-datetime-picker/dist/entry.nostyle';
 
 export class relaxingZones extends Component {
     constructor(props) {
@@ -29,7 +29,9 @@ export class relaxingZones extends Component {
             uid_relaxing: '',
             place_relaxing: null,
             zones_type: null,
-            yella:null
+            yella:null,
+            startRelaxingTime:new Date(),
+            endRelaxingTime:new Date()
         };
         
         this._onSelectZone = this._onSelectZone.bind(this)
@@ -151,6 +153,22 @@ export class relaxingZones extends Component {
         this.getCordinates();
     }
 
+    onChangeStartRelaxingTime = (date)=>{
+        console.log(date,'onChangeStartRelaxingTime')
+        // TODO: FIREBASE
+        this.setState({
+            startRelaxingTime :date
+        })
+    }
+
+    onChangeEndRelaxingTime = (date)=>{
+        console.log(date,'onChangeEndRelaxingTime')
+        // TODO: FIREBASE
+        this.setState({
+            endRelaxingTime :date
+        })
+    }
+
     render() {
         const hoursArray = [];
         const minsArray = [];
@@ -235,13 +253,20 @@ export class relaxingZones extends Component {
                                 flexDirection: 'row', display: 'flex', justifyContent: 'space-around', alignItems: 'center',
                                 height: '5vh', width: '50%', marginRight: '1%', marginLeft: '1%', color: 'white'
                             }}>
-
+                                <DateTimePicker
+                                        onChange={this.onChangeStartRelaxingTime}
+                                        value={this.state.startRelaxingTime}
+                                    />
+                                    <DateTimePicker
+                                        onChange={this.onChangeEndRelaxingTime}
+                                        value={this.state.endRelaxingTime}
+                                    />
                                 {/* <DateTimePicker
                                     // name = {'yella'}
                                     value={this.state.yella}
                                     onChange={this.onChangeTime}
                                 /> */}
-                                <p style={{fontSize:'2.5vh'}}>Select Date & Time:</p>
+                                {/* <p style={{fontSize:'2.5vh'}}>Select Date & Time:</p>
                                 <Dropdown
                                     options={hoursArray}
                                     controlClassName='relaxingControlClassName' className={'relaxingClassName'}
@@ -286,7 +311,7 @@ export class relaxingZones extends Component {
                                     menuClassName='relaxingMenuClassName'
                                     placeholder="Year"
                                     placeholderClassName='relaxingPlaceholderClassName'
-                                />
+                                /> */}
                             </div>
                             <div className={'relaxingLogout'}>
                                 <Ripples color="#DCDCDC" during={1200} className={'relaxingLogoutButton'}>
