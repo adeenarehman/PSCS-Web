@@ -96,7 +96,6 @@ export class Dashboard extends Component {
     render() {
         // console.log("Values = ", this.state.violations);
 
-
         return (
             <div className={'queryMainDiv'}  /*container div*/ >
 
@@ -135,7 +134,7 @@ export class Dashboard extends Component {
                                     <div className={'queryListTextBox'}>
 
                                         <h1 className={'queryListTextHeading'}>
-                                           FIRST NAME
+                                           NAME
                                         </h1>
 
                                     </div>
@@ -244,7 +243,7 @@ export class Dashboard extends Component {
 
                                                    
                                                     <text className={'acceptButtonTrue'}
-                                                    onClick={() => {alert(value.first_name, value.last_name,value.query_description)}}
+                                                    onClick={() => {alert(value.query_description)}}
                                                     >
                                                       Read Description                                           
                                                     </text>

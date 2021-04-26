@@ -98,10 +98,19 @@ export class ViewMap extends Component {
         // this.onChnageKey();
     }
 
-    updateKey = async (uid, key) => {
+    updateKeyToOne = async (uid, key) => {
         const db = firebase.firestore();
         const res = await db.collection('zones').doc(uid).update({
             key: key
+        });
+    }
+
+    updateKeyToZero = async (uid, key) => {
+        const db = firebase.firestore();
+        const res = await db.collection('zones').doc(uid).update({
+            key: key,
+            startTime: null,
+            endTime: null
         });
     }
 
@@ -111,13 +120,12 @@ export class ViewMap extends Component {
 
         if (startTime == currentTime) {
             // alert("key updated to 1")
-            this.updateKey(uid, 1)
+            this.updateKeyToOne(uid, 1)
         }
 
         else if (endTime == currentTime) {
-            this.updateKey(uid, 0)
+            this.updateKeyToZero(uid, 0)
             // alert("key updated to 0")
-
         }
     }
 
@@ -344,11 +352,11 @@ export class ViewMap extends Component {
                                                     // inline style for demonstration purpose
                                                     const style = suggestion.active
                                                         ? {
-                                                            backgroundColor: 'white', cursor: 'pointer', height: '6.5vh', alignItems: 'center', display: 'flex',
+                                                            backgroundColor: 'white', cursor: 'pointer', height: 'auto', alignItems: 'center', display: 'flex',
                                                             border: '0.4vh solid #026e7a',
                                                         }
                                                         : {
-                                                            backgroundColor: '#fafafa', cursor: 'pointer', height: '6.5vh', alignItems: 'center', display: 'flex',
+                                                            backgroundColor: '#fafafa', cursor: 'pointer', height:'auto', alignItems: 'center', display: 'flex',
                                                             border: '0.2vh solid black'
                                                         };
                                                     return (

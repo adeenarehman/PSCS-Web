@@ -105,7 +105,7 @@ addUser = async (userid) => {
                             <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/Pandemic%20Control.png?alt=media&token=36e2120b-4201-429b-abda-6847fa47dd59" className={'signupLogoPic'} />
                         </div>
 
-                        <h1 style={{ color: 'white' }}>Sign Up</h1>
+                        <h1 style={{ color: 'white' }}>Register</h1>
 
                         <div className={'signupLogout'}>
                             <Link to="/signin" style={{ textDecoration: 'none', width: '100%' }}>
@@ -126,7 +126,7 @@ addUser = async (userid) => {
                         <div className={'signupFormBox'}>
 
                         <div className={'signup'}>
-                            Sign Up
+                            Register
                         </div>
 
                         <div className={'signupContainer'}>

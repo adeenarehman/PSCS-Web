@@ -18,7 +18,7 @@ export class Dashboard extends Component {
             violations: [],
             place: {},
             uid: null,
-            name: null,
+            first_name: null,
             fine: null,
         }
     };
@@ -41,7 +41,7 @@ export class Dashboard extends Component {
         const snapshot = await db.collection('violations').get();
 
         snapshot.forEach((doc) => {
-            let tempobj = { 'uid': doc.id, 'name': doc.data().name, 'fine': doc.data().fine };
+            let tempobj = { 'uid': doc.id, 'first_name': doc.data().first_name, 'fine': doc.data().fine };
             tempdata.push(tempobj)
         });
         this.setState({ violations: tempdata })
@@ -127,7 +127,7 @@ export class Dashboard extends Component {
                                         <div className={'textBox'}>
 
                                             <h1 className={'text'}>
-                                                {value.name}
+                                                {value.first_name}
                                             </h1>
 
                                         </div>
