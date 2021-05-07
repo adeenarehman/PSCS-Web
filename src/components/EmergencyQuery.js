@@ -10,7 +10,7 @@ import {
     Link,
 } from "react-router-dom";
 import Modal from 'react-awesome-modal';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 toast.configure()
 
@@ -27,18 +27,18 @@ export class Dashboard extends Component {
             query: null,
             query_status: null,
             query_description: null,
-            visible : false
-
+            visible: false,
+            query_web_status: null
         }
         this.handleClick = this.handleClick.bind(this);
     };
 
-    handleClick(){
+    handleClick() {
         this.setState({
-          button:!this.state.button
+            button: !this.state.button
         })
-      }
-    
+    }
+
     componentDidMount() {
         this.getQueryData();
 
@@ -57,41 +57,44 @@ export class Dashboard extends Component {
         const snapshot = await db.collection('queries').get();
 
         snapshot.forEach((doc) => {
-            let tempobj = { 'uid': doc.id, 'cnic': doc.data().cnic, 'first_name': doc.data().first_name, 'last_name': doc.data().last_name,
-                            'query': doc.data().query, 'query_description': doc.data().description  
-                          };
+            let tempobj = {
+                'uid': doc.id, 'cnic': doc.data().cnic, 'first_name': doc.data().first_name, 'last_name': doc.data().last_name,
+                'query': doc.data().query, 'query_description': doc.data().description, 'query_web_status':doc.data().query_web_status
+            };
             tempdata.push(tempobj)
         });
         this.setState({ queries: tempdata })
     }
 
 
-    addQueryData = async (add_id,add_status) => {
+    addQueryData = async (add_id, add_status, web_status) => {
+        this.setState({ status: 'yes' })
         const db = firebase.firestore();
         const docRef = db.collection('queries').doc(add_id);
         await docRef.update(
             {
-                query_status: add_status
+                query_status: add_status,
+                query_web_status: web_status
             }
-          )  
-          toast('Query Updated Successfully', 
-                {position: toast.POSITION.BOTTOM_CENTER})
+        )
+        toast('Query Updated Successfully',
+            { position: toast.POSITION.BOTTOM_CENTER })
     }
 
     openModal() {
         this.setState({
-            visible : true
+            visible: true
         });
     }
 
     closeModal() {
         this.setState({
-            visible : false
+            visible: false
         });
     }
 
 
-    
+
 
     render() {
         // console.log("Values = ", this.state.violations);
@@ -134,7 +137,7 @@ export class Dashboard extends Component {
                                     <div className={'queryListTextBox'}>
 
                                         <h1 className={'queryListTextHeading'}>
-                                           NAME
+                                            NAME
                                         </h1>
 
                                     </div>
@@ -163,10 +166,18 @@ export class Dashboard extends Component {
 
                                     </div>
 
-                                    <div className={'queryListLastTextBox'}>
+                                    <div className={'queryListTextBox'}>
 
                                         <h1 className={'queryListTextHeading'}>
                                             QUERY STATUS
+                                        </h1>
+
+                                    </div>
+
+                                    <div className={'queryListLastTextBox'}>
+
+                                        <h1 className={'queryListTextHeading'}>
+                                            SELECT
                                         </h1>
 
                                     </div>
@@ -180,9 +191,9 @@ export class Dashboard extends Component {
                                         <div className={'queryListTextBox'}>
 
                                             <h1 className={'text'}>
-                                            {value.first_name}
-                                            {}
-                                            {value.last_name}
+                                                {value.first_name}
+                                                {' '}
+                                                {value.last_name}
                                             </h1>
                                         </div>
 
@@ -198,86 +209,58 @@ export class Dashboard extends Component {
                                             <h1 className={'text'}>
                                                 {value.query}
                                             </h1>
-                                          
+
                                         </div>
 
                                         <div className={'queryListTextBox'}>
 
-                                        {/* <h3 style={{marginLeft:'9vh'}}
-                                        onClick={() => this.openModal()}
-                                        >
-                                            Read Description     
-                                        </h3>
-                                           
-                                           <Modal 
-                                               visible={this.state.visible}
-                                               width="600"
-                                               height="300"
-                                               effect="fadeInUp"
-                                               onClickAway={() => this.closeModal()}
-                                           >
-                                               <div>
-                                                    <h3 style={{display:'flex', justifyContent:'flex-start'}}>
-                                                        {value.first_name}
-                                                        {value.last_name}
-                                                    </h3>
-
-                                                    <p style={{height:'20vh', width:'100%',display:'flex', justifyContent:'center', overflowY:'scroll'}}>
-                                                        {value.query_description}
-                                                    </p>
-
-                                                    <div style={{height:'10vh', width:'100%',display:'flex', alignItems:'center', justifyContent:'center'}}>
-                                                        <a href="javascript:void(0);" style={{height:'5vh', width:'20%'}} >
-                                                            <button className={'closePopupButton'}
-                                                                onClick={() => this.closeModal()}
-                                                            >
-                                                                Close
-                                                            </button>
-                                                        </a>
-                                                    </div>
-                                               </div>
-                                           </Modal> */}
+                                            <h1 className={'text'}>
 
 
-                                                <h1 className={'text'}>
-
-                                                   
-                                                    <text className={'acceptButtonTrue'}
-                                                    onClick={() => {alert(value.query_description)}}
-                                                    >
-                                                      Read Description                                           
+                                                <text className={'acceptButtonTrue'}
+                                                    onClick={() => { alert(value.query_description) }}
+                                                >
+                                                    Read Description
                                                     </text>
-                                                    
-                                                </h1>
+
+                                            </h1>
+
+                                        </div>
+
+                                        <div className={'queryListTextBox'}>
+
+                                            <h1 className={'text'}>
+                                                {value.query_web_status}
+                                            </h1>
 
                                         </div>
 
                                         <div className={'queryListLastTextBox'}>
-                                        {/* {value.uid} */}
+                                            {/* {value.uid} */}
                                             <div className={'queryAcceptButtonDiv'}>
                                                 <Ripples color="#DCDCDC" during={1200} className={'acceptButtonTrue1'}>
-                                                {/* {value.uid} */}
-                                                <button className={'acceptButtonTrue'}
-                                                // onClick={() => { this.handleClick}}
-                                                // onClick={this.handleClick}
-                                                onClick={() => { this.addQueryData(value.uid,'Your Request Has Been Accepted For')}}
-                                                >
-                                                    Accept                                           
+                                                    {/* {value.uid} */}
+                                                    <button className={'acceptButtonTrue'}
+                                                        // onClick={() => { this.handleClick}}
+                                                        // onClick={this.handleClick}
+                                                        onClick={() => { this.addQueryData(value.uid, 'Your Request Has Been Accepted For', 'Accepted') }}
+                                                    >
+                                                        Accept
                                                 </button>
                                                 </Ripples>
-                                            </div> 
-                                           
+                                            </div>
+
                                             <div className={'queryDenyButtonDiv'}>
                                                 <Ripples color="#DCDCDC" during={1200} className={'denyButtonTrue1'}>
 
-                                                <button className={'denyButtonTrue'}
-                                                // onClick={() => { this.deleteCordinates(value.uid) }}
-                                                // onClick={this.handleClick}
-                                                onClick={() => { this.addQueryData(value.uid,'Your Request Has Been Denied For')}}
-                                                >
-                                                    Deny
+                                                    <button className={'denyButtonTrue'}
+                                                        // onClick={() => { this.deleteCordinates(value.uid) }}
+                                                        // onClick={this.handleClick}
+                                                        onClick={() => { this.addQueryData(value.uid, 'Your Request Has Been Denied For', 'Denied') }}
+                                                    >
+                                                        Deny
                                             </button>
-                                            </Ripples>
+                                                </Ripples>
                                             </div>
                                         </div>
 

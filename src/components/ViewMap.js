@@ -48,7 +48,7 @@ export class ViewMap extends Component {
             startTime: '',
             endTime: '',
             key: 0,
-
+            edit_uid:null
         };
         this.onInputChange = this.onInputChange.bind(this);
         this._onSelect = this._onSelect.bind(this);
@@ -95,7 +95,7 @@ export class ViewMap extends Component {
         }, 1000
 
         )
-        // this.onChnageKey();
+        this.onChangeKey();
     }
 
     updateKeyToOne = async (uid, key) => {
@@ -270,9 +270,10 @@ export class ViewMap extends Component {
         window.location.reload(true)
     }
 
-    openModal() {
+    openModal(uid) {
         this.setState({
-            visible: true
+            visible: true,
+            edit_uid:uid
         });
     }
 
@@ -479,7 +480,7 @@ export class ViewMap extends Component {
                                                 Delete
                                             </button>
 
-                                            <input type="button" value="Edit" onClick={() => this.openModal()} className={'editButton'} />
+                                            <input type="button" value="Edit" onClick={() => this.openModal(value.uid)} className={'editButton'} />
 
                                             <Modal
                                                 visible={this.state.visible}
@@ -513,7 +514,7 @@ export class ViewMap extends Component {
                                                         </div>
 
                                                         <button className={'editPopupButton'}
-                                                            onClick={() => { this.updateRadius(value.uid) }}
+                                                            onClick={() => { this.updateRadius(this.state.edit_uid) }}
                                                         >
                                                             Update
                                                     </button>

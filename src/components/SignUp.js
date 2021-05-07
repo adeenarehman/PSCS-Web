@@ -11,10 +11,10 @@ import {
     Link,
 } from "react-router-dom";
 import { AiFillIdcard } from "react-icons/ai";
-import { BsPerson, BsPersonFill, BsFillEnvelopeFill, BsLockFill} from "react-icons/bs";
+import { BsPerson, BsPersonFill, BsFillEnvelopeFill, BsLockFill } from "react-icons/bs";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 toast.configure()
 
@@ -30,67 +30,67 @@ export class Dashboard extends Component {
             cnic: '',
             designation: ''
         }
-        this.onInputChange = this.onInputChange.bind(this);  
+        this.onInputChange = this.onInputChange.bind(this);
         this._onSelect = this._onSelect.bind(this)
- 
-     };
 
-     onInputChange(event) {
+    };
+
+    onInputChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
 
-    _onSelect (option) {
+    _onSelect(option) {
         // console.log('You selected ', option.label)
-        this.setState({designation: option.label})
-      }
+        this.setState({ designation: option.label })
+    }
 
 
     createUserWithEmailPassword = () => {
         // console.log(this.state.email, this.state.password);
-    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-    
-    .then((userCredential) => {
-        // console.log(auth().currentUser+ 'shh');        
+        firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
 
-        // Signed in 
-        var user = userCredential.user;
-        toast('User Registered Successfully', 
-            {position: toast.POSITION.BOTTOM_CENTER})
+            .then((userCredential) => {
+                // console.log(auth().currentUser+ 'shh');        
 
-        this.addUser(user.uid);
+                // Signed in 
+                var user = userCredential.user;
+                toast('User Registered Successfully',
+                    { position: toast.POSITION.BOTTOM_CENTER })
 
-        // ...
-      })
-  .catch((error) => {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    alert(error)
-  });
-}
+                this.addUser(user.uid);
 
-addUser = async (userid) => {
-    const db = firebase.firestore();
-    const docRef = db.collection('users').doc(userid);
-    await docRef.set({
-        first_name: this.state.first_name,
-        last_name: this.state.last_name,
-        email: this.state.email,
-        // password: this.state.password,
-        cnic: this.state.cnic,
-        designation: this.state.designation,
-    });
-    // await this.reloadPage();
-    // this.getCordinates();
-}
-    
+                // ...
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                alert(error)
+            });
+    }
+
+    addUser = async (userid) => {
+        const db = firebase.firestore();
+        const docRef = db.collection('users').doc(userid);
+        await docRef.set({
+            first_name: this.state.first_name,
+            last_name: this.state.last_name,
+            email: this.state.email,
+            // password: this.state.password,
+            cnic: this.state.cnic,
+            designation: this.state.designation,
+        });
+        // await this.reloadPage();
+        // this.getCordinates();
+    }
+
 
     render() {
         // console.log("Values = ", this.state.violations);
-        const options = 
-        [
-            'bureaucrat', 
-            'medical officer'
-        ];
+        const options =
+            [
+                'bureaucrat',
+                'medical officer'
+            ];
 
         //   const defaultOption = options[0];
 
@@ -123,7 +123,7 @@ addUser = async (userid) => {
 
                     <div className={'signupFooter'} /*container div for zones list & view map*/>
 
-                        <div className={'signupFormBox'}>
+                        {/* <div className={'signupFormBox'}>
 
                         <div className={'signup'}>
                             Register
@@ -204,6 +204,53 @@ addUser = async (userid) => {
                                     SIGN UP
                                 </button>
                             </Ripples>
+                        </div> */}
+                        <div className={'mainContainer'}>
+
+                            <div className={'innerContainer'}>
+
+                                 <div className={'innerLeftContainer'}>
+                                    {/*<img src={Background} className={'logo'}/>*/}
+                                    {/* <center><h1 style={{ marginBottom: '35%', color: 'blue' }}>PANDEMIC SITUATION CONTROLLING SYSTEM</h1></center> */}
+                                    <div className={'logoContainer'}>
+                                        <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/Logo%2Btext.png?alt=media&token=93540c12-a601-4ab2-ac0d-31c48ebc8cac" className={'logo'} />
+                                    </div>
+
+                                </div> 
+
+                                <div className={'innerRightContainer'}>
+
+                                    <div className={'heading'}>Sign in</div>
+
+                                    <div className={'inputContainer'}>
+                                        <input className={'input'}
+                                            type={'text'}
+                                            placeholder={'Email'}
+                                            name={'email'}
+                                            value={this.state.email}
+                                            onChange={this.onInputChange}
+                                        />
+                                    </div>
+
+                                    <div className={'inputContainer'}>
+                                        <input className={'input'}
+                                            type={'password'}
+                                            placeholder={'Password'}
+                                            name={'password'}
+                                            value={this.state.password}
+                                            onChange={this.onInputChange}
+                                        />
+                                    </div>
+
+                                    <Ripples color="#DCDCDC" during={1200} className={'button'}>
+                                        <button onClick={this.signInWithEmailPassword} className={'button'}>
+                                            SIGN IN
+            </button>
+                                    </Ripples>
+                                </div>
+
+                            </div>
+
                         </div>
 
                     </div >
