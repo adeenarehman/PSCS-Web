@@ -28,7 +28,11 @@ export class Dashboard extends Component {
             query_status: null,
             query_description: null,
             visible: false,
-            query_web_status: null
+            query_web_status: null,
+            f_name:null,
+            l_name:null,
+            m_cnic:null,
+            desc:null,
         }
         this.handleClick = this.handleClick.bind(this);
     };
@@ -45,7 +49,7 @@ export class Dashboard extends Component {
         setInterval(() => {
             this.getQueryData();
             console.warn("kdbcjkbckajs")
-        }, 5000
+        }, 30000
 
         )
 
@@ -78,12 +82,19 @@ export class Dashboard extends Component {
             }
         )
         toast('Query Updated Successfully',
-            { position: toast.POSITION.BOTTOM_CENTER })
+            { position: toast.POSITION.BOTTOM_CENTER,
+                autoClose: 5000,
+                hideProgressBar: true
+            })
     }
 
-    openModal() {
+    openModal(f_name, l_name, m_cnic, desc) {
         this.setState({
-            visible: true
+            visible: true,
+            f_name: f_name,
+            l_name: l_name,
+            m_cnic: m_cnic,
+            desc: desc
         });
     }
 
@@ -92,9 +103,6 @@ export class Dashboard extends Component {
             visible: false
         });
     }
-
-
-
 
     render() {
         // console.log("Values = ", this.state.violations);
@@ -110,13 +118,13 @@ export class Dashboard extends Component {
                             <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/Pandemic%20Control.png?alt=media&token=36e2120b-4201-429b-abda-6847fa47dd59" className={'queryLogoPic'} />
                         </div>
 
-                        <h1 style={{ color: 'white' }}>Query List</h1>
+                        <h1 style={{ color: 'white', textDecoration: 'underline'}}>QUERY LIST</h1>
 
                         <div className={'queryLogout'}>
                             <Link to="/signin" style={{ textDecoration: 'none', width: '100%' }}>
-                                <Ripples color="#DCDCDC" during={1200} className={'queryLogoutButton'}>
+                                <Ripples color="#DCDCDC" during={1200} className={'queryLogoutButtonRipples'}>
                                     <button
-                                        className={'queryLogoutButton1'}
+                                        className={'queryLogoutButton'}
                                     >
                                         Logout
                                 </button>
@@ -161,7 +169,7 @@ export class Dashboard extends Component {
                                     <div className={'queryListTextBox'}>
 
                                         <h1 className={'queryListTextHeading'}>
-                                            QUERY DESCRIPTION
+                                            QUERY STATUS
                                         </h1>
 
                                     </div>
@@ -169,7 +177,7 @@ export class Dashboard extends Component {
                                     <div className={'queryListTextBox'}>
 
                                         <h1 className={'queryListTextHeading'}>
-                                            QUERY STATUS
+                                            QUERY DESCRIPTION
                                         </h1>
 
                                     </div>
@@ -190,57 +198,97 @@ export class Dashboard extends Component {
 
                                         <div className={'queryListTextBox'}>
 
-                                            <h1 className={'text'}>
+                                            <p className={'text'}>
                                                 {value.first_name}
                                                 {' '}
                                                 {value.last_name}
-                                            </h1>
+                                            </p>
                                         </div>
 
                                         <div className={'queryListTextBox'}>
 
-                                            <h1 className={'text'}>
+                                            <p className={'text'}>
                                                 {value.cnic}
-                                            </h1>
+                                            </p>
                                         </div>
 
                                         <div className={'queryListTextBox'}>
 
-                                            <h1 className={'text'}>
+                                            <p className={'text'}>
                                                 {value.query}
-                                            </h1>
+                                            </p>
 
                                         </div>
 
                                         <div className={'queryListTextBox'}>
 
-                                            <h1 className={'text'}>
+                                            
+                                            <p className={'text'}>
+                                                {value.query_web_status}
+                                            </p>
 
+                                        </div>
 
-                                                <text className={'acceptButtonTrue'}
-                                                    onClick={() => { alert(value.query_description) }}
+                                        <div className={'queryListTextBox'}>
+
+                                            <p className={'text'}>
+                                                <text style={{textDecoration:'underline', cursor:'pointer', fontStyle:'italic'}}
+                                                    // onClick={() => { toast('Query Description: '+value.query_description, 
+                                                    //                 { position: toast.POSITION.BOTTOM_CENTER,
+                                                    //                     autoClose: 7000,
+                                                    //                     hideProgressBar: true
+                                                    //                 }
+                                                    //             ) 
+                                                    //         }}
+                                                    onClick={() => this.openModal(value.first_name, value.last_name,
+                                                                                    value.cnic, value.query_description)}
                                                 >
                                                     Read Description
                                                     </text>
-
-                                            </h1>
-
-                                        </div>
-
-                                        <div className={'queryListTextBox'}>
-
-                                            <h1 className={'text'}>
-                                                {value.query_web_status}
-                                            </h1>
+                                            </p>
 
                                         </div>
+
+                                        <Modal
+                                                visible={this.state.visible}
+                                                width="600"
+                                                height="300"
+                                                effect="fadeInUp"
+                                                onClickAway={() => this.closeModal()}
+                                            >
+
+                                                <div style={{display:'flex', justifyContent:'space-between',
+                                                            flexDirection:'column', height:'300px', width:'600px'}}>
+                                                    
+                                            <div style={{margin:'2vh'}}>
+                                                <p style={{fontSize:'2.3vh'}}>
+                                                   First Name: {this.state.f_name} <br/>
+                                                   Last Name: {this.state.l_name} <br/>
+                                                   CNIC: {this.state.m_cnic} <br/>
+                                                   Query Description: {this.state.desc} <br/>
+                                                </p> 
+                                            </div>    
+
+                                            <div style={{height: '10vh', width: '100%', display: 'flex', alignItems: 'center',
+                                                         justifyContent: 'center' }}>
+
+                                                <a href="javascript:void(0);" style={{ height: '5vh', width: '20%' }} >
+                                                    <button className={'closePopupButton'}
+                                                        onClick={() => this.closeModal()}
+                                                    >
+                                                        Close
+                                                    </button>
+                                                </a>
+
+                                            </div>
+                                                </div>
+
+                                        </Modal>
 
                                         <div className={'queryListLastTextBox'}>
-                                            {/* {value.uid} */}
                                             <div className={'queryAcceptButtonDiv'}>
-                                                <Ripples color="#DCDCDC" during={1200} className={'acceptButtonTrue1'}>
-                                                    {/* {value.uid} */}
-                                                    <button className={'acceptButtonTrue'}
+                                                <Ripples color="#DCDCDC" during={1200} className={'acceptButtonRipples'}>
+                                                    <button className={'acceptButton'}
                                                         // onClick={() => { this.handleClick}}
                                                         // onClick={this.handleClick}
                                                         onClick={() => { this.addQueryData(value.uid, 'Your Request Has Been Accepted For', 'Accepted') }}
@@ -251,15 +299,14 @@ export class Dashboard extends Component {
                                             </div>
 
                                             <div className={'queryDenyButtonDiv'}>
-                                                <Ripples color="#DCDCDC" during={1200} className={'denyButtonTrue1'}>
-
-                                                    <button className={'denyButtonTrue'}
+                                                <Ripples color="#DCDCDC" during={1200} className={'denyButtonRipples'}>
+                                                    <button className={'denyButton'}
                                                         // onClick={() => { this.deleteCordinates(value.uid) }}
                                                         // onClick={this.handleClick}
                                                         onClick={() => { this.addQueryData(value.uid, 'Your Request Has Been Denied For', 'Denied') }}
                                                     >
                                                         Deny
-                                            </button>
+                                                    </button>
                                                 </Ripples>
                                             </div>
                                         </div>

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { HiOutlineMail } from "react-icons/hi";
-import { FiLock } from "react-icons/fi";
+// import { HiOutlineMail } from "react-icons/hi";
+// import { FiLock } from "react-icons/fi";
+import { BsPerson, BsPersonFill, BsFillEnvelopeFill, BsLockFill } from "react-icons/bs";
+
 import Ripples from 'react-ripples'
 import './Signin.css';
+import {reactLocalStorage} from 'reactjs-localstorage';
 import withFirebaseAuth from 'react-with-firebase-auth'
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
@@ -26,13 +29,17 @@ class Signin extends Component {
     }
 
         signInWithEmailPassword = () => {
-        console.log(this.state.email, this.state.password);
+        // console.log(this.state.email, this.state.password);
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
             .then(function (result) {
                 toast('Signin Successfull', 
-                     {position: toast.POSITION.BOTTOM_CENTER})
+                     {position: toast.POSITION.BOTTOM_CENTER,
+                        autoClose: 5000,
+                        hideProgressBar: true
+                    })
+
                 history.push('/dashboard');
-                window.location.reload(false);     
+                window.location.reload(false); 
             })
 
             .catch(function (error) {
@@ -40,13 +47,21 @@ class Signin extends Component {
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 console.log(errorMessage);
-                alert(errorMessage)
+                // alert(errorMessage)
+                toast("" + errorMessage, 
+                    {position: toast.POSITION.BOTTOM_CENTER,
+                        autoClose: 5000,
+                        hideProgressBar: true
+                    })
             });
     }
+
 
     onInputChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
+
+   
 
     render() {
         return (
@@ -65,10 +80,10 @@ class Signin extends Component {
 
                     <div className={'innerRightContainer'}>
 
-                        <div className={'heading'}>Sign in</div>
+                        <div className={'heading'}>Login</div>
 
                         <div className={'inputContainer'}>
-                            <HiOutlineMail style={{ height: 30, width: 30, color: '#5499C7' }} />
+                            <BsFillEnvelopeFill style={{ height: 27, width: 25, color: '#21618C' }} />                            
                             <input className={'input'}
                                 type={'text'}
                                 placeholder={'Email'}
@@ -79,7 +94,7 @@ class Signin extends Component {
                         </div>
 
                         <div className={'inputContainer'}>
-                            <FiLock style={{ height: 27, width: 27, color: '#5499C7' }} />
+                            <BsLockFill style={{ height: 27, width: 29, color: '#21618C' }} />                            
                             <input className={'input'}
                                 type={'password'}
                                 placeholder={'Password'}
@@ -89,9 +104,9 @@ class Signin extends Component {
                             />
                         </div>
 
-                        <Ripples color="#DCDCDC" during={1200} className={'button'}>
-                            <button onClick={this.signInWithEmailPassword} className={'button'}>
-                                SIGN IN
+                        <Ripples color="#DCDCDC" during={1200} className={'loginButtonRipples'}>
+                            <button onClick={this.signInWithEmailPassword} className={'loginButton'}>
+                                LOGIN
                             </button>
                         </Ripples>
                     </div>

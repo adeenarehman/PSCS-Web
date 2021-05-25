@@ -53,10 +53,10 @@ export class Dashboard extends Component {
                         </div>
 
                         <div className={'dashboardLogout'}>
-                            <Ripples color="#DCDCDC" during={1200} className={'dashboardLogoutButton'}>
+                            <Ripples color="#DCDCDC" during={1200} className={'dashboardLogoutButtonRipples'}>
                                 <Link to="/signin" style={{ textDecoration: 'none', width: '100%' }}>
                                     <button
-                                        className={'dashboardLogoutButton1'}>
+                                        className={'dashboardLogoutButton'}>
                                         Logout
                                     </button>
                                 </Link>

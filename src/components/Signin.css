@@ -1,10 +1,8 @@
 .mainContainer
 {
-    /*background-color: #097FCD;*/
     background-image: url('./images/background3.png');
     background-position: center;
     background-size: cover;
-    /*flex: 1;*/
     height: 100vh;
     width: 100%;
     justify-content: center;
@@ -29,24 +27,14 @@
     background-image: url('./images/im2.png');
     background-position: center;
     background-size: cover;
-    /*background-color: coral;*/
     height: 80vh;
     width: 45%;
     border-top-left-radius: 15vh;
-    /*justify-content: center;*/
     align-items: flex-end;
     display: flex;
     border: 0.3vh solid #0D3AA9;
+    box-shadow: 5px 5px 3px 3px rgba(0, 0, 0, 0.2);
 }
-
-/*.logo
-{
-    height: 80vh;
-    width: 100%;
-    position: sticky;
-    opacity: 0.7;
-    border-top-left-radius: 19vh;
-}*/
 
 .innerRightContainer
 {
@@ -58,11 +46,12 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    box-shadow: 5px 5px 3px 3px rgba(0, 0, 0, 0.2);
+
 }
 
 .heading
 {
-   /* background-color: violet; */
    font-size: 6vh;
    height: 5vh;
    width: 29%;
@@ -71,11 +60,12 @@
    align-items: flex-end;
    margin-bottom: 10%;
    color:  #5499C7;
+   font-weight: bold;
+   text-decoration: underline;
 }
 
 .inputContainer
 {
-     /*background-color: green;*/
      height: 5.3vh;
      width: 70%; 
      border-bottom: 0.4vh solid #5499C7;
@@ -88,7 +78,7 @@
 .input
 {
     background-color: white;
-    width: 50%;
+    width: 85%;
     height: 5vh;
     font-size: 2vh;
     border: 0;
@@ -97,14 +87,30 @@
     text-indent: 2%;
 }
 
-
 .user
 {
-    /*background-color: yellow;*/
     font-size: 1.75vh;
 }
 
-.button
+.loginButtonRipples
+{
+    background-color: #5499C7;
+    color: white;
+    height: 6.5vh;
+    width: 55%;
+    border-radius: 20vh;
+    margin-top: 3%;
+    cursor: pointer;
+    outline: 0;
+    border: #0D3AA9;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: 2.5vh;
+    box-shadow: 0 8px 6px -6px black;
+}
+
+.loginButton
 {
     background-color: #5499C7;
     color: white;

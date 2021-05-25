@@ -1,9 +1,5 @@
 .mapMainPage
 {
-    /* background-color: aqua; */
-    /* background-image: url('./images/background.png');
-    background-position: center;
-    background-size: cover; */
     height: 100vh;
     width: 100%;
     justify-content: center;
@@ -18,11 +14,8 @@
     background-color: none;
     height: 100vh;
     width: 95%;
-    /* justify-content: center;
-    align-items: center; */
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     
 }
@@ -31,43 +24,31 @@
 .mapHeader
 {
     background-color: #50A6C2;
-    /* border: 0.4vh solid #012733; */
     height: 12vh;
     width: 100%;
-    /* border-bottom-left-radius: 1vh ;
-    border-bottom-right-radius: 1vh ; */
     margin-bottom: 1%;
-    /* margin-top: 0.5%; */
-    /* justify-content: center; */
     align-items: center;
     justify-content:space-between;
     display: flex;
     flex-direction: row;
-    /* border: 0.4vh solid #026e7a; */
-    /* box-shadow: 0px 5px 5px 4px rgba(0, 0, 0, 0.2); */
     box-shadow: 0 8px 6px -6px black;
 }
 
+
 .mapLogoImg{
-  /* margin-left: 3vh; */
-  /* background-color: aqua; */
-  align-items: center;
-  /* justify-content:space-between; */
-  display: flex;
+  margin-left: 3vh;
   height: fit-content;
-  width: 9%;
+  width: 5%;
 }
+
 .mapLogoPic{
-  height: 10vh;
+  height: 9vh;
   width: 100%;
 }
 
 
 .mapHeaderHeading{
-  /* margin-left: 3vh; */
-  /* background-color: aqua; */
   align-items: center;
-  /* justify-content:space-between; */
   display: flex;
   height: fit-content;
   width: 20%;
@@ -81,7 +62,6 @@
 
 
 .mapLogout{
-  /* background-color: #0D3AA9; */
   height: 10vh;
   width: 10%;
   display: flex;
@@ -89,25 +69,22 @@
   margin-right: 3vh;
 }
 
-.mapLogoutButton
+.mapLogoutButtonRipples
 {
     background-color: none;
     color: black;
     height: 5.6vh;
     width: 100%;
-    /* margin-left: 10vh; */
-    /* border: #0D3AA9; */
-    /* border-radius: 10vh; */
     cursor: pointer;
     outline: 0;
     justify-content: center;
     align-items: center;
     display: flex;
     font-size: 2.5vh;
-    /* position: relative; */
+    box-shadow: 0 8px 6px -6px black;    
 }
 
-.mapLogoutButton1
+.mapLogoutButton
 {
     border-color: #0D3AA9;
     border-width: 3px;
@@ -115,15 +92,12 @@
     color: black;
     height: 5.5vh;
     width: 100%;
-    /* border: #0D3AA9; */
-    /* border-radius: 10vh; */
     cursor: pointer;
     outline: 0;
     justify-content: center;
     align-items: center;
     display: flex;
     font-size: 2.5vh;
-    /* position: relative; */
 }
 
 
@@ -132,21 +106,16 @@
     background-color: #50A6C2;
     height: 10vh;
     width: 99.5%;
-    /* margin-bottom: 1%; */
-    /* margin-top: 0.5%; */
     justify-content: space-around;
     align-items: center;
     display: flex;
     flex-direction: row;
-    /* border: 0.4vh solid #026e7a; */
 }
 
 .inputBox
 {
-     /* background-color: green; */
      height: 4.8vh;
      width: 15%; 
-     /* border-bottom: 0.4vh solid #0D3AA9; */
      display: flex;
      align-items: center;
      justify-content: center;
@@ -154,7 +123,6 @@
 
 .input1
 {
-    /* background-color: pink; */
     width: 100%;
     height: 4.6vh;
     font-size: 2vh;
@@ -167,9 +135,6 @@
 
 .searchBar      /*Autoplaces Complete Input*/
 {
-    /* background-color: red; */
-    /* margin-top: 10%; */
-    /* margin-bottom: 2%; */
     height: 5.2vh;
     width: 45%;
     position: sticky;
@@ -182,8 +147,6 @@
   height: 4.5vh;
   width: 98.7%;
   outline: 0; 
-  /* border: 0;
-  color: black;*/
 }
 
 .autocomplete-dropdown-container
@@ -195,15 +158,10 @@
 
 .dropdownBox
 {
-     /* background-color: blueviolet; */
      height: 4.8vh;
      width: 14%;
      margin-right: 0.5%;
      border: 0.4vh solid #0D3AA9;
-     /* border-bottom: 0.4vh solid #0D3AA9; */
-     /* display: flex;
-     align-items: center;
-     justify-content: center; */
 }
 
 .myPlaceholderClassName
@@ -214,44 +172,37 @@
 }
 
 .myMapClassName{
-  /* background-color: pink; */
   height: 4.8vh;
   width:100%;
   
 }
 
 .myMapControlClassName{
-  /* background-color: red; */
   height: 4.9vh;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
+  
 }
 
 .myMapMenuClassName{
-  /* background-color: yellowgreen; */
   height: 11vh;
 
 }
 
-.addButton
+.addButtonRipples
 {
     background-color: none;
     color: black;
     height: 5.6vh;
     width: 10.7%;
-    /* border: #0D3AA9; */
-    /* border-radius: 10vh; */
     cursor: pointer;
     outline: 0;
     justify-content: center;
     align-items: center;
     display: flex;
     font-size: 2.5vh;
-    /* position: relative; */
+    box-shadow: 0 8px 6px -6px black;
 }
 
-.addButton1
+.addButton
 {
     border-color: #0D3AA9;
     border-width: 3px;
@@ -259,15 +210,12 @@
     color: black;
     height: 5.5vh;
     width: 100%;
-    /* border: #0D3AA9; */
-    /* border-radius: 10vh; */
     cursor: pointer;
     outline: 0;
     justify-content: center;
     align-items: center;
     display: flex;
     font-size: 2.5vh;
-    /* position: relative; */
 }
 
 
@@ -275,12 +223,8 @@
 .footerBox
 {
     background-color: #50A6C2;
-    /* border: 0.4vh solid #026e7a; */
     height: 84.5vh;
     width: 100%;
-    /* margin-bottom: 0.5%; */
-    /* /* justify-content: center;
-    align-items: center; */
     display: flex;
     flex-direction: column;
     box-shadow: 0 8px 6px -6px black;
@@ -296,10 +240,6 @@
     justify-content: center;
     align-items: center;
     display: flex;
-    /* margin-right: 0.8%; */
-    /*flex-direction: column; */
-    /* position: relative; */
-    /* overflow-y: scroll */
 }
 
 .listInnerContainer
@@ -308,7 +248,6 @@
   width: 100%; 
   overflow-y: scroll;
   overflow-x: hidden;
-  /* background-color: #50A6C2; */
 }
 
 .mapSingleRow
@@ -321,7 +260,6 @@
   align-items: center;
   display: flex;
   justify-content: space-around
-  /* justify-content: flex-start; */
 }
 
 .mapText
@@ -331,7 +269,6 @@
   width: 100%;
   display: flex;
   align-items: center;
-  /* background-color: tomato; */
 }
 
 .mapTextDiv
@@ -341,8 +278,6 @@
   align-items: center;
   display: flex;
   margin-left: 0.5%;
-  /* background-color:blue; */
-  /* margin-top: 1% */
 }
 
 .map-popup-content
@@ -350,19 +285,15 @@
   background-color: white;
   height: 80vh;
   width: 80%;
-  /* position: absolute; */
   display: block;
   justify-content: center;
   align-items: center;
   border: 0.4vh solid #0D3AA9;
   box-shadow: 5px 5px 3px 3px rgba(0, 0, 0, 0.2);
-  /* display: flex;
-  position: relative; */
 }
 
 .mapBox
 {
-    /* border: 0.4vh solid #0D3AA9; */
     height: 100%;
     width: 100%;
     justify-content: center;
@@ -371,23 +302,11 @@
     position: relative;
 }
 
-/* .buttonDiv
-{
-  height: 80%;
-  width: 10%;
-  margin-right: 0.5%;
-  border-color: #0D3AA9;
-  border-width: 1%;
-  background-color: violet;
-} */
-
 .editButton
   {
       background-color: white;
-      /* color: white; */
       height: 80%;
       width: 12%;
-      /* border-radius: 20vh; */
       margin-right: 1.5%;
       cursor: pointer;
       outline: 0;
@@ -404,19 +323,15 @@
   background-color: white;
   height: 60vh;
   width: 50%;
-  /* position: absolute; */
   display: flex;
   justify-content: center;
   align-items: center;
   border: 0.4vh solid #0D3AA9;
   box-shadow: 5px 5px 3px 3px rgba(0, 0, 0, 0.2);
-  /* display: flex;
-  position: relative; */
 }
 
 .editPopup-InputDropdown
 {
-  /* background-color: red; */
   height: 10vh;
   width: 100%;
   display: flex;
@@ -427,24 +342,17 @@
 
 .editDropdownBox
 {
-     /* background-color: blueviolet; */
      height: 4.8vh;
      width: 30%;
      margin-right: 0.5%;
      border: 0.4vh solid #0D3AA9;
-     /* border-bottom: 0.4vh solid #0D3AA9; */
-     /* display: flex;
-     align-items: center;
-     justify-content: center; */
 }
 
 
 .editInputBox
 {
-     /* background-color: green; */
      height: 4.8vh;
      width: 28%; 
-     /* border-bottom: 0.4vh solid #0D3AA9; */
      display: flex;
      align-items: center;
      justify-content: center;
@@ -454,10 +362,8 @@
 .editPopupButton
   {
       background-color: white;
-      /* color: white; */
       height: 55%;
       width: 20%;
-      /* border-radius: 20vh; */
       margin-right: 1.5%;
       cursor: pointer;
       outline: 0;
@@ -473,11 +379,8 @@
 .closePopupButton
 {
     background-color: white;
-    /* color: white; */
     height: 5vh;
     width: 100%;
-    /* border-radius: 20vh; */
-    /* margin-right: 1.5%; */
     cursor: pointer;
     outline: 0;
     border-color: #0D3AA9;
@@ -491,10 +394,8 @@
   .deleteButton
   {
       background-color: white;
-      /* color: white; */
       height: 80%;
       width: 12%;
-      /* border-radius: 20vh; */
       margin-right: 3%;
       cursor: pointer;
       outline: 0;

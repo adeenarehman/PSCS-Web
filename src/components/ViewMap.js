@@ -219,6 +219,7 @@ export class ViewMap extends Component {
             tempdata.push(tempobj)
         });
         this.setState({ Zones: tempdata })
+        
     }
 
     addCordinates = async () => {
@@ -235,16 +236,27 @@ export class ViewMap extends Component {
             key: this.state.key,
         });
         toast('Zone Added Successfully', 
-                     {position: toast.POSITION.BOTTOM_CENTER})
+                     {position: toast.POSITION.BOTTOM_CENTER,
+                        autoClose: 5000,
+                        hideProgressBar: true
+                    })
+                    this.setState({
+                        radius: '',
+                        address: '',
+                    })
         // await this.reloadPage();
         this.getCordinates();
+
     }
 
     deleteCordinates = async (delete_id) => {
         const db = firebase.firestore();
         const res = await db.collection('zones').doc(delete_id).delete();
         toast('Zone Deleted Successfull', 
-                     {position: toast.POSITION.BOTTOM_CENTER})
+                     {position: toast.POSITION.BOTTOM_CENTER,
+                        autoClose: 5000,
+                        hideProgressBar: true
+                    })
         // await this.reloadPage();
         this.getCordinates();
 
@@ -256,7 +268,10 @@ export class ViewMap extends Component {
         const res = await db.collection('zones').doc(update_id).update({ radius: parseInt(this.state.updated_radius), zones_type: this.state.updated_zones_type });
         // await this.reloadPage();
         toast('Zone Updated Successfull', 
-                     {position: toast.POSITION.BOTTOM_CENTER})
+                     {position: toast.POSITION.BOTTOM_CENTER,
+                        autoClose: 5000,
+                        hideProgressBar: true
+                    })
         this.getCordinates();
 
     }
@@ -299,19 +314,16 @@ export class ViewMap extends Component {
                     <div className={'mapHeader'} /*container div of logo & Logout button*/>
 
                         <div className={'mapLogoImg'}>
-                            <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/white_lock.png?alt=media&token=6a8c8a6c-7150-4d39-8b36-35078bff679a" className={'mapLogoPic'} />
+                        <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/Pandemic%20Control.png?alt=media&token=36e2120b-4201-429b-abda-6847fa47dd59" className={'fineLogoPic'} />
                         </div>
 
-                        <div className={'mapHeaderHeading'}>
-
-                            <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/white_text.png?alt=media&token=a540a39a-e153-4a04-89c3-3fe86660ba60" className={'mapHeading'} />
-                        </div>
-
+                        <h1 style={{color : 'white', textDecoration: 'underline'}}>ZONES</h1>
+                        
                         <div className={'mapLogout'}>
-                            <Ripples color="#DCDCDC" during={1200} className={'mapLogoutButton'}>
+                            <Ripples color="#DCDCDC" during={1200} className={'mapLogoutButtonRipples'}>
                                 <Link to="/signin" style={{ textDecoration: 'none', width: '100%' }}>
                                     <button
-                                        className={'mapLogoutButton1'}
+                                        className={'mapLogoutButton'}
                                     >
                                         Logout
                                     </button>
@@ -403,8 +415,8 @@ export class ViewMap extends Component {
 
 
                             {/* ADD ZONE POPUP */}
-                            <Ripples color="#DCDCDC" during={1200} className={'addButton'}>
-                                <button className={'addButton1'} onClick={() => { this.addCordinates(); }}>
+                            <Ripples color="#DCDCDC" during={1200} className={'addButtonRipples'}>
+                                <button className={'addButton'} onClick={() => { this.addCordinates(); }}>
                                     Add
                                         </button>
                             </Ripples>
@@ -412,8 +424,8 @@ export class ViewMap extends Component {
                             {/* VIEW MAP POPUP */}
                             <Popup
                                 trigger={
-                                    <Ripples color="#DCDCDC" during={1200} className={'addButton'}>
-                                        <button className={'addButton1'}> View Map</button>
+                                    <Ripples color="#DCDCDC" during={1200} className={'addButtonRipples'}>
+                                        <button className={'addButton'}> View Map</button>
                                     </Ripples>
                                 }
                                 modal
@@ -445,14 +457,6 @@ export class ViewMap extends Component {
                                 </div>
                             </Popup>
 
-                            {/* <div className={'buttonDiv'}>
-
-                                <button className={'deleteButton'}
-                                onClick={() => { this.deleteCordinates(value.uid) }}
-                                >
-                                    EDIT
-                                </button>
-                            </div> */}
                         </div>
 
                         {/*ZONES LIST WORK */}

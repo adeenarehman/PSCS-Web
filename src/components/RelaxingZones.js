@@ -107,7 +107,13 @@ export class relaxingZones extends Component {
         });
         // await this.reloadPage();
         toast('Relaxing Hour Added Successfully', 
-                     {position: toast.POSITION.BOTTOM_CENTER})
+                     {position: toast.POSITION.BOTTOM_CENTER,
+                        autoClose: 5000,
+                        hideProgressBar: true
+                    })
+                    this.setState({
+                       address: ''
+                    })            
         this.getCordinates();
     }
 
@@ -130,7 +136,7 @@ export class relaxingZones extends Component {
 
     render() {
         // var x = Date()
-        console.log("yella = "+this.state.startRelaxingTime)
+        // console.log("yella = "+this.state.startRelaxingTime)
 
         return (
             <div className={'relaxingMainPage'}  /*container div*/ >
@@ -140,19 +146,16 @@ export class relaxingZones extends Component {
                     <div className={'relaxingHeader'} /*container div of logo & Logout button*/>
 
                         <div className={'relaxingLogoImg'}>
-                            <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/white_lock.png?alt=media&token=6a8c8a6c-7150-4d39-8b36-35078bff679a" className={'relaxingLogoPic'} />
+                        <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/Pandemic%20Control.png?alt=media&token=36e2120b-4201-429b-abda-6847fa47dd59" className={'fineLogoPic'} />
                         </div>
-
-                        <div className={'relaxingHeaderHeading'}>
-
-                            <img src="https://firebasestorage.googleapis.com/v0/b/fyp-pscs-7e191.appspot.com/o/white_text.png?alt=media&token=a540a39a-e153-4a04-89c3-3fe86660ba60" className={'relaxingHeading'} />
-                        </div>
-
+                        
+                        <h1 style={{color : 'white', textDecoration: 'underline'}}>RELAXING ZONES</h1>
+                      
                         <div className={'relaxingLogout'}>
-                            <Ripples color="#DCDCDC" during={1200} className={'relaxingLogoutButton'}>
+                            <Ripples color="#DCDCDC" during={1200} className={'relaxingButtonRipples'}>
                                 <Link to="/signin" style={{ textDecoration: 'none', width: '100%' }}>
                                     <button
-                                        className={'relaxingLogoutButton1'}
+                                        className={'relaxingButton'}
                                     >
                                         Logout
                                     </button>
@@ -168,7 +171,7 @@ export class relaxingZones extends Component {
                     <div className={'relaxingFooterBox'} /*container div for zones list & relaxing time*/>
 
                         {/* RELAXING TIME SETTING DIV*/}
-                        <div className={'relaxingTimeSelectBox'}>
+                        <div className={'TimeSetDiv'}>
 
                             <div className={'relaxingDropdownBox'} >
                                 <Dropdown
@@ -185,10 +188,7 @@ export class relaxingZones extends Component {
                                 />
                             </div>
 
-                            <div style={{
-                                flexDirection: 'row', display: 'flex', justifyContent: 'space-around', alignItems: 'center',
-                                height: '5vh', width: '50%', marginRight: '1%', marginLeft: '1%', color: 'white'
-                            }}>
+                            <div className={'relaxingTimeToFrom'}>
 
                                 <p style={{fontSize:'2.5vh', fontWeight:'bold'}}>From:</p>
                                 <div style={{backgroundColor:'white'}}>
@@ -197,6 +197,7 @@ export class relaxingZones extends Component {
                                         value={this.state.startRelaxingTime}
                                     />
                                 </div>
+
                                 <p style={{fontSize:'2.5vh', fontWeight:'bold'}}>To:</p>
                                 <div style={{backgroundColor:'white'}}>
                                 <DateTimePicker
@@ -206,21 +207,23 @@ export class relaxingZones extends Component {
                                 </div>                                    
                                 
                             </div>
+
                             <div className={'relaxingLogout'}>
-                                <Ripples color="#DCDCDC" during={1200} className={'relaxingLogoutButton'}>
+                                <Ripples color="#DCDCDC" during={1200} className={'relaxingButtonRipples'}>
 
                                     <button onClick={() => this.updateData()}
-                                        className={'relaxingLogoutButton1'}
+                                        className={'relaxingButton'}
                                     >
                                         Submit
                                     </button>
 
                                 </Ripples>
                             </div>
+
                         </div>
 
                         {/*ZONES LIST WORK */}
-                        <div style={{ height: '80vh', width: '100%', flexDirection: 'row', display: 'flex', justifyContent: 'center' }}>
+                        <div className={'listDiv'}>
 
                             <div className={'relaxingListBox'} /*list container div*/>
 
